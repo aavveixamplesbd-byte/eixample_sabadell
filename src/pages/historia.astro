@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import HistoryHero from '../components/HistoryHero.astro';
+import Timeline from '../components/Timeline.astro';
+import ChimneysBento from '../components/ChimneysBento.astro';
+import Modernism from '../components/Modernism.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Història - Eixample Sabadell">
+  <Navbar client:load />
+  
+  <main>
+    <HistoryHero />
+    <Timeline />
+    <ChimneysBento />
+    <Modernism />
+
+    {/* Custom History CTA Section */}
+    <section class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
+      <div class="bg-inverse-surface rounded-[32px] p-8 sm:p-12 md:p-24 relative overflow-hidden text-center">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary-container/20 blur-[120px]"></div>
+        <div class="relative z-10">
+          <h2 class="font-display-lg text-3xl sm:text-4xl md:text-5xl text-white mb-6 font-extrabold tracking-tight">
+            Preservem la nostra memòria
+          </h2>
+          <p class="text-surface-variant max-w-2xl mx-auto mb-12 text-base sm:text-lg leading-relaxed text-gray-300">
+            L'Associació de Veïns treballa per protegir el llegat històric de l'Eixample. Uneix-te a nosaltres en les visites guiades pel patrimoni industrial.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+            <button class="bg-primary hover:bg-primary-container text-white px-8 py-4 rounded-xl font-label-md text-base font-bold transition-all shadow-lg hover:shadow-primary/20 active:scale-98">
+              Reservar Visita
+            </button>
+            <button class="bg-transparent text-white border border-white/30 px-8 py-4 rounded-xl font-label-md text-base font-bold hover:bg-white/10 transition-all active:scale-98">
+              Veure l'Arxiu
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

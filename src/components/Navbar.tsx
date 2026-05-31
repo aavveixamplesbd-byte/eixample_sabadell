@@ -13,14 +13,14 @@ export default function Navbar() {
 
   const links = isHome
     ? [
-        { label: "History", icon: "factory", href: "#llegat" },
+        { label: "History", icon: "factory", href: "/historia" },
         { label: "News", icon: "newspaper", href: "/noticies" },
         { label: "Services", icon: "handyman", href: "#serveis" },
         { label: "Contact", icon: "contact_mail", href: "#contacte" },
       ]
     : [
         { label: "Home", icon: "home", href: "/" },
-        { label: "History", icon: "factory", href: "/#llegat" },
+        { label: "History", icon: "factory", href: "/historia" },
         { label: "News", icon: "newspaper", href: "/noticies" },
         { label: "Contact", icon: "contact_mail", href: "#contacte" },
       ];

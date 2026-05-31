@@ -1,0 +1,45 @@
+---
+const services = [
+  {
+    title: "Atenció al Soci",
+    icon: "contact_support",
+    href: "#"
+  },
+  {
+    title: "Gestió de Tràmits",
+    icon: "apartment",
+    href: "#"
+  },
+  {
+    title: "Incidències Via Pública",
+    icon: "campaign",
+    href: "#"
+  },
+  {
+    title: "Espais Comunitaris",
+    icon: "groups",
+    href: "#"
+  }
+];
+---
+
+<section class="py-24 bg-surface-container" id="serveis">
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop text-center">
+    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-12 tracking-tight">Serveis al Veïnat</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {services.map((service) => (
+        <a 
+          href={service.href} 
+          class="group p-8 bg-surface-container-lowest rounded-2xl border border-outline-variant hover:border-primary hover:shadow-md transition-all duration-300"
+        >
+          <div class="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/10 transition-colors">
+            <span class="material-symbols-outlined text-primary text-3xl">{service.icon}</span>
+          </div>
+          <span class="font-label-md text-label-md text-on-surface block font-bold tracking-tight">
+            {service.title}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

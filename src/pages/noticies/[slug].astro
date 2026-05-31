@@ -62,6 +62,134 @@ const dateFormatted = new Date(article.date).toLocaleDateString('ca-ES', {
           <p>{paragraph}</p>
         ))}
       </div>
+      
+      {/* Share Section */}
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-y border-outline-variant/20 py-6 my-8">
+        <span class="font-label-md text-on-surface-variant font-bold text-sm">Comparteix aquesta notícia:</span>
+        <div class="flex items-center gap-3">
+          <a
+            id="share-twitter"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full bg-surface-container-high hover:bg-primary/10 text-on-surface hover:text-primary flex items-center justify-center transition-colors"
+            title="Comparteix a Twitter / X"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a
+            id="share-facebook"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full bg-surface-container-high hover:bg-primary/10 text-on-surface hover:text-primary flex items-center justify-center transition-colors"
+            title="Comparteix a Facebook"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+            </svg>
+          </a>
+          <a
+            id="share-whatsapp"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full bg-surface-container-high hover:bg-primary/10 text-on-surface hover:text-primary flex items-center justify-center transition-colors"
+            title="Comparteix a WhatsApp"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M12.004 0C5.372 0 0 5.373 0 12.004c0 2.116.55 4.103 1.513 5.84L0 24l6.335-1.662c1.677.915 3.59 1.398 5.673 1.398 6.63 0 12.004-5.373 12.004-12.004C24.012 5.373 18.636 0 12.004 0zm6.262 17.025c-.247.697-1.246 1.36-1.712 1.455-.466.096-.927.17-2.613-.509-2.029-.816-3.834-2.825-4.834-4.161-.998-1.336-1.769-2.99-1.769-4.707 0-1.718.895-2.562 1.214-2.906.318-.344.697-.43.927-.43.23 0 .46.002.664.011.213.01.498-.083.778.587.291.696.993 2.42 1.077 2.593.085.172.143.372.027.59-.115.218-.173.344-.344.545-.172.2-.362.447-.517.6-.172.17-.353.356-.153.696.2.34.887 1.464 1.9 2.368 1.306 1.164 2.408 1.524 2.748 1.696.34.172.539.143.738-.086.2-.23.86-1.003 1.09-1.348.23-.345.46-.287.778-.172.318.115 2.029 1.003 2.378 1.176.35.172.584.258.67.408.086.15.086.87-.16 1.567z" />
+            </svg>
+          </a>
+          <button
+            id="share-instagram"
+            class="w-10 h-10 rounded-full bg-surface-container-high hover:bg-primary/10 text-on-surface hover:text-primary flex items-center justify-center transition-colors"
+            title="Comparteix a Instagram"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+          </button>
+          <button
+            id="copy-link"
+            class="w-10 h-10 rounded-full bg-surface-container-high hover:bg-primary/10 text-on-surface hover:text-primary flex items-center justify-center transition-colors"
+            title="Copia l'enllaç"
+          >
+            <span class="material-symbols-outlined text-[20px] pointer-events-none">link</span>
+          </button>
+        </div>
+      </div>
+
+      <script is:inline>
+        // Set sharing links and dynamic clipboard logic
+        const initShare = () => {
+          const rawUrl = window.location.href;
+          const url = encodeURIComponent(rawUrl);
+          const rawTitle = document.title;
+          const title = encodeURIComponent(rawTitle);
+          
+          const twitterBtn = document.getElementById('share-twitter');
+          const facebookBtn = document.getElementById('share-facebook');
+          const whatsappBtn = document.getElementById('share-whatsapp');
+          const instagramBtn = document.getElementById('share-instagram');
+          const copyBtn = document.getElementById('copy-link');
+          
+          if (twitterBtn) twitterBtn.href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+          if (facebookBtn) facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          if (whatsappBtn) whatsappBtn.href = `https://api.whatsapp.com/send?text=${title}%20${url}`;
+          
+          if (instagramBtn) {
+            instagramBtn.addEventListener('click', async () => {
+              // Try using native Web Share if available (supports direct Instagram sharing on mobile)
+              if (navigator.share) {
+                try {
+                  await navigator.share({
+                    title: rawTitle,
+                    url: rawUrl
+                  });
+                } catch (err) {
+                  console.log('User cancelled or share failed:', err);
+                }
+              } else {
+                // Fallback to copying URL with visual feedback
+                try {
+                  await navigator.clipboard.writeText(rawUrl);
+                  alert("Enllaç copiat al portapapeles! Obre Instagram i enganxa'l per compartir.");
+                } catch (err) {
+                  console.error('Clipboard copy failed:', err);
+                }
+              }
+            });
+          }
+
+          if (copyBtn) {
+            copyBtn.addEventListener('click', async () => {
+              try {
+                await navigator.clipboard.writeText(rawUrl);
+                const icon = copyBtn.querySelector('.material-symbols-outlined');
+                if (icon) {
+                  icon.textContent = 'check';
+                  copyBtn.classList.add('bg-primary/10', 'text-primary');
+                  setTimeout(() => {
+                    icon.textContent = 'link';
+                    copyBtn.classList.remove('bg-primary/10', 'text-primary');
+                  }, 2000);
+                }
+              } catch (err) {
+                console.error('Error copying text: ', err);
+              }
+            });
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initShare);
+        } else {
+          initShare();
+        }
+      </script>
 
       {/* Back Button */}
       <div class="border-t border-outline-variant/20 pt-10 mt-8 flex">

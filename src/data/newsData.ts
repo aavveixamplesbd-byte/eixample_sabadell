@@ -9,6 +9,7 @@ export interface Article {
   alt: Record<"ca" | "es", string>;
   slug: Record<"ca" | "es", string>;
   content: Record<"ca" | "es", string[]>;
+  featured?: boolean; // Flag to highlight an article at the top of the news portal
 }
 
 export const newsArticles: Article[] = [
@@ -48,8 +49,8 @@ export const newsArticles: Article[] = [
       ],
       es: [
         "La Asociación de Vecinos Eixample Sabadell ha iniciado un ambicioso proyecto para digitalizar la memoria obrera e industrial de nuestro barrio. Con la colaboración de historiadores locales y la donación altruista de documentos por parte de familias del barrio, nos proponemos catalogar y digitalizar más de 500 archivos históricos de finales del siglo XIX y principios del siglo XX.",
-        "Esta colección contiene planos originales de las primeras fábricas textiles, fotografías inéditas del día a día de los trabajadores, y registros de las primeras mutuas de socorros mutuos creadas por la comunidad obrera. La preservación de estos materiales es fundamental para mantener la identidad colectiva del barrio frente al crecimiento de la ciudad moderna.",
-        "Una vez finalizada la digitalización, todos los archivos se publicarán en un portal de acceso abierto para investigadores, estudiantes y vecinos curiosos. Además, se prevé organizar una exposición física en la sede de la asociación para celebrar la inauguración del archivo digital a finales de año."
+        "Esta colección contiene planos originales de las primeras fábricas textiles, fotografías inéditas del día a día de los trabajadores, y registros de las primeras mutuas de socorros mutuos creadas por la comunidad de obreros. La preservación de estos materiales es fundamental para mantener la identidad colectiva del barrio frente al crecimiento de la ciudad moderna.",
+        "Una vez finalizar la digitalización, todos los archivos se publicarán en un portal de acceso abierto para investigadores, estudiantes y vecinos curiosos. Además, se prevé organizar una exposición física en la sede de la asociación para celebrar la inauguración del archivo digital a finales de año."
       ]
     }
   },
@@ -131,7 +132,7 @@ export const newsArticles: Article[] = [
       es: [
         "Un año más, la Asociación de Vecinos abre las puertas del patio de la antigua fábrica textil del Eixample para acoger una nueva edición del Ciclo de Cine al Aire Libre. Las proyecciones se realizarán todos los viernes de julio a partir de las 22:00 horas.",
         "La temática de este año gira en torno a la sostenibilidad, las luchas vecinales y la reconversión de espacios industriales en Europa. Cada sesión contará con una pequeña presentación por parte de los creadores o especialistas en el ámbito social.",
-        "La entrada es libre y gratuita para todos los residentes. Contaremos con servicio de refrescos y palomitas a precios populares, cuyos fondos se destinarán a financiar el archivo histórico del barrio."
+        "La entrada es libre y gratuita para todos los vecinos. Contaremos con servicio de refrescos y palomitas a precios populares, cuyos fondos se destinarán a financiar el archivo histórico del barrio."
       ]
     }
   },
@@ -170,7 +171,7 @@ export const newsArticles: Article[] = [
         "Les sessions es duran a terme als locals de l'associació durant els mesos d'octubre i novembre. Les places són limitades i les inscripcions ja estan obertes a través de la nostra oficina o el correu general de la web."
       ],
       es: [
-        "Con el objetivo de impulsar el tejido económico local y apoyar al talento joven del Eixample de Sabadell, nace la primera edición del programa 'Emprendiendo en el Barrio'. Un conjunto de talleres teórico-prácticos dirigidos a residentes que quieran desarrollar iniciativas sociales o comerciales.",
+        "Con el objetivo de impulsar el tejido económico local y apoyar al talento del barrio, nace la primera edición del programa 'Emprendiendo en el Barrio'. Un conjunto de talleres teórico-prácticos dirigidos a residentes que quieran desarrollar iniciativas sociales o comerciales.",
         "El programa, liderado por voluntarios de la propia asociación y profesionales en activo, incluye formaciones en diseño de modelos de negocio, marketing de proximidad, y trámites legales para la apertura de pequeños locales o iniciativas cooperativas.",
         "Las sesiones se llevarán a cabo en los locales de la asociación durante los meses de octubre y noviembre. Las plazas son limitadas y las inscripciones ya están abiertas a través de nuestra oficina o el correo general de la web."
       ]
@@ -289,7 +290,7 @@ export const newsArticles: Article[] = [
     content: {
       ca: [
         "La comissió organitzadora de la Festa Major de l'Eixample obre el termini per a la recepció de propostes ciutadanes. Volem que la festa d'enguany respongui als interessos i preferències de tots els grups d'edat del barri.",
-        "Es podran presentar projectes i idees per a concerts, jocs infantils tradicionals, sopars comunitaris a la fresca, i activitats culturals diverses fins al proper 15 de juliol a la bústia de la seu veïnal.",
+        "Es podran presentar projectes i idees per a concerts, jocs infantils tradicional, sopars comunitaris a la fresca, i activitats culturals diverses fins al proper 15 de juliol a la bústia de la seu veïnal.",
         "Posteriorment es realitzarà una assemblea oberta per votar les idees finalistes i planificar l'organització dels voluntaris necessaris per dur a terme cadascun dels actes de la celebració."
       ],
       es: [
@@ -329,13 +330,13 @@ export const newsArticles: Article[] = [
     },
     content: {
       ca: [
-        "El Consistori ha fet públic el disseny executiu per pacificar un dels carrers amb més circulació del barri. El projecte busca crear espais públics més amables per als vianants i pacificar el trànsit rodat.",
+        "El Consistori ha fait públic el disseny executiu per pacificar un dels carrers amb més circulació del barri. El projecte busca crear espais públics més amables per als vianants i pacificar el trànsit rodat.",
         "La intervenció contempla l'ampliació de les voreres, la col·locació de mobiliari urbà de fusta i zones enjardinades amb arbrat d'ombra. També es reduirà la velocitat màxima permesa a 20 km/h en tot el tram.",
         "Es farà una sessió informativa el proper dimarts al Casal per resoldre els dubtes sobre els terminis de les obres, així com la reordenació dels espais d'aparcament afectats a la zona."
       ],
       es: [
         "El Consistorio ha hecho público el diseño ejecutivo para pacificar una de las calles con más circulación del barrio. El proyecto busca crear espacios públicos más amables para los peatones y pacificar el tráfico rodado.",
-        "La intervención contempla la ampliación de las aceras, la colocación de mobiliario urbano de madera y zonas ajardinadas con arbolado de sombra. También se reducirá la velocidad máxima permitida a 20 km/h en todo el tramo.",
+        "La intervención contempla la ampliación de las aceras, la colocación de mobiliario de madera y zonas ajardinadas con arbolado de sombra. También se reducirá la velocidad máxima permitida a 20 km/h en todo el tramo.",
         "Se hará una sesión informativa el próximo martes en el Casal para resolver las dudas sobre los plazos de las obras, así como la reordenación de los espacios de aparcamiento afectados en la zona."
       ]
     }
@@ -379,6 +380,7 @@ export const newsArticles: Article[] = [
         "Las obras, presupuestadas en 1,2 millones de euros, se iniciarán de forma coordinada el próximo mes de octubre. La calle principal pasará a ser de plataforma única, con pavimento continuo de hormigón y piedra granítica. Se eliminarán las barreras arquitectónicas actuales y se instalarán nuevos parterres con flores y árboles autóctonos.",
         "La junta directiva de la Asociación de Vecinos ha valorado muy positivamente que se hayan incorporado la mayoría de las enmiendas presentadas durante el período de exposición pública, como la preservación del carril bici separado y la mejora de la iluminación en los pasos de peatones clave."
       ]
-    }
+    },
+    featured: true
   }
 ];

@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { newsArticles } from '../data/newsData';
+import type { Article } from '../data/newsData';
 
 interface NewsPortalProps {
   lang?: "ca" | "es";
+  articles: Article[];
 }
 
 const categoriesData = {
@@ -10,23 +11,21 @@ const categoriesData = {
   es: ["Todas", "Cultura", "Urbanismo", "Historia", "Actividades"]
 };
 
-export default function NewsPortal({ lang = "ca" }: NewsPortalProps) {
+export default function NewsPortal({ lang = "ca", articles: rawArticles }: NewsPortalProps) {
   const categories = categoriesData[lang];
 
   // Map articles to the current language
   const articles = useMemo(() => {
-    return [...newsArticles]
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .map((art) => ({
-        id: art.id,
-        title: art.title[lang],
-        category: art.category[lang],
-        readTime: art.readTime[lang],
-        image: art.image,
-        description: art.description[lang],
-        alt: art.alt[lang]
-      }));
-  }, [lang]);
+    return [...rawArticles].map((art) => ({
+      id: art.id,
+      title: art.title[lang],
+      category: art.category[lang],
+      readTime: art.readTime[lang],
+      image: art.image,
+      description: art.description[lang],
+      alt: art.alt[lang]
+    }));
+  }, [rawArticles, lang]);
 
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [searchQuery, setSearchQuery] = useState("");

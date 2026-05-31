@@ -78,7 +78,7 @@ export const newsArticles: Article[] = [
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAR1PrYMyEtPVj-zPmZkCDNCw3ZIRFI7ze8EB_8SzKCu1672QzKLjrj0zsBVwNOF1YuOn6VnBwsyR4vrdBuHqnJubrV0VofkSx1S_9tLHUfk9ioGx1NfPhS2QD5dqGME4yEcVfSaANAxICS-N6t1GDTo6LmEvS3KLufSvxMYcbdugwaRjo80SPqkyvC1O1sJ4SzFJK1JLnWeyYkIjNE5fgCfBO6wOadnIYhZC6WH4aUtVejlgX0Srjs7L8fdrtdT22TwMTIt3twTZzd",
     description: {
       ca: "Torna el cinema al pati de la fàbrica. Enguany, el cicle se centra en documentals sobre transformació urbana i art social.",
-      es: "Vuelve el cine al patio de la fábrica. Este año, el ciclo se centra en documentales sobre transformación urbana y arte social."
+      es: "Vuelve el cine al patio de la fábrica. Este año, el ciclo se centra en documentales sobre transformación urbana y art social."
     },
     alt: {
       ca: "Cine exterior estiu",
@@ -208,6 +208,31 @@ export const newsArticles: Article[] = [
     alt: {
       ca: "Projecte de Pacificació",
       es: "Proyecto de Pacificación"
+    }
+  },
+  {
+    id: 9,
+    title: {
+      ca: "Transformació de l'Eix: El nou pla de mobilitat per recuperar els carrers per als vianants",
+      es: "Transformación del Eje: El nuevo plan de movilidad para recuperar las calles para los peatones"
+    },
+    category: {
+      ca: "Urbanisme",
+      es: "Urbanismo"
+    },
+    date: "2024-07-12",
+    readTime: {
+      ca: "4 min de lectura",
+      es: "4 min de lectura"
+    },
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBIcULFygy1-jP3TQRS1e6kV3rF4V6P-R_eVyyW3b-YVz40GvgLQZc_krElCP4kza4ORIV3gXS52-BvPMWhaUdHzj3pPcsy6IkdLCQGRdJCuQOhED19vuKJwkBt3RgesgbIRQqPJhXPoS3TeivEL1rfv7rjPoIUcFVVm4xwjsYn2ayV3JKeAlONHl8qiRJtXzp0HPl8039PPH5Er3aDCyPnQsBjghKEKEhOwVwh52B58iFKj_6vb0P6UXXb3wprO7FghjxU1me8okom",
+    description: {
+      ca: "L'Ajuntament presenta el projecte final per convertir l'eix central en una zona de baixes emissions amb més espais verds i zones de convivència.",
+      es: "El Ayuntamiento presenta el proyecto final para convertir el eje central en una zona de bajas emisiones con más espacios verdes y zonas de convivencia."
+    },
+    alt: {
+      ca: "Transformació de l'Eix Central",
+      es: "Transformación del Eje Central"
     }
   }
 ];

@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Footer from '../../components/Footer.astro';
+
+const alternateUrl = "/qui-som";
+
+const t = {
+  headerBadge: "La Asociación de Vecinos",
+  headerTitle: "Quiénes Somos",
+  headerDesc: "Trabajamos por el barrio del Eixample de Sabadell. Conoce a las personas que forman parte de la junta de la asociación y ayudan a mejorar el día a día de la comunidad.",
+  missionTitle: "Nuestra misión",
+  missionDesc: "La Asociación de Vecinos Eixample Sabadell (AVES) es una organización sin ánimo de lucro fundada para defender los intereses de los vecinos, conservar nuestro valioso patrimonio industrial, promover la cultura local e impulsar la mejora de los espacios urbanos.",
+  valuesTitle: "Nuestros valores",
+  values: [
+    { title: "Comunidad", desc: "Fomentamos la cohesión social y la convivencia solidaria entre todos los vecinos y vecinas del barrio." },
+    { title: "Patrimonio", desc: "Preservamos el legado histórico de las antiguas hilaturas, chimeneas y el pasado obrero de Sabadell." },
+    { title: "Sostenibilidad", desc: "Impulsamos mejoras en movilidad, zonas verdes y eficiencia energética para un barrio más saludable." }
+  ],
+  boardTitle: "Miembros de la Junta",
+  boardDesc: "El equipo que coordina las asambleas, presupuestos, actividades culturales y relaciones con el Ayuntamiento."
+};
+
+const boardMembers = [
+  { name: "Jordi Fuster", role: "Presidente", initial: "JF", color: "bg-teal-700/10 text-teal-800" },
+  { name: "Marta Camps", role: "Vicepresidenta", initial: "MC", color: "bg-emerald-700/10 text-emerald-800" },
+  { name: "Albert Soler", role: "Secretario", initial: "AS", color: "bg-cyan-700/10 text-cyan-800" },
+  { name: "Laura Ruiz", role: "Tesorera", initial: "LR", color: "bg-sky-700/10 text-sky-800" },
+  { name: "Joan Garcia", role: "Vocal de Urbanismo", initial: "JG", color: "bg-indigo-700/10 text-indigo-800" },
+  { name: "Núria Prat", role: "Vocal de Cultura", initial: "NP", color: "bg-violet-700/10 text-violet-800" }
+];
+---
+
+<Layout title="Quiénes somos - Eixample Sabadell" lang="es">
+  <Navbar client:load />
+  <Breadcrumbs lang="es" items={[{ label: 'Quiénes somos' }]} />
+  
+  <main class="py-12 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
+    {/* Page Title Header */}
+    <header class="my-12">
+      <span class="font-label-md text-label-md text-primary uppercase tracking-[0.2em] bg-primary/10 px-4 py-1.5 rounded-full inline-block mb-4 font-semibold">
+        {t.headerBadge}
+      </span>
+      <h1 class="font-display-lg text-4xl sm:text-5xl font-extrabold text-on-surface mb-4">
+        {t.headerTitle}
+      </h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+        {t.headerDesc}
+      </p>
+    </header>
+
+    {/* Mission and Values Section */}
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-12 my-20">
+      <div class="lg:col-span-1 bg-surface-container-low p-8 sm:p-12 rounded-3xl border border-outline-variant/15 flex flex-col justify-center">
+        <h2 class="font-display-lg text-2xl sm:text-3xl font-extrabold text-primary mb-6">{t.missionTitle}</h2>
+        <p class="font-body-md text-on-surface-variant leading-relaxed">
+          {t.missionDesc}
+        </p>
+      </div>
+
+      <div class="lg:col-span-2 flex flex-col gap-6">
+        <h2 class="font-display-lg text-2xl sm:text-3xl font-extrabold text-on-surface mb-4">{t.valuesTitle}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {t.values.map((value) => (
+            <div class="bg-white p-6 rounded-2xl border border-outline-variant/10 shadow-sm hover:shadow-md transition-all">
+              <span class="material-symbols-outlined text-primary text-[36px] mb-4">done_outline</span>
+              <h3 class="font-headline-md text-lg font-bold text-on-surface mb-2">{value.title}</h3>
+              <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">{value.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Junta Members Grid */}
+    <section class="my-24">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="font-display-lg text-3xl sm:text-4xl font-extrabold text-on-surface mb-4">
+          {t.boardTitle}
+        </h2>
+        <p class="font-body-md text-on-surface-variant leading-relaxed">
+          {t.boardDesc}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {boardMembers.map((member) => (
+          <div class="bg-surface-container-low border border-outline-variant/15 rounded-3xl p-8 flex items-center gap-6 group hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md">
+            {/* Initials Avatar */}
+            <div class={`w-16 h-16 rounded-full ${member.color} flex items-center justify-center font-bold text-xl tracking-wider select-none shrink-0 group-hover:scale-105 transition-all`}>
+              {member.initial}
+            </div>
+            
+            <div class="flex flex-col">
+              <h3 class="font-headline-md text-xl font-bold text-on-surface group-hover:text-primary transition-colors">
+                {member.name}
+              </h3>
+              <p class="font-body-sm text-sm text-on-surface-variant mt-1">
+                {member.role}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="es" />
+
+  {/* Pass alternate language URL to Navbar */}
+  <script is:inline define:vars={{ alternateUrl }}>
+    window.alternateLangUrl = alternateUrl;
+  </script>
+</Layout>

@@ -50,8 +50,8 @@ export default function Navbar() {
     ca: {
       brand: "Eixample Sabadell",
       home: "Inici",
-      history: "Història",
-      news: "Notícies",
+      history: "Història",      news: "Notícies",
+      whoWeAre: "Qui som",
       contact: "Contacte",
       joinUs: "Fes-te Soci",
       subtitle: "El cor industrial de Sabadell",
@@ -73,11 +73,12 @@ export default function Navbar() {
       home: "Inicio",
       history: "Historia",
       news: "Noticias",
+      whoWeAre: "Quiénes somos",
       contact: "Contacto",
       joinUs: "Hazte Socio",
       subtitle: "El corazón industrial de Sabadell",
       neighborhoodAssoc: "Asociación de Vecinos",
-      contactHeader: "Contacta con nosotros",
+      contactHeader: "Contacto con nosotros",
       formName: "Nombre completo",
       formNamePlaceholder: "Tu nombre",
       formEmail: "Correo electrónico",
@@ -97,6 +98,7 @@ export default function Navbar() {
     { label: t.home, icon: "home", href: prefix || "/" },
     { label: t.history, icon: "factory", href: `${prefix}/historia` },
     { label: t.news, icon: "newspaper", href: `${prefix}/noticies` },
+    { label: t.whoWeAre, icon: "groups", href: `${prefix}/qui-som` },
   ];
 
   const handleContactSubmit = (e: React.FormEvent) => {

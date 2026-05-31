@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHome, setIsHome] = useState(true);
 
-  const links = [
-    { label: "History", icon: "factory", href: "/#llegat" },
-    { label: "News", icon: "newspaper", href: "/noticies" },
-    { label: "Services", icon: "handyman", href: "/#serveis" },
-    { label: "Contact", icon: "contact_mail", href: "/#contacte" },
-  ];
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      setIsHome(path === "/" || path === "/index.html" || path.endsWith("/eixample_industrial_sabadell/"));
+    }
+  }, []);
+
+  const links = isHome
+    ? [
+        { label: "History", icon: "factory", href: "#llegat" },
+        { label: "News", icon: "newspaper", href: "/noticies" },
+        { label: "Services", icon: "handyman", href: "#serveis" },
+        { label: "Contact", icon: "contact_mail", href: "#contacte" },
+      ]
+    : [
+        { label: "Home", icon: "home", href: "/" },
+        { label: "History", icon: "factory", href: "/#llegat" },
+        { label: "News", icon: "newspaper", href: "/noticies" },
+        { label: "Contact", icon: "contact_mail", href: "#contacte" },
+      ];
 
   return (
     <>

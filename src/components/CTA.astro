@@ -10,7 +10,10 @@
       <p class="font-body-lg text-body-lg text-white/90 mb-10 leading-relaxed max-w-xl mx-auto">
         L'associació és el motor que manté viu el barri. Amb la teva quota ajudes a finançar activitats culturals i a defensar els interessos dels veïns.
       </p>
-      <button class="bg-primary hover:bg-primary-container text-white border border-white/20 px-10 py-4 font-label-md text-label-md font-bold rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-primary/20 active:scale-98">
+      <button 
+        onclick="window.dispatchEvent(new CustomEvent('open-join-modal'))"
+        class="bg-primary hover:bg-primary-container text-white border border-white/20 px-10 py-4 font-label-md text-label-md font-bold rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-primary/20 active:scale-98"
+      >
         Fes-te Soci Ara
       </button>
       <p class="mt-6 font-label-sm text-label-sm text-white/70 uppercase tracking-[0.2em] font-bold">

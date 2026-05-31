@@ -86,7 +86,10 @@ export default function Navbar() {
 
           {/* Desktop CTA Button */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="bg-primary hover:bg-primary-container text-white font-label-md text-label-md px-6 py-2.5 rounded-lg active:scale-95 transition-all shadow-sm">
+            <button 
+              onClick={() => window.dispatchEvent(new CustomEvent("open-join-modal"))}
+              className="bg-primary hover:bg-primary-container text-white font-label-md text-label-md px-6 py-2.5 rounded-lg active:scale-95 transition-all shadow-sm"
+            >
               Join Us
             </button>
           </div>
@@ -187,7 +190,13 @@ export default function Navbar() {
               Sabadell's Industrial Heart
             </div>
           </div>
-          <button className="w-full bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-label-md text-label-md py-5 rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-lg shadow-black/10">
+          <button 
+            onClick={() => {
+              setIsOpen(false);
+              window.dispatchEvent(new CustomEvent("open-join-modal"));
+            }}
+            className="w-full bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-label-md text-label-md py-5 rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-lg shadow-black/10"
+          >
             Join Us
             <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>
               arrow_forward

@@ -23,7 +23,8 @@ export default function NewsPortal({ lang = "ca", articles: rawArticles }: NewsP
       readTime: art.readTime[lang],
       image: art.image,
       description: art.description[lang],
-      alt: art.alt[lang]
+      alt: art.alt[lang],
+      slug: art.slug[lang]
     }));
   }, [rawArticles, lang]);
 
@@ -109,32 +110,36 @@ export default function NewsPortal({ lang = "ca", articles: rawArticles }: NewsP
       {/* Article Grid */}
       {paginatedArticles.length > 0 ? (
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {paginatedArticles.map((article) => (
-            <article key={article.id} className="flex flex-col group cursor-pointer">
-              <div className="aspect-[4/3] mb-6 overflow-hidden rounded-2xl border border-outline-variant">
-                <img
-                  alt={article.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  src={article.image}
-                />
-              </div>
-              <div className="px-2">
-                <span className="font-label-sm text-label-sm text-primary mb-3 block font-extrabold uppercase tracking-[0.1em]">
-                  {article.category}
-                </span>
-                <h3 className="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight line-clamp-2">
-                  {article.title}
-                </h3>
-                <p className="font-body-md text-on-surface-variant line-clamp-3 mb-4">
-                  {article.description}
-                </p>
-                <div className="text-outline font-label-sm text-label-sm flex items-center gap-2 mt-auto">
-                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>schedule</span>
-                  {article.readTime}
+          {paginatedArticles.map((article) => {
+            const prefix = lang === "es" ? "/es" : "";
+            const articleHref = `${prefix}/noticies/${article.slug}`;
+            return (
+              <a href={articleHref} key={article.id} className="flex flex-col group cursor-pointer text-left">
+                <div className="aspect-[4/3] mb-6 overflow-hidden rounded-2xl border border-outline-variant">
+                  <img
+                    alt={article.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    src={article.image}
+                  />
                 </div>
-              </div>
-            </article>
-          ))}
+                <div className="px-2">
+                  <span className="font-label-sm text-label-sm text-primary mb-3 block font-extrabold uppercase tracking-[0.1em]">
+                    {article.category}
+                  </span>
+                  <h3 className="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <p className="font-body-md text-on-surface-variant line-clamp-3 mb-4">
+                    {article.description}
+                  </p>
+                  <div className="text-outline font-label-sm text-label-sm flex items-center gap-2 mt-auto">
+                    <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>schedule</span>
+                    {article.readTime}
+                  </div>
+                </div>
+              </a>
+            );
+          })}
         </section>
       ) : (
         <div className="text-center py-20 bg-surface-container-low rounded-2xl border border-outline-variant/20">

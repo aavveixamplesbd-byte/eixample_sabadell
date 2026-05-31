@@ -26,6 +26,10 @@ export default function Navbar() {
 
   const handleLanguageChange = (newLang: "ca" | "es") => {
     if (typeof window !== "undefined") {
+      if ((window as any).alternateLangUrl) {
+        window.location.href = (window as any).alternateLangUrl;
+        return;
+      }
       const path = window.location.pathname;
       if (newLang === "es") {
         if (!path.startsWith("/es")) {

@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Footer from '../../components/Footer.astro';
+import { newsArticles } from '../../data/newsData';
+
+export async function getStaticPaths() {
+  return newsArticles.map((article) => ({
+    params: { slug: article.slug.ca },
+    props: { article }
+  }));
+}
+
+const { article } = Astro.props;
+const alternateUrl = `/es/noticies/${article.slug.es}`;
+
+const dateFormatted = new Date(article.date).toLocaleDateString('ca-ES', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+});
+---
+
+<Layout title={`${article.title.ca} - Eixample Sabadell`} lang="ca">
+  <Navbar client:load />
+  <Breadcrumbs lang="ca" items={[
+    { label: 'Notícies', href: '/noticies' },
+    { label: article.title.ca }
+  ]} />
+
+  <main class="py-12 px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto w-full">
+    <article class="flex flex-col gap-8">
+      {/* Header Info */}
+      <header class="flex flex-col gap-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-sm font-label-sm uppercase tracking-widest font-semibold">
+            {article.category.ca}
+          </span>
+          <span class="text-outline-variant font-medium">•</span>
+          <span class="text-secondary font-label-md text-sm">{dateFormatted}</span>
+          <span class="text-outline-variant font-medium">•</span>
+          <span class="text-secondary font-label-md text-sm">{article.readTime.ca}</span>
+        </div>
+        <h1 class="font-display-lg text-3xl sm:text-4xl md:text-5xl font-extrabold text-on-surface leading-tight">
+          {article.title.ca}
+        </h1>
+      </header>
+
+      {/* Main Image */}
+      <div class="w-full h-[350px] sm:h-[450px] rounded-3xl overflow-hidden shadow-md border border-outline-variant/30">
+        <img 
+          src={article.image} 
+          alt={article.alt.ca} 
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Article Content */}
+      <div class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed flex flex-col gap-6 max-w-3xl">
+        {article.content.ca.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+
+      {/* Back Button */}
+      <div class="border-t border-outline-variant/20 pt-10 mt-8 flex">
+        <a 
+          href="/noticies" 
+          class="inline-flex items-center gap-2 text-primary font-label-md font-bold hover:gap-3 transition-all"
+        >
+          <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+          Tornar a les notícies
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <Footer lang="ca" />
+
+  {/* Pass alternate language URL to Navbar */}
+  <script is:inline define:vars={{ alternateUrl }}>
+    window.alternateLangUrl = alternateUrl;
+  </script>
+</Layout>

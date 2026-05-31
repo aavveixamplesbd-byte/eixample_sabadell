@@ -46,28 +46,32 @@ const formatDate = (dateStr: string) => {
       </a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {articles.map((article) => (
-        <article class="flex flex-col group cursor-pointer">
-          <div class="aspect-[4/3] mb-6 overflow-hidden rounded-2xl border border-outline-variant">
-            <img 
-              alt={article.alt[lang]} 
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-              src={article.image}
-            />
-          </div>
-          <div class="px-2">
-            <span class="font-label-sm text-label-sm text-primary mb-3 block font-extrabold uppercase tracking-[0.1em]">
-              {article.category[lang]} • {formatDate(article.date)}
-            </span>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight line-clamp-2">
-              {article.title[lang]}
-            </h3>
-            <p class="font-body-md text-on-surface-variant line-clamp-2">
-              {article.description[lang]}
-            </p>
-          </div>
-        </article>
-      ))}
+      {articles.map((article) => {
+        const prefix = lang === 'es' ? '/es' : '';
+        const articleHref = `${prefix}/noticies/${article.slug[lang]}`;
+        return (
+          <a href={articleHref} class="flex flex-col group cursor-pointer">
+            <div class="aspect-[4/3] mb-6 overflow-hidden rounded-2xl border border-outline-variant">
+              <img 
+                alt={article.alt[lang]} 
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                src={article.image}
+              />
+            </div>
+            <div class="px-2 text-left">
+              <span class="font-label-sm text-label-sm text-primary mb-3 block font-extrabold uppercase tracking-[0.1em]">
+                {article.category[lang]} • {formatDate(article.date)}
+              </span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight line-clamp-2">
+                {article.title[lang]}
+              </h3>
+              <p class="font-body-md text-on-surface-variant line-clamp-2">
+                {article.description[lang]}
+              </p>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>

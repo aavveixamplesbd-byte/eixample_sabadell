@@ -1,14 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import NewsPortal from '../components/NewsPortal';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Notícies i Activitats - Eixample Sabadell">
   <Navbar client:load />
+  <Breadcrumbs items={[{ label: 'Notícies' }]} />
   
-  <main class="pt-16 pb-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
+  <main class="pt-6 pb-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
     {/* Page Title Header */}
     <header class="my-12">
       <span class="font-label-md text-label-md text-primary uppercase tracking-[0.2em] bg-primary/10 px-4 py-1.5 rounded-full inline-block mb-4 font-semibold">

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import HistoryHero from '../components/HistoryHero.astro';
 import Timeline from '../components/Timeline.astro';
 import ChimneysBento from '../components/ChimneysBento.astro';
@@ -12,6 +13,7 @@ import Footer from '../components/Footer.astro';
   <Navbar client:load />
   
   <main>
+    <Breadcrumbs items={[{ label: 'Història' }]} />
     <HistoryHero />
     <Timeline />
     <ChimneysBento />

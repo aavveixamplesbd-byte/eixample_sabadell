@@ -1,0 +1,33 @@
+---
+interface Props {
+  items: {
+    label: string;
+    href?: string;
+  }[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="flex items-center space-x-2 text-sm text-secondary font-label-md py-4 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full mt-4" aria-label="Breadcrumb">
+  <ol class="inline-flex items-center space-x-1 md:space-x-2">
+    <li class="inline-flex items-center font-medium">
+      <a href="/" class="inline-flex items-center text-secondary hover:text-primary transition-colors duration-200">
+        <span class="material-symbols-outlined text-[18px] mr-1">home</span>
+        Inici
+      </a>
+    </li>
+    {items.map((item) => (
+      <li class="flex items-center font-medium">
+        <span class="material-symbols-outlined text-[16px] text-outline-variant/60 mx-1">chevron_right</span>
+        {item.href ? (
+          <a href={item.href} class="text-secondary hover:text-primary transition-colors duration-200">
+            {item.label}
+          </a>
+        ) : (
+          <span class="text-primary font-semibold">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

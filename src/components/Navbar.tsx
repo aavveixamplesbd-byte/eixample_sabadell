@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isHome, setIsHome] = useState(true);
+  const [currentPath, setCurrentPath] = useState("/");
 
   // Contact Form States
   const [name, setName] = useState("");
@@ -13,21 +13,15 @@ export default function Navbar() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const path = window.location.pathname;
-      setIsHome(path === "/" || path === "/index.html" || path.endsWith("/eixample_industrial_sabadell/"));
+      setCurrentPath(window.location.pathname);
     }
   }, []);
 
-  const links = isHome
-    ? [
-        { label: "History", icon: "factory", href: "/historia" },
-        { label: "News", icon: "newspaper", href: "/noticies" },
-      ]
-    : [
-        { label: "Home", icon: "home", href: "/" },
-        { label: "History", icon: "factory", href: "/historia" },
-        { label: "News", icon: "newspaper", href: "/noticies" },
-      ];
+  const links = [
+    { label: "Home", icon: "home", href: "/" },
+    { label: "History", icon: "factory", href: "/historia" },
+    { label: "News", icon: "newspaper", href: "/noticies" },
+  ];
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,6 +35,12 @@ export default function Navbar() {
       setSubmitted(false);
       setIsContactOpen(false);
     }, 2000);
+  };
+
+  const isActive = (href: string) => {
+    const cleanPath = currentPath.replace(/\/index\.html$/, "").replace(/\/$/, "") || "/";
+    const cleanHref = href.replace(/\/$/, "") || "/";
+    return cleanPath === cleanHref;
   };
 
   return (
@@ -57,16 +57,23 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-x-8">
-            {links.map((link, idx) => (
-              <a
-                key={idx}
-                href={link.href}
-                className="font-label-md text-label-md text-secondary hover:text-primary transition-colors relative py-2 group"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
+            {links.map((link, idx) => {
+              const active = isActive(link.href);
+              return (
+                <a
+                  key={idx}
+                  href={link.href}
+                  className={`font-label-md text-label-md transition-colors relative py-2 group ${
+                    active ? "text-primary font-bold" : "text-secondary hover:text-primary"
+                  }`}
+                >
+                  {link.label}
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full ${
+                    active ? "w-full" : "w-0"
+                  }`}></span>
+                </a>
+              );
+            })}
             {/* Desktop Contact Trigger */}
             <button
               onClick={() => setIsContactOpen(true)}
@@ -125,24 +132,27 @@ export default function Navbar() {
 
         {/* Navigation Links */}
         <nav className="flex-grow flex flex-col justify-center px-margin-mobile gap-y-8 mt-4">
-          {links.map((item, index) => (
-            <a
-              key={index}
-              className={`flex items-center gap-4 group text-white transform transition-all duration-300 ${
-                isOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
-              }`}
-              style={{ transitionDelay: `${index * 75}ms` }}
-              href={item.href}
-              onClick={() => setIsOpen(false)}
-            >
-              <span className="material-symbols-outlined text-primary-fixed" style={{ fontSize: "28px" }}>
-                {item.icon}
-              </span>
-              <span className="font-headline-lg-mobile text-headline-lg-mobile group-hover:translate-x-2 transition-transform duration-300">
-                {item.label}
-              </span>
-            </a>
-          ))}
+          {links.map((item, index) => {
+            const active = isActive(item.href);
+            return (
+              <a
+                key={index}
+                className={`flex items-center gap-4 group text-white transform transition-all duration-300 ${
+                  isOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
+                } ${active ? "font-bold text-primary-fixed" : ""}`}
+                style={{ transitionDelay: `${index * 75}ms` }}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+              >
+                <span className="material-symbols-outlined text-primary-fixed" style={{ fontSize: "28px" }}>
+                  {item.icon}
+                </span>
+                <span className="font-headline-lg-mobile text-headline-lg-mobile group-hover:translate-x-2 transition-transform duration-300">
+                  {item.label}
+                </span>
+              </a>
+            );
+          })}
           {/* Mobile Contact trigger */}
           <button
             className={`flex items-center gap-4 group text-white transform transition-all duration-300 text-left ${

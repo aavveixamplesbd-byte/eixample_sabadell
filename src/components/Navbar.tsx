@@ -121,14 +121,39 @@ export default function Navbar() {
 
   return (
     <>
+      {/* SVG Filters for colorizing logo.png dynamically */}
+      <svg className="absolute w-0 h-0 pointer-events-none" style={{ visibility: "hidden" }} aria-hidden="true">
+        <defs>
+          <filter id="colorize-mint">
+            <feColorMatrix type="matrix" values="
+              0 0 0 0 0.215
+              0 0 0 0 0.392
+              0 0 0 0 0.365
+              -1 0 0 0 1
+            " />
+          </filter>
+          <filter id="colorize-white">
+            <feColorMatrix type="matrix" values="
+              0 0 0 0 1
+              0 0 0 0 1
+              0 0 0 0 1
+              -1 0 0 0 1
+            " />
+          </filter>
+        </defs>
+      </svg>
+
       {/* Responsive Header */}
       <header className="sticky top-0 bg-surface/90 backdrop-blur-md z-40 border-b border-surface-variant/50 w-full transition-all duration-300">
         <div className="flex justify-between items-center py-4 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
           {/* Logo / Brand */}
-          <a href={prefix || "/"}>
-            <h1 className="font-headline-md text-headline-md text-primary uppercase tracking-wider font-semibold">
-              {t.brand}
-            </h1>
+          <a href={prefix || "/"} className="block">
+            <img 
+              src="/logo.png" 
+              alt="Eixample Sabadell" 
+              className="h-10 sm:h-12 w-auto object-contain" 
+              style={{ filter: "url(#colorize-mint)" }}
+            />
           </a>
 
           {/* Desktop Navigation Links */}
@@ -224,8 +249,13 @@ export default function Navbar() {
       >
         {/* Close Header */}
         <div className="flex justify-between items-center px-margin-mobile py-4 h-16 w-full text-white">
-          <div className="font-headline-sm text-headline-sm text-primary-fixed uppercase tracking-wider">
-            {t.brand}
+          <div className="h-8">
+            <img 
+              src="/logo.png" 
+              alt="Eixample Sabadell" 
+              className="h-8 w-auto object-contain" 
+              style={{ filter: "url(#colorize-white)" }}
+            />
           </div>
           <button
             className="p-2 text-primary-fixed hover:bg-primary-container/20 rounded-full transition-all active:scale-95"

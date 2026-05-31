@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ca"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .industrial-grid {
+            background-image: radial-gradient(circle, #37645d 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.03;
+        }
+    </style>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-secondary-container": "#55656d", "secondary-fixed-dim": "#b9c9d3", "on-tertiary": "#ffffff", "on-primary-fixed-variant": "#204e47", "on-primary-container": "#f4fffb", "surface-container-lowest": "#ffffff", "inverse-primary": "#a1d0c7", "tertiary-fixed-dim": "#c1c9bc", "inverse-on-surface": "#f0f1f1", "on-tertiary-fixed-variant": "#41493f", "surface-container-high": "#e7e8e8", "primary-container": "#507d75", "primary-fixed-dim": "#a1d0c7", "on-error-container": "#93000a", "on-surface-variant": "#404846", "primary-fixed": "#bcece3", error: "#ba1a1a", "on-error": "#ffffff", "surface-tint": "#3a665f", "surface-container": "#edeeee", tertiary: "#565e54", "secondary-fixed": "#d5e5ef", "surface-variant": "#e1e3e3", background: "#f8f9f9", "on-surface": "#191c1c", "error-container": "#ffdad6", "surface-container-low": "#f3f4f4", surface: "#f8f9f9", "tertiary-container": "#6f776c", "tertiary-fixed": "#dde5d8", "surface-dim": "#d9dada", "secondary-container": "#d2e2ec", outline: "#707976", primary: "#37645d", "outline-variant": "#c0c8c5", "surface-bright": "#f8f9f9", "on-secondary-fixed-variant": "#3a4951", "on-primary-fixed": "#00201c", "on-tertiary-fixed": "#161d15", "inverse-surface": "#2e3131", "surface-container-highest": "#e1e3e3", "on-primary": "#ffffff", "on-secondary": "#ffffff", secondary: "#516169", "on-background": "#191c1c", "on-tertiary-container": "#f7fff1", "on-secondary-fixed": "#0e1d25"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"margin-mobile": "16px", gutter: "24px", "margin-desktop": "64px", "max-width": "1280px", unit: "8px"}, fontFamily: {"label-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], headline: ["Comfortaa"], display: ["Comfortaa"], body: ["Plus Jakarta Sans"], label: ["Plus Jakarta Sans"]}, fontSize: {"label-md": ["14px", {lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600"}], "label-sm": ["12px", {lineHeight: "16px", fontWeight: "600"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.03em", fontWeight: "800"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "700"}], "headline-md": ["24px", {lineHeight: "32px", fontWeight: "700"}], "headline-sm": ["20px", {lineHeight: "28px", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "28px", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "24px", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "700"}]}}}};</script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full bg-surface dark:bg-on-background h-20 border-b border-outline-variant z-50 transition-all duration-300" id="main-nav">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-20">
+<div class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">
+            Eixample Sabadell
+        </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Història</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-200" href="#">Notícies</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-200" href="#">Serveis</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-200" href="#">Contacte</a>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md hover:bg-primary-container hover:scale-95 active:opacity-80 transition-all duration-200 shadow-sm">Join Us</button>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined text-on-surface cursor-pointer text-3xl">menu</span>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative pt-20 min-h-[819px] flex items-center overflow-hidden bg-surface-container-lowest">
+<div class="absolute inset-0 industrial-grid z-0"></div>
+<div class="absolute right-0 top-0 w-full md:w-1/2 h-full z-0 opacity-10 md:opacity-25 pointer-events-none overflow-hidden">
+<img alt="Industrial Heritage" class="w-full h-full object-cover saturate-50 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlJuPWK9Y4nBtgTBE0CyHLMJlEQruuH-cxE8IEc4A2aSkx2eHrJmErsL-TH0lO4-QdKKqVvhJgffsQG7oi9GBnyU6o-pfPC3soBlltV3Uv2fZN9mO_xQtdUhXX9WHfA9xZPhh0MUXAGVvKMfWYIobejSe-gNay3vBgjF0jux1wyisWWkIS1FsrCZRyHmfQrtSahF6DYOoxrhJncE86vpYVBqOuhKoTA6UP-eVuZjYc8DjEOzHeTFt6YBzGpaZEERew1ue5I0d0W3fe"/>
+</div>
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop relative z-10 w-full">
+<div class="max-w-2xl">
+<span class="font-label-md text-label-md text-primary uppercase tracking-[0.2em] bg-primary/10 px-3 py-1 rounded-full inline-block mb-6">Associació de Veïns</span>
+<h1 class="font-display-lg text-4xl md:text-6xl text-on-surface mb-8 leading-tight tracking-tighter">
+                Eixample Sabadell: <br/>
+<span class="text-primary font-bold">Cor Industrial</span> de Catalunya
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-10 leading-relaxed">
+                Treballem per mantenir viu el llegat històric del nostre barri mentre construïm una comunitat moderna, inclusiva i vibrant per a tots els sabadellencs.
+            </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-3.5 rounded-xl font-label-md text-label-md font-bold hover:bg-primary-container transition-all hover:shadow-lg hover:-translate-y-0.5">
+                    Descobreix el barri
+                </button>
+<button class="border border-outline text-on-surface px-8 py-3.5 rounded-xl font-label-md text-label-md font-bold hover:bg-surface-container transition-all">
+                    Informació veïnal
+                </button>
+</div>
+</div>
+</div>
+</header>
+<main>
+<!-- Heritage Section (Bento Style) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="mb-12">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">El Nostre Llegat</h2>
+<div class="w-16 h-1 bg-primary rounded-full mb-6"></div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+                    Des de les antigues xemeneies tèxtils fins a les joies del modernisme, l'Eixample és un testimoni viu del passat obrer de Sabadell.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-7 group relative h-[400px] overflow-hidden rounded-2xl shadow-sm border border-outline-variant">
+<img alt="Modernist Architecture" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE-eGBcji-ndKsZiP51dYggxLi8hbiBfBeNivHC_yjyxNtHQU6T_dbMpW7QCLM_yuK4sf8c5pjaJHrM-bt2zw6Yj5b9dpu4_RsVVT1ahQO7GtBeDsQ5AZRtv1eNPPYvp03IXBmmLW2Kjy3c21C21dtoA-86IxFE-Zm5d-0Y4JnuhMAN0EDt2utFd0S1kXCLMThWGleXdP7NNSOLAV1EXKjY9tn8HY0M5PBJ3nNYKtpioBC2ND9aOE5DUNbyBPP2BYQxwUWSbl5r_iX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent p-8 flex flex-col justify-end">
+<span class="material-symbols-outlined text-primary-fixed text-4xl mb-3">factory</span>
+<h3 class="font-headline-sm text-headline-sm text-on-primary mb-2">Arquitectura Industrial</h3>
+<p class="font-body-md text-on-primary/90 font-medium">Recuperant els espais fabrils per a l'ús ciutadà.</p>
+</div>
+</div>
+<div class="md:col-span-5 flex flex-col gap-6">
+<div class="flex-1 bg-surface-container-highest p-8 rounded-2xl border border-outline-variant hover:border-primary/30 transition-colors flex flex-col justify-center">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">handyman</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-bold mb-2">Oficis del Barri</h4>
+<p class="font-body-md text-on-surface-variant">L'esperit del treball manual que va definir la nostra identitat col·lectiva.</p>
+</div>
+<div class="flex-1 bg-primary text-on-primary p-8 rounded-2xl shadow-md flex flex-col justify-center group hover:bg-primary-container transition-colors">
+<div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<h4 class="font-label-md text-label-md uppercase tracking-widest font-bold mb-2">Urbanisme Elegant</h4>
+<p class="font-body-md text-on-primary/90">Carrers amples i geometria perfecta inspirada en el Pla Cerdà.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- News & Events (Clean Grid) -->
+<section class="py-24">
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2 tracking-tight">Notícies i Activitats</h2>
+<p class="font-body-md text-on-surface-variant">Mantén-te al dia del que passa al carrer.</p>
+</div>
+<a class="font-label-md text-label-md text-primary flex items-center gap-2 group px-4 py-2 hover:bg-primary/5 rounded-full transition-all font-bold" href="#">
+                    Veure tot <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Article 1 -->
+<article class="flex flex-col group cursor-pointer">
+<div class="aspect-[4/3] mb-6 overflow-hidden rounded-2xl border border-outline-variant">
+<img alt="Community Festival" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHwDK3L_fxD1B26aiXJ523a0w-Xml9DYLrJtoas-okWC2kGQtHfXZyKA1x0UNtflX9bKMIM0JFw5ctT1VBMr29TtKxKl8qWYcFz-_TS35_Dv8h3OkqrbLf8-WLwWmqPKnqIxq5DA6wPqtbZTmehfck4CyWtmXPbtZQv1i5BZ4FAnD4IxiRwQIiBhjV2cP1zerFqBoD0tgZv0Kzf-glHXjlDFktjAc6HgZcQS2AZvwxdwC0vx1pT9qc-UD7uZEB9Ry7JAlnVTy8tRqG"/>
+</div>
+<div class="px-2">
+<span class="font-label-sm text-label-sm text-primary mb-3 block font-extrabold uppercase tracking-[0.1em]">Cultura • 12 Jun</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight">Festa Major del Barri: Recollida de propostes</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2">
+                            Volem que la festa d'enguany sigui més participativa que mai. T'esperem el proper dimarts.
+                        </p>
+</div>
+</article>
+<!-- Article 2 -->
+<article class="flex flex-col group cursor-pointer">
+<div class="aspect-[4/3] mb-6 overflow-hidden rounded-2xl border border-outline-variant">
+<img alt="Urban Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkk8ItTgq0dk_xyXO89z1IV2EKfhnt5kjn_Y_wx-1WLIK_xykvsrxO3EzToh1bXwY3t2IW_O-HN9e3CQn-Wl0lgmYFU48a0w-oh_EZe7J1jDWG2sAuCPJkPfL00but3uBiZSsyowBWzJCZd6pPIf-SA-XFv8hsBWQpRYwYcvvbEhEqRUA5BINM_F8zavkdBGNOzQ7QyQZlzGIG5Ml3xDbfPLKroq2m9jol1-7hfym5psUdLoM2x-JmJLxSQCuz72oU8fOr5RqPuGIH"/>
+</div>
+<div class="px-2">
+<span class="font-label-sm text-label-sm text-primary mb-3 block font-extrabold uppercase tracking-[0.1em]">Urbanisme • 05 Jun</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight">Nou projecte de pacificació de l'Indústria</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2">
+                            L'ajuntament presenta el pla per ampliar les zones de vianants i millorar la qualitat de l'aire.
+                        </p>
+</div>
+</article>
+<!-- Article 3 -->
+<article class="flex flex-col group cursor-pointer">
+<div class="aspect-[4/3] mb-6 overflow-hidden rounded-2xl border border-outline-variant">
+<img alt="Archive" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpI-Vk5cWosXS5P2RanIXWrr593eDlj9H3HtdvJ92yGtdNC1-5f53DzhJXHx3QomxwY1dEBkAmLInU-SwxaQkiUZavPjJmgqcV-J0oi1Bp4QlaDD6l6H1CpUwOyiPHuvZntjfywaUrADGy1si4ijLWToRcgmIS0ifhjclbUfs7FEqR1heiyJ5CtcdnCYnwJ3plLuOFzZMrAPxDwwcdRvFIhacTCy3YcG77PJo7SuFpVX6sLPpk2jk-lNVsU_iQGPh2vfOjIgcjM2CH"/>
+</div>
+<div class="px-2">
+<span class="font-label-sm text-label-sm text-primary mb-3 block font-extrabold uppercase tracking-[0.1em]">Història • 28 Maig</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight">Digitalització de l'arxiu històric</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2">
+                            Ja podeu consultar online més de 500 fotografies inèdites del barri durant els anys 50 i 60.
+                        </p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Services (Minimalist Links) -->
+<section class="py-24 bg-surface-container">
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-12 tracking-tight">Serveis al Veïnat</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<a class="group p-8 bg-surface-container-lowest rounded-2xl border border-outline-variant hover:border-primary hover:shadow-md transition-all duration-300" href="#">
+<div class="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">contact_support</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface block font-bold tracking-tight">Atenció al Soci</span>
+</a>
+<a class="group p-8 bg-surface-container-lowest rounded-2xl border border-outline-variant hover:border-primary hover:shadow-md transition-all duration-300" href="#">
+<div class="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">apartment</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface block font-bold tracking-tight">Gestió de Tràmits</span>
+</a>
+<a class="group p-8 bg-surface-container-lowest rounded-2xl border border-outline-variant hover:border-primary hover:shadow-md transition-all duration-300" href="#">
+<div class="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">campaign</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface block font-bold tracking-tight">Incidències Via Pública</span>
+</a>
+<a class="group p-8 bg-surface-container-lowest rounded-2xl border border-outline-variant hover:border-primary hover:shadow-md transition-all duration-300" href="#">
+<div class="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">groups</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface block font-bold tracking-tight">Espais Comunitaris</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="py-24 bg-primary-container text-on-primary-container">
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<div class="max-w-3xl mx-auto bg-surface-container-lowest/10 backdrop-blur-sm p-12 rounded-3xl border border-white/10 shadow-xl">
+<h2 class="font-headline-lg text-headline-lg mb-6 tracking-tight">Forma part de la nostra història</h2>
+<p class="font-body-lg text-body-lg opacity-90 mb-10 leading-relaxed">
+                    L'associació és el motor que manté viu el barri. Amb la teva quota ajudes a finançar activitats culturals i a defensar els interessos dels veïns.
+                </p>
+<button class="bg-primary text-on-primary hover:bg-primary/90 px-10 py-4 font-label-md text-label-md font-extrabold rounded-full transition-all transform hover:scale-105 shadow-lg">
+                    Fes-te Soci Ara
+                </button>
+<p class="mt-6 font-label-sm text-label-sm opacity-70 uppercase tracking-[0.2em] font-bold">Des de només 10€ a l'any</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-start py-16 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto gap-12">
+<div class="max-w-sm">
+<div class="font-headline-md text-headline-md text-primary font-extrabold mb-6 tracking-tight">Eixample Sabadell</div>
+<p class="font-body-md text-body-md text-on-secondary-container">
+                Treballant per la millora del barri i la cohesió social des de 1978. Construint un futur compartit sobre el nostre llegat industrial.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-12 md:gap-24">
+<div class="flex flex-col gap-4">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold mb-2">Navegació</span>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">Història</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">Notícies</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">Serveis</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">Contacto</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold mb-2">Legal</span>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">Avís Legal</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">Privacitat</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">Cookies</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">Arxiu</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold mb-2">Contacte</span>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-label-sm text-label-sm text-on-secondary-container font-medium">C/ de la República, 45, 08202 Sabadell</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="font-label-sm text-label-sm text-on-secondary-container font-medium">hola@eixamplesabadell.cat</span>
+</div>
+</div>
+</div>
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-label-sm text-label-sm text-on-secondary-container text-center md:text-left font-medium">
+            © 2024 Associació de Veïns Eixample Sabadell. Tots els drets reservats.
+        </p>
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center hover:bg-primary/10 cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-primary text-xl">share</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center hover:bg-primary/10 cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-primary text-xl">rss_feed</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Sticky nav scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav');
+        if (window.scrollY > 20) {
+            nav.classList.add('shadow-sm');
+            nav.classList.remove('h-20');
+            nav.classList.add('h-16');
+            nav.style.backgroundColor = 'rgba(248, 249, 249, 0.9)';
+            nav.style.backdropFilter = 'blur(12px)';
+        } else {
+            nav.classList.remove('shadow-sm');
+            nav.classList.add('h-20');
+            nav.classList.remove('h-16');
+            nav.style.backgroundColor = '';
+            nav.style.backdropFilter = '';
+        }
+    });
+
+    // Reveal animations on scroll
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-8');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('section > div').forEach(el => {
+        el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
+        observer.observe(el);
+    });
+</script>
+</body></html>

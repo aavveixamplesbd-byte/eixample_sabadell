@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html lang="ca"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e7e8e8",
+                        "primary-fixed-dim": "#a1d0c7",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-container-low": "#f3f4f4",
+                        "on-background": "#191c1c",
+                        "surface-variant": "#e1e3e3",
+                        "background": "#f8f9f9",
+                        "primary-fixed": "#bcece3",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#d2e2ec",
+                        "surface-container-highest": "#e1e3e3",
+                        "surface-tint": "#3a665f",
+                        "on-secondary-fixed": "#0e1d25",
+                        "on-surface": "#191c1c",
+                        "on-primary-fixed": "#00201c",
+                        "on-tertiary-container": "#f7fff1",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#161d15",
+                        "on-secondary-container": "#55656d",
+                        "surface-dim": "#d9dada",
+                        "surface-bright": "#f8f9f9",
+                        "surface-container": "#edeeee",
+                        "on-primary-fixed-variant": "#204e47",
+                        "tertiary-fixed": "#dde5d8",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#a1d0c7",
+                        "tertiary": "#565e54",
+                        "primary": "#37645d",
+                        "secondary-fixed-dim": "#b9c9d3",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#404846",
+                        "on-secondary-fixed-variant": "#3a4951",
+                        "tertiary-container": "#6f776c",
+                        "tertiary-fixed-dim": "#c1c9bc",
+                        "secondary": "#516169",
+                        "outline": "#707976",
+                        "surface": "#f8f9f9",
+                        "error": "#ba1a1a",
+                        "primary-container": "#507d75",
+                        "inverse-surface": "#2e3131",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d5e5ef",
+                        "on-primary-container": "#f4fffb",
+                        "on-tertiary-fixed-variant": "#41493f",
+                        "outline-variant": "#c0c8c5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "max-width": "1280px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Comfortaa"],
+                        "headline-lg": ["Comfortaa"],
+                        "headline-md": ["Comfortaa"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f8f9f9;
+            color: #191c1c;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(112, 121, 118, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full bg-surface dark:bg-background border-b border-on-secondary-fixed-variant/10 z-50">
+<nav class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="font-headline-sm text-headline-sm text-primary uppercase tracking-wider font-bold">
+                Eixample Sabadell
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">History</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">News</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Services</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 rounded-lg bg-surface-container-low border-none focus:ring-2 focus:ring-primary text-label-md font-label-md w-48 lg:w-64" placeholder="Search archive..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all">
+                    Join Us
+                </button>
+</div>
+</nav>
+</header>
+<main class="pt-24 pb-20 px-gutter max-w-container-max mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4">Notícies i Activitats</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                L'actualitat del cor industrial de Sabadell. Descobreix els esdeveniments, projectes urbanístics i cròniques històriques del barri.
+            </p>
+</header>
+<!-- Featured Article -->
+<section class="mb-16">
+<div class="relative w-full h-[500px] rounded-xl overflow-hidden group cursor-pointer border border-outline-variant/30">
+<img alt="Industrial Sabadell" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-angle cinematic photograph of an old textile factory in Sabadell at dusk. The building features classic red brick industrial architecture and large multi-paned windows glowing with warm interior light. The surrounding area is clean and modern, highlighting the contrast between historic preservation and contemporary urban design. The sky is a soft mint-grey and steel-blue, reflecting a calm aero-industrial aesthetic with refined lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIcULFygy1-jP3TQRS1e6kV3rF4V6P-R_eVyyW3b-YVz40GvgLQZc_krElCP4kza4ORIV3gXS52-BvPMWhaUdHzj3pPcsy6IkdLCQGRdJCuQOhED19vuKJwkBt3RgesgbIRQqPJhXPoS3TeivEL1rfv7rjPoIUcFVVm4xwjsYn2ayV3JKeAlONHl8qiRJtXzp0HPl8039PPH5Er3aDCyPnQsBjghKEKEhOwVwh52B58iFKj_6vb0P6UXXb3wprO7FghjxU1me8okom"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
+<div class="mb-4">
+<span class="bg-primary-fixed-dim text-on-primary-fixed px-3 py-1 rounded-full text-label-sm font-label-sm uppercase tracking-widest">Urbanisme</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-white mb-4 max-w-3xl">
+                        Transformació de l'Eix: El nou pla de mobilitat per recuperar els carrers per als vianants
+                    </h2>
+<p class="text-white/80 font-body-md text-body-md max-w-xl mb-6 line-clamp-2">
+                        L'Ajuntament presenta el projecte final per convertir l'eix central en una zona de baixes emissions amb més espais verds i zones de convivència.
+                    </p>
+<div class="flex items-center gap-4 text-white/90">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span class="text-label-sm font-label-sm">12 de Gener, 2024</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="text-label-sm font-label-sm">Redacció AVES</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Filters -->
+<section class="flex flex-wrap items-center gap-3 mb-10 pb-6 border-b border-outline-variant/20">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all">Totes</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container font-label-md text-label-md transition-all">Cultura</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container font-label-md text-label-md transition-all">Urbanisme</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container font-label-md text-label-md transition-all">Història</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container font-label-md text-label-md transition-all">Activitats</button>
+<div class="ml-auto hidden md:flex items-center gap-2 text-on-surface-variant">
+<span class="text-label-md font-label-md">Ordena per:</span>
+<select class="bg-transparent border-none focus:ring-0 text-label-md font-label-md cursor-pointer text-primary">
+<option>Més recents</option>
+<option>Més antigues</option>
+</select>
+</div>
+</section>
+<!-- Article Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+<!-- Article 1 -->
+<article class="group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 border border-outline-variant/30">
+<img alt="Archive work" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist workspace showing a laptop and various vintage architectural blueprints of industrial Sabadell. The lighting is soft and natural, coming from a large window off-camera. The color palette is dominated by muted mint-steel tones and crisp whites, creating an atmosphere of professional technical clarity and historical research. Sharp focus on the textures of the old paper blueprints and the sleek modern laptop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9zDROrGCOXeqariPC6ruo2OmNmidmXakBKUdrcDETBhMFUt5QRXsbYYRlz3YyGfqIW1z6mZcLpuhV6CdYv7jmHuGsVH06ynvFaY3nFunpkw7ikF01OjSqUePMktGNPDEiO27WrIN_0T1VIWk3RjnFA2q3Ff0BT3L61zNTR1guVJWez3QH-zn4jGXjHdvXgiFX7U3omTF0vV-2HyNeKPwzosycTpBBZB4WvNx6ZT5YC4JqLCCuGPBaNeqmJ3ta6436EIm247DRlIOI"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-primary font-label-sm text-label-sm uppercase tracking-wider">Història</span>
+<h3 class="font-headline-md text-headline-md leading-tight group-hover:text-primary transition-colors">Digitalització de l'Arxiu Industrial: Un viatge al passat</h3>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-3">
+                        Iniciem el procés de preservació digital de més de 500 documents històrics de les antigues filatures de l'Eixample.
+                    </p>
+<div class="mt-2 text-outline font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 5 min de lectura
+                    </div>
+</div>
+</article>
+<!-- Article 2 -->
+<article class="group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 border border-outline-variant/30">
+<img alt="Meeting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional and friendly community meeting inside a modern, light-filled assembly hall with high ceilings and industrial steel beams. People are sitting in a circle, engaged in a positive discussion. The overall aesthetic is clean and airy, using a palette of light grey, mint green accents, and warm wood textures. The atmosphere is collaborative, efficient, and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfL24rhEpx0WjB2202ghb6AeITtxB6oLgjx7VvxNck-5EPrbSucmSYfH_qnEKWFRc8aUMu8wvU72xGIdPFaN3WQm8pqsnpg0dUmKo63cbnV1XZXklVTredby35m61kOu0ucndZjkt9qHSlRGKjb6fYmciBXAXsk-J0Jxq5N-wLuubr25GQG7JlxACwdQJc4jmgqGTAwcRYcP_AmLtmIX8W2x5ggZnLeEVuvFk2mx3rtVI1NgVKW6wUxHBHQY8IRGUguzwi1XZGCrNv"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-primary font-label-sm text-label-sm uppercase tracking-wider">Activitats</span>
+<h3 class="font-headline-md text-headline-md leading-tight group-hover:text-primary transition-colors">Assemblea de Veïns: Resultats del Pressupost Participatiu</h3>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-3">
+                        Més de 200 veïns han votat per les millores del barri. El parc de la Filosa rebrà la inversió principal per a la nova àrea infantil.
+                    </p>
+<div class="mt-2 text-outline font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 3 min de lectura
+                    </div>
+</div>
+</article>
+<!-- Article 3 -->
+<article class="group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 border border-outline-variant/30">
+<img alt="Modern architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A photograph of contemporary urban architecture in Sabadell, featuring a minimalist facade with clean lines and large glass panels reflecting a pale blue sky. The building is surrounded by neat landscaping with drought-resistant plants. The visual style is refined industrial minimalism, with high-end sophistication and a calm, efficient mood. The lighting is bright and even, reinforcing the light-mode design tokens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR1PrYMyEtPVj-zPmZkCDNCw3ZIRFI7ze8EB_8SzKCu1672QzKLjrj0zsBVwNOF1YuOn6VnBwsyR4vrdBuHqnJubrV0VofkSx1S_9tLHUfk9ioGx1NfPhS2QD5dqGME4yEcVfSaANAxICS-N6t1GDTo6LmEvS3KLufSvxMYcbdugwaRjo80SPqkyvC1O1sJ4SzFJK1JLnWeyYkIjNE5fgCfBO6wOadnIYhZC6WH4aUtVejlgX0Srjs7L8fdrtdT22TwMTIt3twTZzd"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-primary font-label-sm text-label-sm uppercase tracking-wider">Cultura</span>
+<h3 class="font-headline-md text-headline-md leading-tight group-hover:text-primary transition-colors">Cicle de Cinema a la Fresca: Programació d'Estiu</h3>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-3">
+                        Torna el cinema al pati de la fàbrica. Enguany, el cicle se centra en documentals sobre transformació urbana i art social.
+                    </p>
+<div class="mt-2 text-outline font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 2 min de lectura
+                    </div>
+</div>
+</article>
+<!-- Article 4 -->
+<article class="group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 border border-outline-variant/30">
+<img alt="Office" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Interior of a modern coworking space in a repurposed industrial building. The design features white-washed brick walls, polished concrete floors, and steel-framed glass partitions. The lighting is soft and airy, creating a professional and friction-less environment. The furniture is minimalist with a hint of industrial heritage. The color palette is restricted to shades of grey, mint, and white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGLgJTwjvJulWLu0iZuxJJBlkvRE9j4Ci2IuwGznxsCVkGyUDGJ1OJQYs682ediEGYGX61a6tw8aVh2F6gZREOMa-CT1ccNCOAyFpSjiuPtLHo1KgBCdlYqvLOtIl1URtn2jc3BEevBwnN2hR-d24tarBSmUH3UtG0rX1-ifyi5p-Z_xXO6TXNtjZPWDh-O8GnwaggIbT8lSRwKoNSZ7F0sjm-vZ2a3lL857lhTZXUCN3ThL6TGG7R3d14h0YO3_BAg1pys71ZYAqH"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-primary font-label-sm text-label-sm uppercase tracking-wider">Activitats</span>
+<h3 class="font-headline-md text-headline-md leading-tight group-hover:text-primary transition-colors">Taller d'Innovació Social: Emprenent al Barri</h3>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-3">
+                        Obrim les inscripcions per al nou taller d'emprenedoria local destinat a joves veïns de l'Eixample.
+                    </p>
+<div class="mt-2 text-outline font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 4 min de lectura
+                    </div>
+</div>
+</article>
+<!-- Article 5 -->
+<article class="group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 border border-outline-variant/30">
+<img alt="Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A portrait of an elderly artisan in their workshop in Sabadell, surrounded by high-quality tools and industrial machinery. The lighting is dramatic but soft, highlighting the textures of wood and metal. The background is slightly blurred, focusing on the artisan's dignified expression. The overall style is refined and technically clear, emphasizing a connection between tradition and modern professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJrJHFZX1IeMjQ6Ny572w8BqWWCnks0TN0QnpDYWky7uB3i7CL4MoMlPTQVXi6xuBAWxfhNSJZyxDJVAc4a4jku02dsmv354gkMIL9LS_IQfhOvbLo9q6E_H4XQWDWUYigJwltwz_-DeuXq2a_6KwjDKRXW12MnZR50T-gxOGz1PkLM_DlGcWwUomnueuEXGyDYSENGm85Evao0oM5TXcqtSgLRhfpuux9jin3YwsnTMv_ZKKGkCzy-GiJhNUg2N-cS3IXcRYxxuwd"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-primary font-label-sm text-label-sm uppercase tracking-wider">Història</span>
+<h3 class="font-headline-md text-headline-md leading-tight group-hover:text-primary transition-colors">Retrats de l'Eix: Testimonis de la Sabadell tèxtil</h3>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-3">
+                        Una nova exposició fotogràfica recull les històries dels antics treballadors i treballadores de les fàbriques del barri.
+                    </p>
+<div class="mt-2 text-outline font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 6 min de lectura
+                    </div>
+</div>
+</article>
+<!-- Article 6 -->
+<article class="group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 border border-outline-variant/30">
+<img alt="Urban park" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A wide-angle landscape shot of a newly designed urban park in an industrial district. The park features geometric walking paths made of light-colored stone, modern minimalist benches, and a variety of green trees and shrubs. In the background, modern residential buildings with steel accents are visible. The mood is serene and technologically advanced, with a bright, airy daylight aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChm6osAFnZ6kNrAs3-3LAzHMKlYcI65vpb458dqFVgOPyU-zSjOmmzGrpJIkBrfvhk0Oh_1WUqDzRPcWK6u8BE0KdD8V4PFpkdzoggjTwHCz8o2yzR17ENHIWEQF9XomdIV1H0wO5chOjHKKySdAj6jjgHzlsU35rM7EdwuNl9TOeye3_qAAqNQOoSEotFEfz3T6ngMN6v8hTaXaYuBtz8js7Q8EKjEP7buBHZ3Py5QXPe-NsT2mD2Q4EX4gxhi7O5omO0Rf-hYqhI"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-primary font-label-sm text-label-sm uppercase tracking-wider">Urbanisme</span>
+<h3 class="font-headline-md text-headline-md leading-tight group-hover:text-primary transition-colors">Nova il·luminació LED: Més seguretat i eficiència</h3>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-3">
+                        S'ha completat la instal·lació dels nous fanals LED intel·ligents a tot el perímetre del barri, reduint el consum un 40%.
+                    </p>
+<div class="mt-2 text-outline font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 2 min de lectura
+                    </div>
+</div>
+</article>
+</section>
+<!-- Pagination -->
+<div class="mt-20 flex justify-center items-center gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant/30 text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-on-primary font-label-md">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-high transition-all font-label-md">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-high transition-all font-label-md">3</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant/30 text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<!-- Newsletter Section (Bento Inspired) -->
+<section class="mt-32">
+<div class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/20 flex flex-col lg:flex-row">
+<div class="p-8 md:p-16 lg:w-3/5">
+<h2 class="font-display-lg text-display-lg mb-6">Estigues connectat</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10">
+                        Subscriu-te al nostre butlletí mensual i no perdis cap detall sobre les activitats, assemblees i notícies rellevants de l'Eixample Sabadell.
+                    </p>
+<form class="flex flex-col sm:flex-row gap-4">
+<input class="flex-grow bg-white border border-outline-variant/30 rounded-lg px-6 py-4 text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="El teu correu electrònic" type="email"/>
+<button class="bg-primary text-on-primary px-10 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all whitespace-nowrap">
+                            Subscriure'm
+                        </button>
+</form>
+<p class="mt-6 font-label-sm text-label-sm text-outline">
+                        En subscriure't, acceptes la nostra Política de Privacitat. No t'enviarem correus brossa.
+                    </p>
+</div>
+<div class="lg:w-2/5 relative h-64 lg:h-auto bg-primary-container/20 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-[120px] text-primary/10 absolute -rotate-12 transform -translate-x-12">newspaper</span>
+<span class="material-symbols-outlined text-[180px] text-primary/5 absolute rotate-12 transform translate-x-20 translate-y-20">mail</span>
+<div class="relative z-10 glass-card p-10 rounded-xl max-w-xs text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-primary text-[32px]">verified</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Comunitat</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Unim-nos per fer un barri millor, dia rere dia.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-on-secondary-fixed w-full py-xl border-t-2 border-on-secondary-fixed-variant/20 mt-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg px-gutter max-w-container-max mx-auto">
+<div class="flex flex-col gap-4">
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold uppercase tracking-wider">Eixample Sabadell</div>
+<p class="font-caption text-caption text-on-surface-variant max-w-xs">
+                    Associació de Veïns del Barri de l'Eixample de Sabadell. Defensem el patrimoni industrial i la qualitat de vida veïnal.
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-label-md text-primary uppercase">Quick Links</h4>
+<div class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary transition-all font-caption text-caption" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-caption text-caption" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-caption text-caption" href="#">Local Council</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-caption text-caption" href="#">Archive</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-label-md text-primary uppercase">Contacte</h4>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">location_on</span> Carrer de la Indústria, 24, 08202 Sabadell
+                </p>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">mail</span> info@eixamplesabadell.cat
+                </p>
+<div class="mt-4">
+<p class="font-caption text-caption text-on-surface-variant">© 2024 Associació de Veïns Eixample Sabadell. Built on Industrial Heritage.</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for filter buttons
+        const filterButtons = document.querySelectorAll('section button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary');
+                btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                
+                // Simulated loading effect
+                const grid = document.querySelector('section.grid');
+                grid.style.opacity = '0.5';
+                grid.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    grid.style.opacity = '1';
+                    grid.style.transform = 'translateY(0)';
+                }, 300);
+            });
+        });
+
+        // Add smooth transitions to grid articles
+        const articles = document.querySelectorAll('article');
+        articles.forEach((article, index) => {
+            article.style.transition = `all 0.5s ease ${index * 0.1}s`;
+        });
+    </script>
+</body></html>

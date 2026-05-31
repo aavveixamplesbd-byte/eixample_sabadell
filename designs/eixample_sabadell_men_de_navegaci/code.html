@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="ca"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;family=Plus+Jakarta+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .industrial-glass {
+            background: rgba(55, 100, 93, 0.95);
+            backdrop-filter: blur(12px);
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .animate-slide-in {
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e7e8e8",
+                    "primary-fixed-dim": "#a1d0c7",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f0f1f1",
+                    "surface-container-low": "#f3f4f4",
+                    "on-background": "#191c1c",
+                    "surface-variant": "#e1e3e3",
+                    "background": "#f8f9f9",
+                    "primary-fixed": "#bcece3",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#d2e2ec",
+                    "surface-container-highest": "#e1e3e3",
+                    "surface-tint": "#3a665f",
+                    "on-secondary-fixed": "#0e1d25",
+                    "on-surface": "#191c1c",
+                    "on-primary-fixed": "#00201c",
+                    "on-tertiary-container": "#f7fff1",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#161d15",
+                    "on-secondary-container": "#55656d",
+                    "surface-dim": "#d9dada",
+                    "surface-bright": "#f8f9f9",
+                    "surface-container": "#edeeee",
+                    "on-primary-fixed-variant": "#204e47",
+                    "tertiary-fixed": "#dde5d8",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#a1d0c7",
+                    "tertiary": "#565e54",
+                    "primary": "#37645d",
+                    "secondary-fixed-dim": "#b9c9d3",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#404846",
+                    "on-secondary-fixed-variant": "#3a4951",
+                    "tertiary-container": "#6f776c",
+                    "tertiary-fixed-dim": "#c1c9bc",
+                    "secondary": "#516169",
+                    "outline": "#707976",
+                    "surface": "#f8f9f9",
+                    "error": "#ba1a1a",
+                    "primary-container": "#507d75",
+                    "inverse-surface": "#2e3131",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#d5e5ef",
+                    "on-primary-container": "#f4fffb",
+                    "on-tertiary-fixed-variant": "#41493f",
+                    "outline-variant": "#c0c8c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "max-width": "1280px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Comfortaa"],
+                    "headline-lg-mobile": ["Comfortaa"],
+                    "headline-lg": ["Comfortaa"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-md": ["Comfortaa"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Main Background (Mock Content) -->
+<main class="p-margin-mobile">
+<header class="flex justify-between items-center py-4">
+<h1 class="font-headline-md text-headline-md text-primary uppercase tracking-wider">Eixample Sabadell</h1>
+<button class="p-2 text-primary" id="openMenu">
+<span class="material-symbols-outlined" style="font-size: 32px;">menu</span>
+</button>
+</header>
+<section class="mt-8">
+<div class="h-64 w-full bg-surface-container-high rounded-xl overflow-hidden mb-gutter">
+<img class="w-full h-full object-cover" data-alt="A cinematic architectural shot of a refurbished industrial factory building in Sabadell, featuring red brickwork and large iron-framed windows. The lighting is early morning gold, casting long shadows across the clean, minimalist cobblestone plaza. The atmosphere is quiet, professional, and reflects a blend of heritage preservation and modern industrial minimalism with soft mint-steel color grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPdreWSO0Q66AZ-u560dKGgSCAFvUtmvuGdPWGkcPVGSjC8zwUQeS35fmxNyrSyxIoujutuSvQ0UVyAGtRzUerdZEcCtWAwbOpPpiEyeaqvkEwADKGQ55A4Zi0S0GveteE0af5yEHCFtUlu7wwG_MrAzCTq29cf3efEL6aeAsa_PDBwnXo0Jkf3kB2gPkljAG9RjckWgmj6ttmO-ymvloYn73lA-ySKvvChORbbW8BWiDEwJVLYq9r3A0kgyTFqe5_MyWimDNKLW27"/>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-4">L'Herència Industrial Viva</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Explora el cor de Sabadell, on el passat tèxtil es troba amb la innovació del futur.</p>
+</section>
+</main>
+<!-- Mobile Navigation Overlay -->
+<div class="fixed inset-0 z-50 industrial-glass text-on-primary-container hidden flex-col" id="mobileOverlay">
+<!-- Close Header -->
+<div class="flex justify-between items-center px-margin-mobile py-4 h-16">
+<div class="font-headline-sm text-headline-sm text-primary-fixed uppercase tracking-wider">Eixample Sabadell</div>
+<button class="p-2 text-primary-fixed hover:bg-primary-container/20 rounded-full transition-all" id="closeMenu">
+<span class="material-symbols-outlined" style="font-size: 32px;">close</span>
+</button>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-grow flex flex-col justify-center px-margin-mobile gap-y-8 mt-4">
+<a class="flex items-center gap-4 group" href="#">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="factory">factory</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile group-hover:translate-x-2 transition-transform duration-300">History</span>
+</a>
+<a class="flex items-center gap-4 group" href="#">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="newspaper">newspaper</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile group-hover:translate-x-2 transition-transform duration-300">News</span>
+</a>
+<a class="flex items-center gap-4 group" href="#">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="handyman">handyman</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile group-hover:translate-x-2 transition-transform duration-300">Services</span>
+</a>
+<a class="flex items-center gap-4 group" href="#">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="contact_mail">contact_mail</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile group-hover:translate-x-2 transition-transform duration-300">Contact</span>
+</a>
+</nav>
+<!-- Footer / CTA -->
+<div class="p-margin-mobile flex flex-col gap-6 bg-primary-fixed/5 border-t border-primary-fixed/10 pb-12">
+<div class="flex flex-col gap-2">
+<div class="font-headline-md text-headline-md text-primary-fixed">Neighborhood Association</div>
+<div class="font-label-md text-label-md text-primary-fixed-dim">Sabadell's Industrial Heart</div>
+</div>
+<button class="w-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md py-5 rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-lg shadow-black/10">
+                Join Us
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+</button>
+<div class="grid grid-cols-2 gap-4 mt-2">
+<a class="font-label-sm text-label-sm text-primary-fixed-dim opacity-70 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-primary-fixed-dim opacity-70 hover:opacity-100 transition-opacity" href="#">Archive</a>
+</div>
+</div>
+</div>
+<!-- Decorative Industrial Element (Floating Gear) -->
+<div class="fixed -bottom-20 -right-20 opacity-10 pointer-events-none select-none text-primary-fixed" style="font-size: 320px;">
+<span class="material-symbols-outlined" style="font-size: 320px;">settings</span>
+</div>
+<script>
+        const openBtn = document.getElementById('openMenu');
+        const closeBtn = document.getElementById('closeMenu');
+        const overlay = document.getElementById('mobileOverlay');
+
+        openBtn.addEventListener('click', () => {
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex', 'animate-slide-in');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            overlay.classList.add('hidden');
+            overlay.classList.remove('flex', 'animate-slide-in');
+            document.body.style.overflow = '';
+        });
+
+        // Close on link click
+        overlay.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body></html>

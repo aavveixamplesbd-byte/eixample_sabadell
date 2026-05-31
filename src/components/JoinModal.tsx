@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 
+interface JoinModalProps {
+  lang?: "ca" | "es";
+}
+
 // Spanish DNI/NIE Validator
 function validateDNI(value: string): boolean {
   const clean = value.toUpperCase().replace(/[\s-]/g, "");
@@ -39,7 +43,7 @@ function validateSpanishIBAN(value: string): boolean {
   }
 }
 
-export default function JoinModal() {
+export default function JoinModal({ lang = "ca" }: JoinModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -54,6 +58,55 @@ export default function JoinModal() {
   // Error States
   const [dniError, setDniError] = useState("");
   const [ibanError, setIbanError] = useState("");
+
+  const t = {
+    ca: {
+      title: "Fes-te Soci / Sòcia",
+      subtitle: "Quota de 10€ anuals domiciliats",
+      nameLabel: "Nom i cognoms del titular",
+      namePlaceholder: "Ex. Joan Garcia i Pujol",
+      dniLabel: "DNI / NIE",
+      dniPlaceholder: "Ex. 12345678Z o Y1234567Z",
+      dniErrorMsg: "DNI o NIE no vàlid. Comprova el format i la lletra de control.",
+      phoneLabel: "Telèfon",
+      phonePlaceholder: "Ex. 600 000 000",
+      emailLabel: "Correu electrònic",
+      emailPlaceholder: "Ex. joan@exemple.cat",
+      ibanLabel: "Número de Compte Bancari (IBAN)",
+      ibanPlaceholder: "ES00 0000 0000 0000 0000 0000",
+      ibanErrorMsg: "IBAN espanyol no vàlid (ha de començar per ES i tenir 24 caràcters).",
+      sepaLabel: "Autoritzo l'Associació de Veïns Eixample Sabadell a realitzar una domiciliació bancària anual de 10,00 € en la compta indicada d'acord amb les condicions del Mandat SEPA.",
+      submitBtn: "Enviar sol·licitud",
+      successTitle: "Sol·licitud Rebuta!",
+      successText: "Gràcies per unir-te a l'Associació de Veïns Eixample Sabadell.",
+      securityTitle: "Seguretat i confirmació de compte",
+      securityText: "Per prevenció del frau i complir la normativa de domiciliacions, t'hem enviat un correu electrònic amb el document de Mandat SEPA de format digital. L'hauràs de signar per procedir a l'activació de la teva quota.",
+      closeBtn: "Entès"
+    },
+    es: {
+      title: "Hazte Socio / Socia",
+      subtitle: "Cuota de 10€ anuales domiciliados",
+      nameLabel: "Nombre y apellidos del titular",
+      namePlaceholder: "Ej. Juan García y Pujol",
+      dniLabel: "DNI / NIE",
+      dniPlaceholder: "Ej. 12345678Z o Y1234567Z",
+      dniErrorMsg: "DNI o NIE no válido. Comprueba el formato y la letra de control.",
+      phoneLabel: "Teléfono",
+      phonePlaceholder: "Ej. 600 000 000",
+      emailLabel: "Correo electrónico",
+      emailPlaceholder: "Ej. juan@ejemplo.es",
+      ibanLabel: "Número de Cuenta Bancaria (IBAN)",
+      ibanPlaceholder: "ES00 0000 0000 0000 0000 0000",
+      ibanErrorMsg: "IBAN español no válido (debe empezar por ES y tener 24 caracteres).",
+      sepaLabel: "Autorizo a la Asociación de Vecinos Eixample Sabadell a realizar una domiciliación bancaria anual de 10,00 € en la cuenta indicada de acuerdo con las condiciones del Mandato SEPA.",
+      submitBtn: "Enviar solicitud",
+      successTitle: "¡Solicitud Recibida!",
+      successText: "Gracias por unirte a la Asociación de Vecinos Eixample Sabadell.",
+      securityTitle: "Seguridad y confirmación de cuenta",
+      securityText: "Por prevención del fraude y cumplir la normativa de domiciliaciones, te hemos enviado un correo electrónico con el documento de Mandato SEPA de formato digital. Deberás firmarlo para proceder a la activación de tu cuota.",
+      closeBtn: "Entendido"
+    }
+  }[lang];
 
   useEffect(() => {
     const handleOpen = () => {
@@ -81,7 +134,7 @@ export default function JoinModal() {
 
     // Validate DNI
     if (!validateDNI(dni)) {
-      setDniError("DNI o NIE no vàlid. Comprova el format i la lletra de control.");
+      setDniError(t.dniErrorMsg);
       hasError = true;
     } else {
       setDniError("");
@@ -89,7 +142,7 @@ export default function JoinModal() {
 
     // Validate IBAN
     if (!validateSpanishIBAN(iban)) {
-      setIbanError("IBAN espanyol no vàlid (ha de començar per ES i tenir 24 caràcters).");
+      setIbanError(t.ibanErrorMsg);
       hasError = true;
     } else {
       setIbanError("");
@@ -116,8 +169,8 @@ export default function JoinModal() {
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-outline-variant/30 shrink-0">
           <div>
-            <h3 className="font-headline-md text-headline-md text-primary font-bold">Fes-te Soci / Sòcia</h3>
-            <p className="font-label-sm text-label-sm text-on-surface-variant">Quota de 10€ anuals domiciliats</p>
+            <h3 className="font-headline-md text-headline-md text-primary font-bold">{t.title}</h3>
+            <p className="font-label-sm text-label-sm text-on-surface-variant">{t.subtitle}</p>
           </div>
           <button 
             onClick={() => setIsOpen(false)}
@@ -138,19 +191,19 @@ export default function JoinModal() {
                 <span className="material-symbols-outlined text-[40px]">mark_email_read</span>
               </div>
               <div className="space-y-3">
-                <h4 className="font-headline-md text-primary font-bold">Sol·licitud Rebuta!</h4>
-                <p className="font-body-md text-on-surface-variant px-4 leading-relaxed">
-                  Gràcies per unir-te a l'Associació de Veïns Eixample Sabadell.
+                <h4 className="font-headline-md text-primary font-bold">{t.successTitle}</h4>
+                <p className="font-body-md text-on-surface-variant px-4 leading-relaxed font-semibold">
+                  {t.successText}
                 </p>
               </div>
               
               <div className="bg-surface-container-low p-5 rounded-2xl border border-outline-variant/20 text-left max-w-sm">
                 <h5 className="font-label-md text-primary font-bold mb-2 flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-[18px]">verified_user</span>
-                  Seguretat i confirmació de compte
+                  {t.securityTitle}
                 </h5>
                 <p className="font-body-sm text-on-surface-variant leading-relaxed">
-                  Per prevenció del frau i complir la normativa de domiciliacions, t'hem enviat un correu electrònic amb el document de <strong>Mandat SEPA</strong> de format digital. L'hauràs de signar per procedir a l'activació de la teva quota.
+                  {t.securityText}
                 </p>
               </div>
 
@@ -158,20 +211,20 @@ export default function JoinModal() {
                 onClick={() => setIsOpen(false)}
                 className="bg-primary hover:bg-primary-container text-white px-8 py-3 rounded-xl font-label-md font-bold transition-all shadow-md"
               >
-                Entès
+                {t.closeBtn}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="flex flex-col gap-1">
                 <label htmlFor="join-name" className="font-label-md text-on-surface font-semibold">
-                  Nom i cognoms del titular
+                  {t.nameLabel}
                 </label>
                 <input
                   id="join-name"
                   type="text"
                   required
-                  placeholder="Ex. Joan Garcia i Pujol"
+                  placeholder={t.namePlaceholder}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-2.5 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary transition-all"
@@ -181,13 +234,13 @@ export default function JoinModal() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1">
                   <label htmlFor="join-dni" className="font-label-md text-on-surface font-semibold">
-                    DNI / NIE
+                    {t.dniLabel}
                   </label>
                   <input
                     id="join-dni"
                     type="text"
                     required
-                    placeholder="Ex. 12345678Z o Y1234567Z"
+                    placeholder={t.dniPlaceholder}
                     value={dni}
                     onChange={(e) => {
                       setDni(e.target.value);
@@ -202,13 +255,13 @@ export default function JoinModal() {
 
                 <div className="flex flex-col gap-1">
                   <label htmlFor="join-phone" className="font-label-md text-on-surface font-semibold">
-                    Telèfon
+                    {t.phoneLabel}
                   </label>
                   <input
                     id="join-phone"
                     type="tel"
                     required
-                    placeholder="Ex. 600 000 000"
+                    placeholder={t.phonePlaceholder}
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary transition-all"
@@ -218,13 +271,13 @@ export default function JoinModal() {
 
               <div className="flex flex-col gap-1">
                 <label htmlFor="join-email" className="font-label-md text-on-surface font-semibold">
-                  Correu electrònic
+                  {t.emailLabel}
                 </label>
                 <input
                   id="join-email"
                   type="email"
                   required
-                  placeholder="Ex. joan@exemple.cat"
+                  placeholder={t.emailPlaceholder}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2.5 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary transition-all"
@@ -233,13 +286,13 @@ export default function JoinModal() {
 
               <div className="flex flex-col gap-1">
                 <label htmlFor="join-iban" className="font-label-md text-on-surface font-semibold">
-                  Número de Compte Bancari (IBAN)
+                  {t.ibanLabel}
                 </label>
                 <input
                   id="join-iban"
                   type="text"
                   required
-                  placeholder="ES00 0000 0000 0000 0000 0000"
+                  placeholder={t.ibanPlaceholder}
                   value={iban}
                   onChange={(e) => {
                     setIban(e.target.value);
@@ -262,7 +315,7 @@ export default function JoinModal() {
                   className="mt-1 w-4 h-4 text-primary bg-white border-outline-variant rounded focus:ring-primary cursor-pointer"
                 />
                 <label htmlFor="join-sepa" className="font-body-sm text-on-surface-variant leading-relaxed select-none cursor-pointer">
-                  Autoritzo l'Associació de Veïns Eixample Sabadell a realitzar una domiciliació bancària anual de <strong>10,00 €</strong> en la compta indicada d'acord amb les condicions del Mandat SEPA.
+                  {t.sepaLabel}
                 </label>
               </div>
 
@@ -270,7 +323,7 @@ export default function JoinModal() {
                 type="submit"
                 className="w-full bg-primary hover:bg-primary-container text-white font-label-md font-bold py-4 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-md mt-4"
               >
-                <span>Enviar sol·licitud</span>
+                <span>{t.submitBtn}</span>
                 <span className="material-symbols-outlined text-[20px]">how_to_reg</span>
               </button>
             </form>

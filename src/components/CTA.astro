@@ -1,23 +1,42 @@
 ---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    title: "Forma part de la nostra història",
+    desc: "L'associació és el motor que manté viu el barri. Amb la teva quota ajudes a finançar activitats culturals i a defensar els interessos dels veïns.",
+    btn: "Fes-te Soci Ara",
+    price: "Des de només 10€ a l'any"
+  },
+  es: {
+    title: "Forma parte de nuestra historia",
+    desc: "La asociación es el motor que mantiene vivo el barrio. Con tu cuota ayudas a financiar actividades culturales y a defender los intereses de los vecinos.",
+    btn: "Hazte Socio Ahora",
+    price: "Desde solo 10€ al año"
+  }
+}[lang];
 ---
 
 <section class="py-24 bg-primary-container text-on-primary-container">
   <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop text-center">
     <div class="max-w-3xl mx-auto bg-surface-container-lowest/10 backdrop-blur-sm p-8 sm:p-12 rounded-3xl border border-white/10 shadow-xl">
       <h2 class="font-headline-lg text-headline-lg mb-6 tracking-tight text-white">
-        Forma part de la nostra història
+        {t.title}
       </h2>
       <p class="font-body-lg text-body-lg text-white/90 mb-10 leading-relaxed max-w-xl mx-auto">
-        L'associació és el motor que manté viu el barri. Amb la teva quota ajudes a finançar activitats culturals i a defensar els interessos dels veïns.
+        {t.desc}
       </p>
       <button 
         onclick="window.dispatchEvent(new CustomEvent('open-join-modal'))"
         class="bg-primary hover:bg-primary-container text-white border border-white/20 px-10 py-4 font-label-md text-label-md font-bold rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-primary/20 active:scale-98"
       >
-        Fes-te Soci Ara
+        {t.btn}
       </button>
       <p class="mt-6 font-label-sm text-label-sm text-white/70 uppercase tracking-[0.2em] font-bold">
-        Des de només 10€ a l'any
+        {t.price}
       </p>
     </div>
   </div>

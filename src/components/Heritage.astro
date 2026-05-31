@@ -1,13 +1,40 @@
 ---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    title: "El Nostre Llegat",
+    desc: "Des de les antigues xemeneies tèxtils fins a les joies del modernisme, l'Eixample és un testimoni viu del passat obrer de Sabadell.",
+    item1Title: "Arquitectura Industrial",
+    item1Desc: "Recuperant els espais fabrils per a l'ús ciutadà.",
+    item2Title: "Oficis del Barri",
+    item2Desc: "L'esperit del treball manual que va definir la nostra identitat col·lectiva.",
+    item3Title: "Urbanisme Elegant",
+    item3Desc: "Carrers amples i geometria perfecta inspirada en el Pla Cerdà."
+  },
+  es: {
+    title: "Nuestro Legado",
+    desc: "Desde las antiguas chimeneas textiles hasta las joyas del modernismo, el Eixample es un testimonio vivo del pasado obrero de Sabadell.",
+    item1Title: "Arquitectura Industrial",
+    item1Desc: "Recuperando los espacios fabriles para el uso ciudadano.",
+    item2Title: "Oficios del Barrio",
+    item2Desc: "El espíritu del trabajo manual que definió nuestra identidad colectiva.",
+    item3Title: "Urbanismo Elegante",
+    item3Desc: "Calles anchas y geometría perfecta inspirada en el Plan Cerdà."
+  }
+}[lang];
 ---
 
 <section class="py-24 bg-surface-container-low" id="llegat">
   <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
     <div class="mb-12">
-      <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">El Nostre Llegat</h2>
+      <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">{t.title}</h2>
       <div class="w-16 h-1 bg-primary rounded-full mb-6"></div>
       <p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
-        Des de les antigues xemeneies tèxtils fins a les joies del modernisme, l'Eixample és un testimoni viu del passat obrer de Sabadell.
+        {t.desc}
       </p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -20,8 +47,8 @@
         />
         <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent p-8 flex flex-col justify-end">
           <span class="material-symbols-outlined text-primary-fixed text-4xl mb-3">factory</span>
-          <h3 class="font-headline-sm text-headline-sm text-on-primary mb-2">Arquitectura Industrial</h3>
-          <p class="font-body-md text-on-primary/90 font-medium">Recuperant els espais fabrils per a l'ús ciutadà.</p>
+          <h3 class="font-headline-sm text-headline-sm text-on-primary mb-2">{t.item1Title}</h3>
+          <p class="font-body-md text-on-primary/90 font-medium">{t.item1Desc}</p>
         </div>
       </div>
       
@@ -31,15 +58,15 @@
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
             <span class="material-symbols-outlined text-primary text-2xl">handyman</span>
           </div>
-          <h4 class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-bold mb-2">Oficis del Barri</h4>
-          <p class="font-body-md text-on-surface-variant">L'esperit del treball manual que va definir la nostra identitat col·lectiva.</p>
+          <h4 class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-bold mb-2">{t.item2Title}</h4>
+          <p class="font-body-md text-on-surface-variant">{t.item2Desc}</p>
         </div>
         <div class="flex-1 bg-primary text-on-primary p-8 rounded-2xl shadow-md flex flex-col justify-center group hover:bg-primary-container transition-colors cursor-pointer">
           <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-4">
             <span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings: 'FILL' 1;">architecture</span>
           </div>
-          <h4 class="font-label-md text-label-md uppercase tracking-widest font-bold mb-2 text-white">Urbanisme Elegant</h4>
-          <p class="font-body-md text-on-primary/90">Carrers amples i geometria perfecta inspirada en el Pla Cerdà.</p>
+          <h4 class="font-label-md text-label-md uppercase tracking-widest font-bold mb-2 text-white">{t.item3Title}</h4>
+          <p class="font-body-md text-on-primary/90">{t.item3Desc}</p>
         </div>
       </div>
     </div>

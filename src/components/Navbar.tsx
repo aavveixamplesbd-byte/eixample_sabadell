@@ -4,6 +4,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState("/");
+  const [lang, setLang] = useState<"ca" | "es">("ca");
 
   // Contact Form States
   const [name, setName] = useState("");
@@ -13,22 +14,91 @@ export default function Navbar() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setCurrentPath(window.location.pathname);
+      const path = window.location.pathname;
+      setCurrentPath(path);
+      if (path.startsWith("/es") || path.startsWith("/es/")) {
+        setLang("es");
+      } else {
+        setLang("ca");
+      }
     }
   }, []);
 
+  const handleLanguageChange = (newLang: "ca" | "es") => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      if (newLang === "es") {
+        if (!path.startsWith("/es")) {
+          // If on home "/", redirect to "/es", otherwise "/es/page"
+          window.location.href = "/es" + (path === "/" ? "" : path);
+        }
+      } else {
+        if (path.startsWith("/es")) {
+          // Remove "/es" prefix. If it becomes empty, redirect to "/"
+          const cleanPath = path.replace(/^\/es/, "") || "/";
+          window.location.href = cleanPath;
+        }
+      }
+    }
+  };
+
+  const t = {
+    ca: {
+      brand: "Eixample Sabadell",
+      home: "Inici",
+      history: "Història",
+      news: "Notícies",
+      contact: "Contacte",
+      joinUs: "Fes-te Soci",
+      subtitle: "El cor industrial de Sabadell",
+      neighborhoodAssoc: "Associació de Veïns",
+      contactHeader: "Contacta amb nosaltres",
+      formName: "Nom complet",
+      formNamePlaceholder: "El teu nom",
+      formEmail: "Correu electrònic",
+      formEmailPlaceholder: "nom@exemple.com",
+      formMessage: "Missatge",
+      formMessagePlaceholder: "Com et podem ajudar?",
+      formSubmit: "Enviar missatge",
+      successTitle: "Missatge Enviat!",
+      successBody: "Gràcies per posar-te en contacte. Et respondrem el més aviat possible.",
+      closeBtn: "Tancar"
+    },
+    es: {
+      brand: "Eixample Sabadell",
+      home: "Inicio",
+      history: "Historia",
+      news: "Noticias",
+      contact: "Contacto",
+      joinUs: "Hazte Socio",
+      subtitle: "El corazón industrial de Sabadell",
+      neighborhoodAssoc: "Asociación de Vecinos",
+      contactHeader: "Contacta con nosotros",
+      formName: "Nombre completo",
+      formNamePlaceholder: "Tu nombre",
+      formEmail: "Correo electrónico",
+      formEmailPlaceholder: "nombre@ejemplo.com",
+      formMessage: "Mensaje",
+      formMessagePlaceholder: "¿Cómo te podemos ayudar?",
+      formSubmit: "Enviar mensaje",
+      successTitle: "¡Mensaje Enviado!",
+      successBody: "Gracias por ponerte en contacto. Te responderemos lo antes posible.",
+      closeBtn: "Cerrar"
+    }
+  }[lang];
+
+  const prefix = lang === "es" ? "/es" : "";
+
   const links = [
-    { label: "Home", icon: "home", href: "/" },
-    { label: "History", icon: "factory", href: "/historia" },
-    { label: "News", icon: "newspaper", href: "/noticies" },
+    { label: t.home, icon: "home", href: prefix || "/" },
+    { label: t.history, icon: "factory", href: `${prefix}/historia` },
+    { label: t.news, icon: "newspaper", href: `${prefix}/noticies` },
   ];
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate API call
     setSubmitted(true);
     setTimeout(() => {
-      // Clear form
       setName("");
       setEmail("");
       setMessage("");
@@ -49,9 +119,9 @@ export default function Navbar() {
       <header className="sticky top-0 bg-surface/90 backdrop-blur-md z-40 border-b border-surface-variant/50 w-full transition-all duration-300">
         <div className="flex justify-between items-center py-4 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
           {/* Logo / Brand */}
-          <a href="/">
+          <a href={prefix || "/"}>
             <h1 className="font-headline-md text-headline-md text-primary uppercase tracking-wider font-semibold">
-              Eixample Sabadell
+              {t.brand}
             </h1>
           </a>
 
@@ -79,31 +149,60 @@ export default function Navbar() {
               onClick={() => setIsContactOpen(true)}
               className="font-label-md text-label-md text-secondary hover:text-primary transition-colors relative py-2 group"
             >
-              Contact
+              {t.contact}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </button>
           </nav>
 
-          {/* Desktop CTA Button */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Desktop CTA Button & Language Switcher */}
+          <div className="hidden md:flex items-center gap-6">
+            {/* Language Selector */}
+            <div className="flex items-center gap-1 bg-surface-container border border-outline-variant/30 rounded-lg p-1">
+              <button
+                onClick={() => handleLanguageChange("ca")}
+                className={`px-2.5 py-1 text-xs font-bold rounded transition-all ${
+                  lang === "ca" ? "bg-primary text-white shadow-sm" : "text-secondary hover:text-primary"
+                }`}
+              >
+                CA
+              </button>
+              <button
+                onClick={() => handleLanguageChange("es")}
+                className={`px-2.5 py-1 text-xs font-bold rounded transition-all ${
+                  lang === "es" ? "bg-primary text-white shadow-sm" : "text-secondary hover:text-primary"
+                }`}
+              >
+                ES
+              </button>
+            </div>
+
             <button 
               onClick={() => window.dispatchEvent(new CustomEvent("open-join-modal"))}
               className="bg-primary hover:bg-primary-container text-white font-label-md text-label-md px-6 py-2.5 rounded-lg active:scale-95 transition-all shadow-sm"
             >
-              Join Us
+              {t.joinUs}
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="p-2 text-primary hover:bg-primary/5 rounded-full transition-all active:scale-95 md:hidden"
-            onClick={() => setIsOpen(true)}
-            aria-label="Obrir menú"
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: "32px" }}>
-              menu
-            </span>
-          </button>
+          {/* Mobile Menu Button & Mobile Switcher */}
+          <div className="flex items-center gap-4 md:hidden">
+            {/* Mobile quick language toggle */}
+            <button
+              onClick={() => handleLanguageChange(lang === "ca" ? "es" : "ca")}
+              className="px-3 py-1.5 text-xs font-bold rounded-lg border border-outline-variant/40 text-secondary"
+            >
+              {lang === "ca" ? "ES" : "CA"}
+            </button>
+            <button
+              className="p-2 text-primary hover:bg-primary/5 rounded-full transition-all active:scale-95"
+              onClick={() => setIsOpen(true)}
+              aria-label="Obrir menú"
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: "32px" }}>
+                menu
+              </span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -120,7 +219,7 @@ export default function Navbar() {
         {/* Close Header */}
         <div className="flex justify-between items-center px-margin-mobile py-4 h-16 w-full text-white">
           <div className="font-headline-sm text-headline-sm text-primary-fixed uppercase tracking-wider">
-            Eixample Sabadell
+            {t.brand}
           </div>
           <button
             className="p-2 text-primary-fixed hover:bg-primary-container/20 rounded-full transition-all active:scale-95"
@@ -171,7 +270,7 @@ export default function Navbar() {
               contact_mail
             </span>
             <span className="font-headline-lg-mobile text-headline-lg-mobile group-hover:translate-x-2 transition-transform duration-300">
-              Contact
+              {t.contact}
             </span>
           </button>
         </nav>
@@ -184,10 +283,10 @@ export default function Navbar() {
         >
           <div className="flex flex-col gap-2">
             <div className="font-headline-md text-headline-md text-primary-fixed">
-              Neighborhood Association
+              {t.neighborhoodAssoc}
             </div>
             <div className="font-label-md text-label-md text-primary-fixed-dim">
-              Sabadell's Industrial Heart
+              {t.subtitle}
             </div>
           </div>
           <button 
@@ -197,7 +296,7 @@ export default function Navbar() {
             }}
             className="w-full bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-label-md text-label-md py-5 rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-lg shadow-black/10"
           >
-            Join Us
+            {t.joinUs}
             <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>
               arrow_forward
             </span>
@@ -226,8 +325,8 @@ export default function Navbar() {
           {/* Header */}
           <div className="flex justify-between items-center mb-8 border-b border-outline-variant/30 pb-4">
             <div className="flex flex-col">
-              <h2 className="font-headline-md text-headline-md text-primary font-bold">Contacta amb nosaltres</h2>
-              <span className="font-label-sm text-label-sm text-on-surface-variant">Sabadell's Industrial Heart</span>
+              <h2 className="font-headline-md text-headline-md text-primary font-bold">{t.contactHeader}</h2>
+              <span className="font-label-sm text-label-sm text-on-surface-variant">{t.subtitle}</span>
             </div>
             <button
               onClick={() => setIsContactOpen(false)}
@@ -246,22 +345,22 @@ export default function Navbar() {
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary animate-pulse">
                 <span className="material-symbols-outlined text-[32px]">check_circle</span>
               </div>
-              <h3 className="font-headline-md text-primary font-bold">Missatge Enviat!</h3>
+              <h3 className="font-headline-md text-primary font-bold">{t.successTitle}</h3>
               <p className="font-body-md text-on-surface-variant px-6">
-                Gràcies per posar-te en contacte. Et respondrem el més aviat possible.
+                {t.successBody}
               </p>
             </div>
           ) : (
             <form onSubmit={handleContactSubmit} className="flex-grow flex flex-col gap-6">
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="drawer-name" className="font-label-md text-label-md text-on-surface font-semibold">
-                  Nom complet
+                  {t.formName}
                 </label>
                 <input
                   id="drawer-name"
                   type="text"
                   required
-                  placeholder="El teu nom"
+                  placeholder={t.formNamePlaceholder}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 placeholder:text-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
@@ -270,13 +369,13 @@ export default function Navbar() {
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="drawer-email" className="font-label-md text-label-md text-on-surface font-semibold">
-                  Correu electrònic
+                  {t.formEmail}
                 </label>
                 <input
                   id="drawer-email"
                   type="email"
                   required
-                  placeholder="nom@exemple.com"
+                  placeholder={t.formEmailPlaceholder}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 placeholder:text-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
@@ -285,13 +384,13 @@ export default function Navbar() {
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="drawer-message" className="font-label-md text-label-md text-on-surface font-semibold">
-                  Missatge
+                  {t.formMessage}
                 </label>
                 <textarea
                   id="drawer-message"
                   required
                   rows={6}
-                  placeholder="Com et podem ajudar?"
+                  placeholder={t.formMessagePlaceholder}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 placeholder:text-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
@@ -302,7 +401,7 @@ export default function Navbar() {
                 type="submit"
                 className="w-full bg-primary hover:bg-primary-container text-white font-label-md text-label-md py-4 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-md mt-auto mb-4"
               >
-                <span>Enviar missatge</span>
+                <span>{t.formSubmit}</span>
                 <span className="material-symbols-outlined text-[18px]">send</span>
               </button>
             </form>

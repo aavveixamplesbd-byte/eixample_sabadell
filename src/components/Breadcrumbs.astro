@@ -1,20 +1,24 @@
 ---
 interface Props {
+  lang?: 'ca' | 'es';
   items: {
     label: string;
     href?: string;
   }[];
 }
 
-const { items } = Astro.props;
+const { lang = 'ca', items } = Astro.props;
+
+const homeLabel = lang === 'es' ? 'Inicio' : 'Inici';
+const homeHref = lang === 'es' ? '/es' : '/';
 ---
 
 <nav class="flex items-center space-x-2 text-sm text-secondary font-label-md py-4 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full mt-4" aria-label="Breadcrumb">
   <ol class="inline-flex items-center space-x-1 md:space-x-2">
     <li class="inline-flex items-center font-medium">
-      <a href="/" class="inline-flex items-center text-secondary hover:text-primary transition-colors duration-200">
+      <a href={homeHref} class="inline-flex items-center text-secondary hover:text-primary transition-colors duration-200">
         <span class="material-symbols-outlined text-[18px] mr-1">home</span>
-        Inici
+        {homeLabel}
       </a>
     </li>
     {items.map((item) => (

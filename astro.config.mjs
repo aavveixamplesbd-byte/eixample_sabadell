@@ -5,7 +5,13 @@ import react from '@astrojs/react';
 
 import tailwind from '@astrojs/tailwind';
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [react(), tailwind()]
+  integrations: [react(), tailwind()],
+  i18n: {
+    defaultLocale: 'ca',
+    locales: ['ca', 'es'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  }
 });

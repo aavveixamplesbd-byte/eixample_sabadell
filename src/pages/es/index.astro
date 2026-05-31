@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import Hero from '../../components/Hero.astro';
+import Heritage from '../../components/Heritage.astro';
+import NewsGrid from '../../components/NewsGrid.astro';
+import Services from '../../components/Services.astro';
+import CTA from '../../components/CTA.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Eixample Sabadell - Asociación de Vecinos" lang="es">
+	<Navbar client:load />
+	<main>
+		<Hero lang="es" />
+		<Heritage lang="es" />
+		<NewsGrid lang="es" />
+		<Services lang="es" />
+		<CTA lang="es" />
+	</main>
+	<Footer lang="es" />
+</Layout>

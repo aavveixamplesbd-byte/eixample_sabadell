@@ -1,5 +1,40 @@
 ---
-const services = [
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    title: "Serveis al Veïnat"
+  },
+  es: {
+    title: "Servicios al Vecindario"
+  }
+}[lang];
+
+const services = lang === 'es' ? [
+  {
+    title: "Atención al Socio",
+    icon: "contact_support",
+    href: "#"
+  },
+  {
+    title: "Gestión de Trámites",
+    icon: "apartment",
+    href: "#"
+  },
+  {
+    title: "Incidencias Vía Pública",
+    icon: "campaign",
+    href: "#"
+  },
+  {
+    title: "Espacios Comunitarios",
+    icon: "groups",
+    href: "#"
+  }
+] : [
   {
     title: "Atenció al Soci",
     icon: "contact_support",
@@ -25,7 +60,7 @@ const services = [
 
 <section class="py-24 bg-surface-container" id="serveis">
   <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop text-center">
-    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-12 tracking-tight">Serveis al Veïnat</h2>
+    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-12 tracking-tight">{t.title}</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
       {services.map((service) => (
         <a 

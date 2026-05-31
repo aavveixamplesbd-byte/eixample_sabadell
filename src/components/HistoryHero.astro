@@ -1,4 +1,21 @@
 ---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    titlePrefix: "El Cor de la",
+    titleBold: "Revolució",
+    body: "Benvinguts a l'Eixample de Sabadell. Un barri forjat en el vapor de les calderes, el batec dels telers i l'elegància del modernisme català."
+  },
+  es: {
+    titlePrefix: "El Corazón de la",
+    titleBold: "Revolución",
+    body: "Bienvenidos al Eixample de Sabadell. Un barrio forjado en el vapor de las calderas, el latido de los telares y la elegancia del modernismo catalán."
+  }
+}[lang];
 ---
 
 <header class="relative h-[819px] flex items-center justify-center overflow-hidden">
@@ -10,10 +27,10 @@
   />
   <div class="relative z-20 text-center px-4 max-w-4xl">
     <h1 class="font-display-lg text-white mb-6 tracking-tight leading-tight text-5xl sm:text-6xl md:text-7xl">
-      El Cor de la <span class="text-primary-fixed font-bold">Revolució</span>
+      {t.titlePrefix} <span class="text-primary-fixed font-bold">{t.titleBold}</span>
     </h1>
     <p class="font-body-lg text-body-lg text-surface-container-low max-w-2xl mx-auto leading-relaxed text-white/90">
-      Benvinguts a l'Eixample de Sabadell. Un barri forjat en el vapor de les calderes, el batec dels telers i l'elegància del modernisme català.
+      {t.body}
     </p>
     <div class="mt-12 flex justify-center">
       <span class="material-symbols-outlined text-white text-4xl animate-bounce">

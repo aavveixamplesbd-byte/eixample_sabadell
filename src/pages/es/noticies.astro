@@ -1,33 +1,33 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import NewsPortal from '../components/NewsPortal';
-import Footer from '../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import NewsPortal from '../../components/NewsPortal';
+import Footer from '../../components/Footer.astro';
 
 const t = {
-  headerBadge: "Actualitat del Barri",
-  headerTitle: "Notícies i Activitats",
-  headerDesc: "L'actualitat del cor industrial de Sabadell. Descobreix els esdeveniments, projectes urbanístics i cròniques històriques del barri.",
-  featuredAlt: "Transformació de l'Eix Central",
-  featuredBadge: "Urbanisme",
-  featuredTitle: "Transformació de l'Eix: El nou pla de mobilitat per recuperar els carrers per als vianants",
-  featuredDesc: "L'Ajuntament presenta el projecte final per convertir l'eix central en una zona de baixes emissions amb més espais verds i zones de convivència.",
-  featuredDate: "12 de Gener, 2024",
-  featuredAuthor: "Redacció AVES",
-  newsletterTitle: "Estigues connectat",
-  newsletterDesc: "Subscriu-te al nostre butlletí mensual i no perdis cap detall sobre les activitats, assemblees i notícies rellevants de l'Eixample Sabadell.",
-  newsletterPlaceholder: "El teu correu electrònic",
-  newsletterBtn: "Subscriure'm",
-  newsletterConsent: "En subscriure't, acceptes la nostra Política de Privacitat. No t'enviarem correus brossa.",
-  sidebarBadge: "Comunitat",
-  sidebarBody: "Unim-nos per fer un barri millor, dia rere dia."
+  headerBadge: "Actualidad del Barrio",
+  headerTitle: "Noticias y Actividades",
+  headerDesc: "La actualidad del corazón industrial de Sabadell. Descubre los eventos, proyectos urbanísticos y crónicas históricas del barrio.",
+  featuredAlt: "Transformación del Eje Central",
+  featuredBadge: "Urbanismo",
+  featuredTitle: "Transformación del Eje: El nuevo plan de movilidad para recuperar las calles para los peatones",
+  featuredDesc: "El Ayuntamiento presenta el proyecto final para convertir el eje central en una zona de bajas emisiones con más espacios verdes y zonas de convivencia.",
+  featuredDate: "12 de Enero, 2024",
+  featuredAuthor: "Redacción AVES",
+  newsletterTitle: "Mantente conectado",
+  newsletterDesc: "Suscríbete a nuestro boletín mensual y no te pierdas ningún detalle sobre las actividades, asambleas y noticias de interés del Eixample Sabadell.",
+  newsletterPlaceholder: "Tu correo electrónico",
+  newsletterBtn: "Suscribirme",
+  newsletterConsent: "Al suscribirte, aceptas nuestra Política de Privacidad. No te enviaremos spam.",
+  sidebarBadge: "Comunidad",
+  sidebarBody: "Unámonos para hacer un barrio mejor, día tras día."
 };
 ---
 
-<Layout title="Notícies i Activitats - Eixample Sabadell" lang="ca">
+<Layout title="Noticias y Actividades - Eixample Sabadell" lang="es">
   <Navbar client:load />
-  <Breadcrumbs lang="ca" items={[{ label: 'Notícies' }]} />
+  <Breadcrumbs lang="es" items={[{ label: 'Noticias' }]} />
   
   <main class="pt-6 pb-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
     {/* Page Title Header */}
@@ -78,7 +78,7 @@ const t = {
     </section>
 
     {/* Interactive React News Grid and Filters */}
-    <NewsPortal lang="ca" client:load />
+    <NewsPortal lang="es" client:load />
 
     {/* Page Newsletter Section */}
     <section class="mt-32">
@@ -121,5 +121,5 @@ const t = {
     </section>
   </main>
 
-  <Footer lang="ca" />
+  <Footer lang="es" />
 </Layout>

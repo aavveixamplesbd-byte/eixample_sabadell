@@ -1,17 +1,46 @@
 ---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    title: "Els Guaites de Maó",
+    desc: "Les xemeneies són els darrers testimonis muts de la puixança industrial. Escultures de maó vist que s'enfilen cap al cel de l'Eixample.",
+    explore: "Explora el mapa de patrimoni",
+    item1Title: "Xemeneia del Vapor Gorina",
+    item1Desc: "Un dels exemples més esvelts i millor conservats de la ciutat.",
+    item2Title: "45+",
+    item2Desc: "Xemeneies protegides al catàleg de patrimoni de Sabadell.",
+    item3Title: "Enginyeria",
+    item3Desc: "Dissenyades per optimitzar el tiratge del carbó amb estètica singular."
+  },
+  es: {
+    title: "Los Guardianes de Ladrillo",
+    desc: "Las chimeneas son los últimos testigos mudos del auge industrial. Esculturas de ladrillo visto que se elevan hacia el cielo del Eixample.",
+    explore: "Explora el mapa de patrimonio",
+    item1Title: "Chimenea del Vapor Gorina",
+    item1Desc: "Uno de los ejemplos más esbeltos y mejor conservados de la ciudad.",
+    item2Title: "45+",
+    item2Desc: "Chimeneas protegidas en el catálogo de patrimonio de Sabadell.",
+    item3Title: "Ingeniería",
+    item3Desc: "Diseñadas para optimizar el tiro del carbón con una estética singular."
+  }
+}[lang];
 ---
 
 <section class="py-24 bg-surface-container-low">
   <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
     <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
       <div class="max-w-2xl">
-        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Els Guaites de Maó</h2>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{t.title}</h2>
         <p class="font-body-lg text-body-lg text-on-surface-variant">
-          Les xemeneies són els darrers testimonis muts de la puixança industrial. Escultures de maó vist que s'enfilen cap al cel de l'Eixample.
+          {t.desc}
         </p>
       </div>
       <button class="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all">
-        Explora el mapa de patrimoni <span class="material-symbols-outlined">arrow_forward</span>
+        {t.explore} <span class="material-symbols-outlined">arrow_forward</span>
       </button>
     </div>
     
@@ -23,21 +52,21 @@
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuA68WfjeMww3IkLf93to40465D-Hbin8ND4TrsJ9HQoxuswC7IGhhd5Z8vBPlvGVYX7RU7ctF0ZdzK_NHLcazWK91JNw4kv6xJiatmfJtlXPi67KJXY6UaO_eAmOf7CNUpeMYE7LRDIBP-q1rtQrs68mFdhjofUsTlfCOLlRok6opQavjUDwEts3gt7T_EMTjSQe-rZMFiE6DuMR4-1hUIjeafgm5cKX4IAJXBjjo1ihxHbUakgMTua__-lkkpaI1usPsh1TiVtParE"
         />
         <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/60 to-transparent w-full">
-          <h4 class="text-white font-headline-md font-bold text-2xl mb-1">Xemeneia del Vapor Gorina</h4>
-          <p class="text-white/90 text-sm">Un dels exemples més esvelts i millor conservats de la ciutat.</p>
+          <h4 class="text-white font-headline-md font-bold text-2xl mb-1">{t.item1Title}</h4>
+          <p class="text-white/90 text-sm">{t.item1Desc}</p>
         </div>
       </div>
       
       <div class="md:col-span-4 grid grid-rows-2 gap-6">
         <div class="bg-primary p-8 rounded-2xl text-on-primary flex flex-col justify-center text-white">
           <span class="material-symbols-outlined text-5xl mb-4">factory</span>
-          <h4 class="font-headline-md font-bold text-3xl mb-2 text-white">45+</h4>
-          <p class="opacity-90">Xemeneies protegides al catàleg de patrimoni de Sabadell.</p>
+          <h4 class="font-headline-md font-bold text-3xl mb-2 text-white">{t.item2Title}</h4>
+          <p class="opacity-90">{t.item2Desc}</p>
         </div>
         <div class="bg-white p-8 rounded-2xl border border-outline-variant/30 flex flex-col justify-center">
           <span class="material-symbols-outlined text-primary text-5xl mb-4">architecture</span>
-          <h4 class="font-headline-md text-primary font-bold text-2xl mb-2">Enginyeria</h4>
-          <p class="text-on-surface-variant">Dissenyades per optimitzar el tiratge del carbó amb estètica singular.</p>
+          <h4 class="font-headline-md text-primary font-bold text-2xl mb-2">{t.item3Title}</h4>
+          <p class="text-on-surface-variant">{t.item3Desc}</p>
         </div>
       </div>
     </div>

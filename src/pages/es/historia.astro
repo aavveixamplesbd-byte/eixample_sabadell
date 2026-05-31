@@ -1,30 +1,30 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import HistoryHero from '../components/HistoryHero.astro';
-import Timeline from '../components/Timeline.astro';
-import ChimneysBento from '../components/ChimneysBento.astro';
-import Modernism from '../components/Modernism.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import HistoryHero from '../../components/HistoryHero.astro';
+import Timeline from '../../components/Timeline.astro';
+import ChimneysBento from '../../components/ChimneysBento.astro';
+import Modernism from '../../components/Modernism.astro';
+import Footer from '../../components/Footer.astro';
 
 const t = {
-  title: "Preservem la nostra memòria",
-  desc: "L'Associació de Veïns treballa per protegir el llegat històric de l'Eixample. Uneix-te a nosaltres en les visites guiades pel patrimoni industrial.",
+  title: "Preservemos nuestra memoria",
+  desc: "La Asociación de Vecinos trabaja para proteger el legado histórico del Eixample. Únete a nosotros en las visitas guiadas por el patrimonio industrial.",
   btn1: "Reservar Visita",
-  btn2: "Veure l'Arxiu"
+  btn2: "Ver el Archivo"
 };
 ---
 
-<Layout title="Història - Eixample Sabadell" lang="ca">
+<Layout title="Historia - Eixample Sabadell" lang="es">
   <Navbar client:load />
   
   <main>
-    <Breadcrumbs lang="ca" items={[{ label: 'Història' }]} />
-    <HistoryHero lang="ca" />
-    <Timeline lang="ca" />
-    <ChimneysBento lang="ca" />
-    <Modernism lang="ca" />
+    <Breadcrumbs lang="es" items={[{ label: 'Historia' }]} />
+    <HistoryHero lang="es" />
+    <Timeline lang="es" />
+    <ChimneysBento lang="es" />
+    <Modernism lang="es" />
 
     {/* Custom History CTA Section */}
     <section class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
@@ -50,5 +50,5 @@ const t = {
     </section>
   </main>
 
-  <Footer lang="ca" />
+  <Footer lang="es" />
 </Layout>

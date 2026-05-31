@@ -1,4 +1,25 @@
 ---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    assoc: "Associació de Veïns",
+    title: "Eixample Sabadell: Cor Industrial de Catalunya",
+    body: "Treballem per mantenir viu el llegat històric del nostre barri mentre construïm una comunitat moderna, inclusiva i vibrant per a tots els sabadellencs.",
+    discover: "Descobreix el barri",
+    info: "Informació veïnal"
+  },
+  es: {
+    assoc: "Asociación de Vecinos",
+    title: "Eixample Sabadell: Corazón Industrial de Cataluña",
+    body: "Trabajamos para mantener vivo el legado histórico de nuestro barrio mientras construimos una comunidad moderna, inclusiva y vibrante para todos los sabadellenses.",
+    discover: "Descubre el barrio",
+    info: "Información vecinal"
+  }
+}[lang];
 ---
 
 <section class="relative min-h-[750px] flex items-center overflow-hidden bg-surface-container-lowest py-20">
@@ -13,27 +34,27 @@
   <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop relative z-10 w-full">
     <div class="max-w-2xl">
       <span class="font-label-md text-label-md text-primary uppercase tracking-[0.2em] bg-primary/10 px-4 py-1.5 rounded-full inline-block mb-6 font-semibold">
-        Associació de Veïns
+        {t.assoc}
       </span>
       <h1 class="font-display-lg text-4xl sm:text-5xl md:text-6xl text-on-surface mb-8 leading-tight tracking-tighter">
         Eixample Sabadell: <br/>
-        <span class="text-primary font-bold">Cor Industrial</span> de Catalunya
+        <span class="text-primary font-bold">{lang === 'es' ? 'Corazón Industrial' : 'Cor Industrial'}</span> {lang === 'es' ? 'de Cataluña' : 'de Catalunya'}
       </h1>
       <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-10 leading-relaxed">
-        Treballem per mantenir viu el llegat històric del nostre barri mentre construïm una comunitat moderna, inclusiva i vibrant per a tots els sabadellencs.
+        {t.body}
       </p>
       <div class="flex flex-wrap gap-4">
         <a 
           href="#llegat" 
           class="bg-primary hover:bg-primary-container text-white px-8 py-4 rounded-xl font-label-md text-label-md font-bold transition-all hover:shadow-lg hover:-translate-y-0.5 text-center"
         >
-          Descobreix el barri
+          {t.discover}
         </a>
         <a 
           href="#serveis" 
           class="border border-outline text-on-surface px-8 py-4 rounded-xl font-label-md text-label-md font-bold hover:bg-surface-container transition-all text-center"
         >
-          Informació veïnal
+          {t.info}
         </a>
       </div>
     </div>

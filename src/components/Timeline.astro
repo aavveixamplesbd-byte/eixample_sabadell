@@ -1,10 +1,31 @@
 ---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    title: "Cronologia Industrial",
+    e1Title: "L'Alba del Vapor",
+    e1Body: "L'arribada del ferrocarril i les primeres màquines de vapor transformen l'Eixample en un formiguer d'activitat. Les primeres \"Vapors\" comencen a dominar l'horitzó.",
+    e2Title: "L'Edat d'Or Tèxtil",
+    e2Body: "Sabadell esdevé la \"Manchester Catalana\". Els telers no descansen i l'Eixample creix seguint un traçat ortogonal que defineix la seva identitat moderna."
+  },
+  es: {
+    title: "Cronología Industrial",
+    e1Title: "El Alba del Vapor",
+    e1Body: "La llegada del ferrocarril y las primeras máquinas de vapor transforman el Eixample en un hervidero de actividad. Los primeros \"Vapores\" empiezan a dominar el horizonte.",
+    e2Title: "La Edad de Oro Textil",
+    e2Body: "Sabadell se convierte en la \"Manchester Catalana\". Los telares no descansan y el Eixample crece siguiendo un trazado ortogonal que define su identidad moderna."
+  }
+}[lang];
 ---
 
 <section class="py-24 bg-surface-container-lowest overflow-hidden">
   <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
     <div class="mb-20 text-center">
-      <h2 class="font-headline-lg text-headline-lg text-primary mb-4 tracking-tight">Cronologia Industrial</h2>
+      <h2 class="font-headline-lg text-headline-lg text-primary mb-4 tracking-tight">{t.title}</h2>
       <div class="h-1 w-24 bg-primary mx-auto rounded-full"></div>
     </div>
     
@@ -16,9 +37,9 @@
       <div class="relative mb-24 md:flex items-center justify-between w-full">
         <div class="md:w-[45%] mb-8 md:mb-0 order-1 md:order-1 text-right z-10">
           <span class="font-display-lg text-3xl text-primary opacity-50 block mb-2 font-bold">1850 - 1880</span>
-          <h3 class="font-headline-md text-headline-md text-on-surface mb-3 tracking-tight">L'Alba del Vapor</h3>
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-3 tracking-tight">{t.e1Title}</h3>
           <p class="text-on-surface-variant leading-relaxed font-body-md text-base">
-            L'arribada del ferrocarril i les primeres màquines de vapor transformen l'Eixample en un formiguer d'activitat. Les primeres "Vapors" comencen a dominar l'horitzó.
+            {t.e1Body}
           </p>
         </div>
         <div class="z-20 absolute left-1/2 -translate-x-1/2 bg-primary w-4 h-4 rounded-full border-4 border-surface-container-lowest hidden md:block"></div>
@@ -35,9 +56,9 @@
       <div class="relative mb-24 md:flex items-center justify-between w-full">
         <div class="md:w-[45%] mb-8 md:mb-0 order-1 md:order-2 text-left z-10">
           <span class="font-display-lg text-3xl text-primary opacity-50 block mb-2 font-bold">1890 - 1920</span>
-          <h3 class="font-headline-md text-headline-md text-on-surface mb-3 tracking-tight">L'Edat d'Or Tèxtil</h3>
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-3 tracking-tight">{t.e2Title}</h3>
           <p class="text-on-surface-variant leading-relaxed font-body-md text-base">
-            Sabadell esdevé la "Manchester Catalana". Els telers no descansen i l'Eixample creix seguint un traçat ortogonal que defineix la seva identitat moderna.
+            {t.e2Body}
           </p>
         </div>
         <div class="z-20 absolute left-1/2 -translate-x-1/2 bg-primary w-4 h-4 rounded-full border-4 border-surface-container-lowest hidden md:block"></div>

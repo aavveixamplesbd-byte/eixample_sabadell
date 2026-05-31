@@ -4,6 +4,7 @@ interface Props {
 	description?: string;
 	image?: string;
 	canonicalURL?: string;
+	lang?: 'ca' | 'es';
 }
 
 const {
@@ -11,13 +12,14 @@ const {
 	description = "Eixample Industrial Sabadell - Descubre nuestro legado histórico y actividades.",
 	image = "/og-image.png",
 	canonicalURL = Astro.url.href,
+	lang = 'ca',
 } = Astro.props;
 
 import JoinModal from '../components/JoinModal';
 ---
 
 <!doctype html>
-<html lang="ca">
+<html lang={lang}>
 	<head>
 		<!-- Global Metadata -->
 		<meta charset="UTF-8" />
@@ -54,7 +56,7 @@ import JoinModal from '../components/JoinModal';
 	</head>
 	<body class="bg-surface text-on-surface min-h-screen">
 		<slot />
-		<JoinModal client:load />
+		<JoinModal lang={lang} client:load />
 	</body>
 </html>
 

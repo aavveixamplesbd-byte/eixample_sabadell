@@ -1,4 +1,31 @@
 ---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    category: "Arquitectura",
+    titlePrefix: "L'Elegància del",
+    titleItalic: "Modernisme",
+    body: "L'èxit industrial va portar una nova burgesia que va voler reflectir el seu estatus a través de l'art. L'Eixample es va omplir de façanes ornamentades, ferro forjat i mosaics que trencaven la monotonia industrial amb línies corbes i motius florals.",
+    item1Title: "Artesania Única",
+    item1Desc: "Treball meticulós en vidre, ceràmica i fusta noble.",
+    item2Title: "Cases Senyorials",
+    item2Desc: "Residències que definien el prestigi dels capitans d'indústria."
+  },
+  es: {
+    category: "Arquitectura",
+    titlePrefix: "La Elegancia del",
+    titleItalic: "Modernismo",
+    body: "El éxito industrial trajo una nueva burguesía que quiso reflejar su estatus a través del arte. El Eixample se llenó de fachadas ornamentadas, hierro forjado y mosaicos que rompían la monotonía industrial con líneas curvas y motivos florales.",
+    item1Title: "Artesanía Única",
+    item1Desc: "Trabajo meticuloso en vidrio, cerámica y madera noble.",
+    item2Title: "Casas Señoriales",
+    item2Desc: "Residencias que definían el prestigio de los capitanes de industria."
+  }
+}[lang];
 ---
 
 <section class="py-24 bg-white relative overflow-hidden">
@@ -12,12 +39,12 @@
       />
     </div>
     <div class="w-full relative z-10">
-      <span class="text-primary font-label-md uppercase tracking-[0.2em] mb-4 block font-semibold">Arquitectura</span>
+      <span class="text-primary font-label-md uppercase tracking-[0.2em] mb-4 block font-semibold">{t.category}</span>
       <h2 class="font-display-lg text-4xl sm:text-5xl text-on-surface mb-8 leading-tight font-extrabold">
-        L'Elegància del <span class="text-primary italic font-serif">Modernisme</span>
+        {t.titlePrefix} <span class="text-primary italic font-serif">{t.titleItalic}</span>
       </h2>
       <p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed">
-        L'èxit industrial va portar una nova burgesia que va voler reflectir el seu estatus a través de l'art. L'Eixample es va omplir de façanes ornamentades, ferro forjat i mosaics que trencaven la monotonia industrial amb línies corbes i motius florals.
+        {t.body}
       </p>
       <ul class="space-y-6">
         <li class="flex gap-4 items-start">
@@ -25,8 +52,8 @@
             <span class="material-symbols-outlined text-primary">palette</span>
           </div>
           <div>
-            <h5 class="font-label-md text-primary font-bold text-base">Artesania Única</h5>
-            <p class="text-on-surface-variant text-sm mt-0.5">Treball meticulós en vidre, ceràmica i fusta noble.</p>
+            <h5 class="font-label-md text-primary font-bold text-base">{t.item1Title}</h5>
+            <p class="text-on-surface-variant text-sm mt-0.5">{t.item1Desc}</p>
           </div>
         </li>
         <li class="flex gap-4 items-start">
@@ -34,8 +61,8 @@
             <span class="material-symbols-outlined text-primary">home_work</span>
           </div>
           <div>
-            <h5 class="font-label-md text-primary font-bold text-base">Cases Senyorials</h5>
-            <p class="text-on-surface-variant text-sm mt-0.5">Residències que definien el prestigi dels capitans d'indústria.</p>
+            <h5 class="font-label-md text-primary font-bold text-base">{t.item2Title}</h5>
+            <p class="text-on-surface-variant text-sm mt-0.5">{t.item2Desc}</p>
           </div>
         </li>
       </ul>

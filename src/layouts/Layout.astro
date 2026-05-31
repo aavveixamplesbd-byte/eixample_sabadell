@@ -12,8 +12,6 @@ const {
 	image = "/og-image.png",
 	canonicalURL = Astro.url.href,
 } = Astro.props;
-
-import CookieBanner from '../components/CookieBanner';
 ---
 
 <!doctype html>
@@ -54,7 +52,6 @@ import CookieBanner from '../components/CookieBanner';
 	</head>
 	<body class="bg-surface text-on-surface min-h-screen">
 		<slot />
-		<CookieBanner client:load />
 	</body>
 </html>
 
@@ -99,20 +96,5 @@ import CookieBanner from '../components/CookieBanner';
 	a {
 		color: inherit;
 		text-decoration: none;
-	}
-
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(1rem);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.animate-fade-in-up {
-		animation: fadeInUp 0.4s ease-out forwards;
 	}
 </style>

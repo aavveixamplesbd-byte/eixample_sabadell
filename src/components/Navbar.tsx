@@ -121,37 +121,39 @@ export default function Navbar() {
 
   return (
     <>
-      {/* SVG Filters for colorizing logo.png dynamically */}
+      {/* SVG Filters for colorizing logo.png dynamically without bounds overflow */}
       <svg className="absolute w-0 h-0 pointer-events-none" style={{ visibility: "hidden" }} aria-hidden="true">
         <defs>
-          <filter id="colorize-mint">
+          <filter id="colorize-mint" x="0" y="0" width="100%" height="100%">
             <feColorMatrix type="matrix" values="
               0 0 0 0 0.215
               0 0 0 0 0.392
               0 0 0 0 0.365
               -1 0 0 0 1
-            " />
+            " result="colorized" />
+            <feComposite operator="in" in="colorized" in2="SourceGraphic" />
           </filter>
-          <filter id="colorize-white">
+          <filter id="colorize-white" x="0" y="0" width="100%" height="100%">
             <feColorMatrix type="matrix" values="
               0 0 0 0 1
               0 0 0 0 1
               0 0 0 0 1
               -1 0 0 0 1
-            " />
+            " result="colorized" />
+            <feComposite operator="in" in="colorized" in2="SourceGraphic" />
           </filter>
         </defs>
       </svg>
 
       {/* Responsive Header */}
       <header className="sticky top-0 bg-surface/90 backdrop-blur-md z-40 border-b border-surface-variant/50 w-full transition-all duration-300">
-        <div className="flex justify-between items-center py-4 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
+        <div className="flex justify-between items-center py-2 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
           {/* Logo / Brand */}
           <a href={prefix || "/"} className="block">
             <img 
               src="/logo.png" 
               alt="Eixample Sabadell" 
-              className="h-10 sm:h-12 w-auto object-contain" 
+              className="h-16 sm:h-20 md:h-24 w-auto object-contain" 
               style={{ filter: "url(#colorize-mint)" }}
             />
           </a>

@@ -1,4 +1,6 @@
 ---
+import { newsArticles } from '../data/newsData';
+
 interface Props {
   lang?: 'ca' | 'es';
 }
@@ -19,57 +21,17 @@ const t = {
   }
 }[lang];
 
-const articles = lang === 'es' ? [
-  {
-    title: "Fiesta Mayor del Barrio: Recogida de propuestas",
-    category: "Cultura",
-    date: "12 Jun",
-    description: "Queremos que la fiesta de este año sea más participativa que nunca. Te esperamos el próximo martes.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCHwDK3L_fxD1B26aiXJ523a0w-Xml9DYLrJtoas-okWC2kGQtHfXZyKA1x0UNtflX9bKMIM0JFw5ctT1VBMr29TtKxKl8qWYcFz-_TS35_Dv8h3OkqrbLf8-WLwWmqPKnqIxq5DA6wPqtbZTmehfck4CyWtmXPbtZQv1i5BZ4FAnD4IxiRwQIiBhjV2cP1zerFqBoD0tgZv0Kzf-glHXjlDFktjAc6HgZcQS2AZvwxdwC0vx1pT9qc-UD7uZEB9Ry7JAlnVTy8tRqG",
-    alt: "Fiesta Mayor del Barrio"
-  },
-  {
-    title: "Nuevo proyecto de pacificación de la calle Indústria",
-    category: "Urbanismo",
-    date: "05 Jun",
-    description: "El ayuntamiento presenta el plan para ampliar las zonas peatonales y mejorar la calidad del aire.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAkk8ItTgq0dk_xyXO89z1IV2EKfhnt5kjn_Y_wx-1WLIK_xykvsrxO3EzToh1bXwY3t2IW_O-HN9e3CQn-Wl0lgmYFU48a0w-oh_EZe7J1jDWG2sAuCPJkPfL00but3uBiZSsyowBWzJCZd6pPIf-SA-XFv8hsBWQpRYwYcvvbEhEqRUA5BINM_F8zavkdBGNOzQ7QyQZlzGIG5Ml3xDbfPLKroq2m9jol1-7hfym5psUdLoM2x-JmJLxSQCuz72oU8fOr5RqPuGIH",
-    alt: "Proyecto de Pacificación"
-  },
-  {
-    title: "Digitalización del archivo histórico",
-    category: "Historia",
-    date: "28 May",
-    description: "Ya podéis consultar online más de 500 fotografías inéditas del barrio durante los años 50 y 60.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDpI-Vk5cWosXS5P2RanIXWrr593eDlj9H3HtdvJ92yGtdNC1-5f53DzhJXHx3QomxwY1dEBkAmLInU-SwxaQkiUZavPjJmgqcV-J0oi1Bp4QlaDD6l6H1CpUwOyiPHuvZntjfywaUrADGy1si4ijLWToRcgmIS0ifhjclbUfs7FEqR1heiyJ5CtcdnCYnwJ3plLuOFzZMrAPxDwwcdRvFIhacTCy3YcG77PJo7SuFpVX6sLPpk2jk-lNVsU_iQGPh2vfOjIgcjM2CH",
-    alt: "Archivo Histórico"
-  }
-] : [
-  {
-    title: "Festa Major del Barri: Recollida de propostes",
-    category: "Cultura",
-    date: "12 Jun",
-    description: "Volem que la festa d'enguany sigui més participativa que mai. T'esperem el proper dimarts.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCHwDK3L_fxD1B26aiXJ523a0w-Xml9DYLrJtoas-okWC2kGQtHfXZyKA1x0UNtflX9bKMIM0JFw5ctT1VBMr29TtKxKl8qWYcFz-_TS35_Dv8h3OkqrbLf8-WLwWmqPKnqIxq5DA6wPqtbZTmehfck4CyWtmXPbtZQv1i5BZ4FAnD4IxiRwQIiBhjV2cP1zerFqBoD0tgZv0Kzf-glHXjlDFktjAc6HgZcQS2AZvwxdwC0vx1pT9qc-UD7uZEB9Ry7JAlnVTy8tRqG",
-    alt: "Festa Major del Barri"
-  },
-  {
-    title: "Nou projecte de pacificació de l'Indústria",
-    category: "Urbanisme",
-    date: "05 Jun",
-    description: "L'ajuntament presenta el pla per ampliar les zones de vianants i millorar la qualitat de l'aire.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAkk8ItTgq0dk_xyXO89z1IV2EKfhnt5kjn_Y_wx-1WLIK_xykvsrxO3EzToh1bXwY3t2IW_O-HN9e3CQn-Wl0lgmYFU48a0w-oh_EZe7J1jDWG2sAuCPJkPfL00but3uBiZSsyowBWzJCZd6pPIf-SA-XFv8hsBWQpRYwYcvvbEhEqRUA5BINM_F8zavkdBGNOzQ7QyQZlzGIG5Ml3xDbfPLKroq2m9jol1-7hfym5psUdLoM2x-JmJLxSQCuz72oU8fOr5RqPuGIH",
-    alt: "Projecte de Pacificació"
-  },
-  {
-    title: "Digitalització de l'arxiu històric",
-    category: "Història",
-    date: "28 Maig",
-    description: "Ja podeu consultar online més de 500 fotografies inèdites del barri durant els anys 50 i 60.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDpI-Vk5cWosXS5P2RanIXWrr593eDlj9H3HtdvJ92yGtdNC1-5f53DzhJXHx3QomxwY1dEBkAmLInU-SwxaQkiUZavPjJmgqcV-J0oi1Bp4QlaDD6l6H1CpUwOyiPHuvZntjfywaUrADGy1si4ijLWToRcgmIS0ifhjclbUfs7FEqR1heiyJ5CtcdnCYnwJ3plLuOFzZMrAPxDwwcdRvFIhacTCy3YcG77PJo7SuFpVX6sLPpk2jk-lNVsU_iQGPh2vfOjIgcjM2CH",
-    alt: "Arxiu Històric"
-  }
-];
+// Sort by date descending and get the 5 most recent
+const articles = [...newsArticles]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 5);
+
+// Helper to format date
+const formatDate = (dateStr: string) => {
+  const dateObj = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short' };
+  return dateObj.toLocaleDateString(lang === 'es' ? 'es-ES' : 'ca-ES', options);
+};
 ---
 
 <section class="py-24" id="noticies">
@@ -83,25 +45,25 @@ const articles = lang === 'es' ? [
         {t.viewAll} <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
       </a>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {articles.map((article) => (
         <article class="flex flex-col group cursor-pointer">
           <div class="aspect-[4/3] mb-6 overflow-hidden rounded-2xl border border-outline-variant">
             <img 
-              alt={article.alt} 
+              alt={article.alt[lang]} 
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
               src={article.image}
             />
           </div>
           <div class="px-2">
             <span class="font-label-sm text-label-sm text-primary mb-3 block font-extrabold uppercase tracking-[0.1em]">
-              {article.category} • {article.date}
+              {article.category[lang]} • {formatDate(article.date)}
             </span>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight">
-              {article.title}
+            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors tracking-tight line-clamp-2">
+              {article.title[lang]}
             </h3>
             <p class="font-body-md text-on-surface-variant line-clamp-2">
-              {article.description}
+              {article.description[lang]}
             </p>
           </div>
         </article>

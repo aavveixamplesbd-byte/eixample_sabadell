@@ -1,5 +1,5 @@
 ---
-import { newsArticles } from '../data/newsData';
+import { getArticles } from '../utils/news';
 
 interface Props {
   lang?: 'ca' | 'es';
@@ -21,8 +21,9 @@ const t = {
   }
 }[lang];
 
+const allArticles = await getArticles();
 // Sort by date descending and get the 3 most recent
-const articles = [...newsArticles]
+const articles = [...allArticles]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
 

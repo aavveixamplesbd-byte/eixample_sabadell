@@ -4,10 +4,11 @@ import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import NewsPortal from '../components/NewsPortal';
 import Footer from '../components/Footer.astro';
-import { newsArticles } from '../data/newsData';
+import { getArticles } from '../utils/news';
 
-const sortedArticles = [...newsArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-const featuredArticle = newsArticles.find(a => a.featured) || sortedArticles[0];
+const articles = await getArticles();
+const sortedArticles = [...articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+const featuredArticle = articles.find(a => a.featured) || sortedArticles[0];
 const remainingArticles = sortedArticles.filter(a => a.id !== featuredArticle.id);
 
 const featuredDateFormatted = new Date(featuredArticle.date).toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' });

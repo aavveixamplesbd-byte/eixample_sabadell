@@ -14,8 +14,7 @@ collections:
     folder: "src/content/noticies"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    format: "yaml-frontmatter"
-    extension: "md"
+    identifier_field: "title_ca"
     fields:
       - { label: "Títol (Català)", name: "title_ca", widget: "string" }
       - { label: "Título (Castellano)", name: "title_es", widget: "string" }

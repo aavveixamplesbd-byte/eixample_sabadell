@@ -2,8 +2,11 @@
 local_backend: true
 
 backend:
-  name: git-gateway
+  name: github
+  repo: aolivari/eixample_sabadell
   branch: main
+  base_url: https://eixample-sabadell.vercel.app
+  auth_endpoint: api/auth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"

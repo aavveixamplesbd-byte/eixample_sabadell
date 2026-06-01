@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import type { Article } from '../data/newsData';
+import { newsArticles, type Article } from '../data/newsData';
 
 const supabaseUrl = import.meta.env.SUPABASE_URL || (typeof process !== 'undefined' ? process.env.SUPABASE_URL : '') || '';
 const supabaseKey = import.meta.env.SUPABASE_ANON_KEY || (typeof process !== 'undefined' ? process.env.SUPABASE_ANON_KEY : '') || '';
@@ -8,8 +8,8 @@ export const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, s
 
 export async function getArticles(): Promise<Article[]> {
   if (!supabase) {
-    console.warn('Supabase credentials missing. Returning empty news articles list.');
-    return [];
+    console.warn('Supabase credentials missing. Returning fallback static news articles list.');
+    return newsArticles;
   }
   
   const { data, error } = await supabase
@@ -19,7 +19,7 @@ export async function getArticles(): Promise<Article[]> {
 
   if (error) {
     console.error('Error fetching articles from Supabase:', error);
-    return [];
+    return newsArticles;
   }
 
   return (data || []).map((row) => ({

@@ -30,28 +30,40 @@ export default function NewsPortal({ lang = "ca", articles: rawArticles }: NewsP
 
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showArchive, setShowArchive] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 
   // Reset selected category if language changes
   useEffect(() => {
     setSelectedCategory(categories[0]);
+    setShowArchive(false);
   }, [lang]);
 
   // Filter & Search Logic
   const filteredArticles = useMemo(() => {
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+
     return articles.filter((article) => {
       const matchesCategory = selectedCategory === categories[0] || article.category === selectedCategory;
       const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             article.description.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
+      
+      const articleDate = new Date(article.date);
+      const isRecent = !isNaN(articleDate.getTime()) ? articleDate >= oneMonthAgo : true;
+
+      // Show if searching, if showArchive checkbox is active, or if the article is recent (< 30 days)
+      const matchesArchive = showArchive || searchQuery.trim().length > 0 || isRecent;
+
+      return matchesCategory && matchesSearch && matchesArchive;
     });
-  }, [selectedCategory, searchQuery, articles, categories]);
+  }, [selectedCategory, searchQuery, showArchive, articles, categories]);
 
   // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, showArchive]);
 
   // Pagination Logic
   const totalPages = Math.ceil(filteredArticles.length / itemsPerPage);
@@ -74,36 +86,51 @@ export default function NewsPortal({ lang = "ca", articles: rawArticles }: NewsP
   return (
     <div>
       {/* Search and Filters Section */}
-      <section className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-6 border-b border-outline-variant/20">
-        {/* Category Filters */}
-        <div className="flex flex-wrap gap-2.5">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2.5 rounded-full font-label-md text-label-md transition-all active:scale-95 ${
-                selectedCategory === cat
-                  ? "bg-primary text-white shadow-sm"
-                  : "bg-surface-container-high text-on-surface-variant hover:bg-primary/5"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+      <section className="flex flex-col gap-4 mb-10 pb-6 border-b border-outline-variant/20">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          {/* Category Filters */}
+          <div className="flex flex-wrap gap-2.5">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-5 py-2.5 rounded-full font-label-md text-label-md transition-all active:scale-95 ${
+                  selectedCategory === cat
+                    ? "bg-primary text-white shadow-sm"
+                    : "bg-surface-container-high text-on-surface-variant hover:bg-primary/5"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Search Input */}
+          <div className="relative">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">
+              search
+            </span>
+            <input
+              type="text"
+              placeholder={t.placeholder}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-label-md font-label-md w-full md:w-64 transition-all"
+            />
+          </div>
         </div>
 
-        {/* Search Input */}
-        <div className="relative">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">
-            search
-          </span>
-          <input
-            type="text"
-            placeholder={t.placeholder}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-label-md font-label-md w-full md:w-64 transition-all"
-          />
+        {/* Archive Toggle Checkbox */}
+        <div className="flex items-center mt-2">
+          <label className="flex items-center gap-3 text-sm text-on-surface-variant cursor-pointer select-none font-medium hover:text-primary transition-colors">
+            <input
+              type="checkbox"
+              checked={showArchive}
+              onChange={(e) => setShowArchive(e.target.checked)}
+              className="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer accent-primary"
+            />
+            <span>{lang === "ca" ? "Veure arxiu de notícies anteriors a 30 dies" : "Ver archivo de noticias anteriores a 30 días"}</span>
+          </label>
         </div>
       </section>
 

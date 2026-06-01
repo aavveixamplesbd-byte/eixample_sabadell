@@ -1,10 +1,21 @@
 import { createClient } from '@supabase/supabase-js';
+import type { WebSocketLikeConstructor } from '@supabase/realtime-js';
 import { newsArticles, type Article } from '../data/newsData';
+import ws from 'ws';
 
 const supabaseUrl = import.meta.env.SUPABASE_URL || (typeof process !== 'undefined' ? process.env.SUPABASE_URL : '') || '';
 const supabaseKey = import.meta.env.SUPABASE_ANON_KEY || (typeof process !== 'undefined' ? process.env.SUPABASE_ANON_KEY : '') || '';
 
-export const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+export const supabase = supabaseUrl && supabaseKey 
+  ? createClient(supabaseUrl, supabaseKey, {
+      auth: {
+        persistSession: false
+      },
+      realtime: {
+        transport: ws as unknown as WebSocketLikeConstructor
+      }
+    }) 
+  : null;
 
 export async function getArticles(): Promise<Article[]> {
   if (!supabase) {
@@ -22,7 +33,7 @@ export async function getArticles(): Promise<Article[]> {
     return newsArticles;
   }
 
-  return (data || []).map((row) => ({
+  const mapped = (data || []).map((row) => ({
     id: row.id,
     title: {
       ca: row.title_ca || '',
@@ -34,8 +45,8 @@ export async function getArticles(): Promise<Article[]> {
     },
     date: row.date || '',
     readTime: {
-      ca: row.readTime_ca || '4 min de lectura',
-      es: row.readTime_es || '4 min de lectura'
+      ca: row.readtime_ca || '4 min de lectura',
+      es: row.readtime_es || '4 min de lectura'
     },
     image: row.image || '/og-image.png',
     description: {
@@ -56,4 +67,11 @@ export async function getArticles(): Promise<Article[]> {
     },
     featured: !!row.featured
   }));
+
+  if (mapped.length === 0) {
+    console.warn('No articles found in Supabase. Returning fallback static news articles list.');
+    return newsArticles;
+  }
+
+  return mapped;
 }

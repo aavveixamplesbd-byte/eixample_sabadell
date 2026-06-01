@@ -311,7 +311,12 @@ import AdminTable from './AdminTable.astro';
   });
 
   window.addEventListener('admin-refresh-list', () => {
+    viewDashboard.classList.remove('hidden');
     loadArticles();
+  });
+
+  window.addEventListener('admin-show-form', () => {
+    viewDashboard.classList.add('hidden');
   });
 
   window.addEventListener('admin-delete-article', (e: any) => {

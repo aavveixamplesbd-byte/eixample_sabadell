@@ -1,0 +1,35 @@
+<!-- Toast Notification Component -->
+<div id="toast" class="fixed bottom-8 right-8 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-inverse-surface text-inverse-on-surface px-6 py-3.5 rounded-xl shadow-xl flex items-center gap-3">
+  <span id="toast-icon" class="material-symbols-outlined">info</span>
+  <span id="toast-message" class="font-label-md text-sm font-semibold">Mensaje</span>
+</div>
+
+<script>
+  const showToast = (message: string, isError = false) => {
+    const toast = document.getElementById('toast')!;
+    const toastMsg = document.getElementById('toast-message')!;
+    const toastIcon = document.getElementById('toast-icon')!;
+
+    toastMsg.textContent = message;
+    if (isError) {
+      toast.classList.add('bg-error', 'text-on-error');
+      toast.classList.remove('bg-inverse-surface', 'text-inverse-on-surface');
+      toastIcon.textContent = 'error';
+    } else {
+      toast.classList.remove('bg-error', 'text-on-error');
+      toast.classList.add('bg-inverse-surface', 'text-inverse-on-surface');
+      toastIcon.textContent = 'check_circle';
+    }
+
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0');
+    }, 4000);
+  };
+
+  // Listen to the global event to trigger toast notifications
+  window.addEventListener('admin-show-toast', (e: any) => {
+    const { message, isError } = e.detail;
+    showToast(message, isError);
+  });
+</script>

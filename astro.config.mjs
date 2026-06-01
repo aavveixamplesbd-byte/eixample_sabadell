@@ -13,5 +13,8 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false
     }
+  },
+  redirects: {
+    '/es/admin': '/admin'
   }
 });

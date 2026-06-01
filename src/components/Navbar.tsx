@@ -16,6 +16,14 @@ export default function Navbar() {
     if (typeof window !== "undefined") {
       const path = window.location.pathname;
       setCurrentPath(path);
+      const cleanPath = path.replace(/\/$/, "");
+      if (cleanPath === "/admin" || cleanPath === "/es/admin") {
+        const savedLang = localStorage.getItem("admin_lang") as "ca" | "es";
+        if (savedLang) {
+          setLang(savedLang);
+          return;
+        }
+      }
       if (path.startsWith("/es") || path.startsWith("/es/")) {
         setLang("es");
       } else {
@@ -31,6 +39,16 @@ export default function Navbar() {
         return;
       }
       const path = window.location.pathname;
+      const cleanPath = path.replace(/\/$/, "");
+      
+      // Admin page is bilingual and handles both languages inline
+      if (cleanPath === "/admin" || cleanPath === "/es/admin") {
+        setLang(newLang);
+        localStorage.setItem("admin_lang", newLang);
+        window.dispatchEvent(new CustomEvent("admin-lang-change", { detail: newLang }));
+        return;
+      }
+
       if (newLang === "es") {
         if (!path.startsWith("/es")) {
           // If on home "/", redirect to "/es", otherwise "/es/page"
@@ -39,8 +57,8 @@ export default function Navbar() {
       } else {
         if (path.startsWith("/es")) {
           // Remove "/es" prefix. If it becomes empty, redirect to "/"
-          const cleanPath = path.replace(/^\/es/, "") || "/";
-          window.location.href = cleanPath;
+          const cleanPathNoPrefix = path.replace(/^\/es/, "") || "/";
+          window.location.href = cleanPathNoPrefix;
         }
       }
     }

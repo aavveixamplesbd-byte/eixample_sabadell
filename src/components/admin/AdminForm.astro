@@ -1,0 +1,437 @@
+<!-- Admin Form Component -->
+<div id="form-view" class="hidden flex-col gap-8 w-full">
+  <div class="flex items-center gap-4">
+    <button 
+      id="btn-back-to-list"
+      class="w-10 h-10 rounded-full border border-outline-variant/65 flex items-center justify-center text-secondary hover:bg-surface-container transition-all active:scale-90"
+    >
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <div>
+      <h1 id="form-title" class="font-display-lg text-2xl sm:text-3xl font-extrabold text-on-surface">Nova Notícia</h1>
+      <p id="form-sub" class="font-body-md text-on-surface-variant text-sm">Emplena els camps bilingües de la publicació</p>
+    </div>
+  </div>
+
+  <form id="article-form" novalidate class="bg-surface-container border border-outline-variant/35 rounded-3xl p-6 sm:p-10 flex flex-col gap-8 shadow">
+    
+    <!-- Language Switcher Tabs -->
+    <div class="flex border-b border-outline-variant/30">
+      <button 
+        type="button" 
+        id="tab-ca" 
+        class="px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-primary text-primary transition-all"
+      >
+        Català (CA)
+      </button>
+      <button 
+        type="button" 
+        id="tab-es" 
+        class="px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-transparent text-secondary hover:text-primary transition-all"
+      >
+        Castellano (ES)
+      </button>
+    </div>
+
+    <input type="hidden" id="field-id" />
+
+    <!-- CA SECTION -->
+    <div id="section-ca" class="flex flex-col gap-6">
+      <div class="flex flex-col gap-1.5">
+        <label id="label-title_ca" for="field-title_ca" class="font-label-md text-sm font-semibold text-on-surface">Títol de la notícia (CA)</label>
+        <input type="text" id="field-title_ca" required class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-category_ca" for="field-category_ca" class="font-label-md text-sm font-semibold text-on-surface">Categoría (CA)</label>
+        <input type="text" id="field-category_ca" required placeholder="Activitats, Història, Urbanisme..." class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-description_ca" for="field-description_ca" class="font-label-md text-sm font-semibold text-on-surface">Descripció curta (CA)</label>
+        <textarea id="field-description_ca" required rows="2" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"></textarea>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-alt_ca" for="field-alt_ca" class="font-label-md text-sm font-semibold text-on-surface">Alt de la Imatge (CA)</label>
+        <input type="text" id="field-alt_ca" required placeholder="Descripció de la imatge de portada" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-content_ca" for="field-content_ca" class="font-label-md text-sm font-semibold text-on-surface">Cos de la Notícia (CA)</label>
+        <span id="hint-content_ca" class="text-xs text-outline mb-1">Separa els paràgrafs fent un doble salt de línia (Enter dues vegades).</span>
+        <textarea id="field-content_ca" required rows="10" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-y font-body-md"></textarea>
+      </div>
+    </div>
+
+    <!-- ES SECTION (Initially Hidden) -->
+    <div id="section-es" class="hidden flex flex-col gap-6">
+      <div class="flex flex-col gap-1.5">
+        <label id="label-title_es" for="field-title_es" class="font-label-md text-sm font-semibold text-on-surface">Título de la noticia (ES)</label>
+        <input type="text" id="field-title_es" required class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-category_es" for="field-category_es" class="font-label-md text-sm font-semibold text-on-surface">Categoría (ES)</label>
+        <input type="text" id="field-category_es" required placeholder="Actividades, Historia, Urbanismo..." class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-description_es" for="field-description_es" class="font-label-md text-sm font-semibold text-on-surface">Descripción corta (ES)</label>
+        <textarea id="field-description_es" required rows="2" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"></textarea>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-alt_es" for="field-alt_es" class="font-label-md text-sm font-semibold text-on-surface">Alt de la Imagen (ES)</label>
+        <input type="text" id="field-alt_es" required placeholder="Descripción de la imagen de portada" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-content_es" for="field-content_es" class="font-label-md text-sm font-semibold text-on-surface">Cuerpo de la Noticia (ES)</label>
+        <span id="hint-content_es" class="text-xs text-outline mb-1">Separa los párrafos haciendo un ojo doble salto de línea (Enter dos veces).</span>
+        <textarea id="field-content_es" required rows="10" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-y font-body-md"></textarea>
+      </div>
+    </div>
+
+    <hr class="border-outline-variant/30" />
+
+    <!-- SHARED FIELDS SECTION -->
+    <div class="flex flex-col gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-1.5">
+          <label id="label-date" for="field-date" class="font-label-md text-sm font-semibold text-on-surface">Data de Publicació</label>
+          <input type="date" id="field-date" required class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label id="label-readtime" for="field-read-time" class="font-label-md text-sm font-semibold text-on-surface">Temps de Lectura (minuts)</label>
+          <input type="number" id="field-read-time" required min="1" max="120" value="4" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+        </div>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label id="label-image" for="field-image" class="font-label-md text-sm font-semibold text-on-surface">URL de la Imatge Portada</label>
+        <div class="flex flex-col sm:flex-row gap-3 items-stretch">
+          <input type="url" id="field-image" required placeholder="https://ejemplo.com/imagen.jpg" class="flex-grow px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+          <label class="bg-secondary-container hover:bg-secondary-container/80 text-on-secondary-fixed font-label-md font-bold px-5 py-3 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-sm shadow-sm select-none">
+            <span class="material-symbols-outlined">upload_file</span>
+            <span id="btn-upload-text">Pujar Arxiu</span>
+            <input type="file" id="field-image-file" accept="image/*" class="hidden" />
+          </label>
+        </div>
+        <div id="image-upload-spinner" class="hidden items-center gap-2 text-primary font-medium text-xs py-1">
+          <div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <span id="msg-uploading">Pujant imatge a Supabase...</span>
+        </div>
+        <div id="image-preview-container" class="hidden mt-3 p-2 bg-surface-container-low border border-outline-variant/30 rounded-xl max-w-xs relative group">
+          <img id="image-preview-img" src="" class="w-full h-32 object-cover rounded-lg" alt="Vista prèvia" />
+          <button type="button" id="btn-remove-image" class="absolute top-4 right-4 bg-error/95 hover:bg-error text-white w-7 h-7 rounded-full flex items-center justify-center shadow transition-all active:scale-90 opacity-0 group-hover:opacity-100">
+            <span class="material-symbols-outlined text-[16px]">close</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 py-2">
+        <input type="checkbox" id="field-featured" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer" />
+        <label id="label-featured" for="field-featured" class="font-label-md text-sm font-bold text-on-surface cursor-pointer select-none">Notícia destacada (Apareix a dalt de tot)</label>
+      </div>
+    </div>
+
+    <!-- Submit actions -->
+    <div class="flex justify-end items-center gap-4 mt-4">
+      <button 
+        type="button" 
+        id="btn-cancel"
+        class="border border-outline-variant/65 text-on-surface-variant hover:bg-surface-container-high px-8 py-3.5 rounded-xl font-label-md font-bold transition-all active:scale-95 text-sm"
+      >
+        Cancel·lar
+      </button>
+      <button 
+        type="submit" 
+        id="btn-save"
+        class="bg-primary hover:bg-primary-container text-white px-10 py-3.5 rounded-xl font-label-md font-bold transition-all active:scale-95 text-sm shadow flex items-center gap-2"
+      >
+        <span id="btn-save-text">Desar Notícia</span>
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  const configEl = document.getElementById('admin-config')!;
+  const supabaseUrl = configEl.getAttribute('data-supabase-url') || '';
+  const supabaseKey = configEl.getAttribute('data-supabase-key') || '';
+  const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+
+  const viewForm = document.getElementById('form-view')!;
+  const articleForm = document.getElementById('article-form') as HTMLFormElement;
+
+  const tabCa = document.getElementById('tab-ca')!;
+  const tabEs = document.getElementById('tab-es')!;
+  const secCa = document.getElementById('section-ca')!;
+  const secEs = document.getElementById('section-es')!;
+
+  const fieldId = document.getElementById('field-id') as HTMLInputElement;
+  const fieldTitleCa = document.getElementById('field-title_ca') as HTMLInputElement;
+  const fieldTitleEs = document.getElementById('field-title_es') as HTMLInputElement;
+  const fieldCategoryCa = document.getElementById('field-category_ca') as HTMLInputElement;
+  const fieldCategoryEs = document.getElementById('field-category_es') as HTMLInputElement;
+  const fieldDate = document.getElementById('field-date') as HTMLInputElement;
+  const fieldReadTime = document.getElementById('field-read-time') as HTMLInputElement;
+  const fieldImage = document.getElementById('field-image') as HTMLInputElement;
+  const fieldImageFile = document.getElementById('field-image-file') as HTMLInputElement;
+  const imageUploadSpinner = document.getElementById('image-upload-spinner')!;
+  const imagePreviewContainer = document.getElementById('image-preview-container')!;
+  const imagePreviewImg = document.getElementById('image-preview-img') as HTMLImageElement;
+  const btnRemoveImage = document.getElementById('btn-remove-image')!;
+  const fieldAltCa = document.getElementById('field-alt_ca') as HTMLInputElement;
+  const fieldAltEs = document.getElementById('field-alt_es') as HTMLInputElement;
+  const fieldDescriptionCa = document.getElementById('field-description_ca') as HTMLTextAreaElement;
+  const fieldDescriptionEs = document.getElementById('field-description_es') as HTMLTextAreaElement;
+  const fieldContentCa = document.getElementById('field-content_ca') as HTMLTextAreaElement;
+  const fieldContentEs = document.getElementById('field-content_es') as HTMLTextAreaElement;
+  const fieldFeatured = document.getElementById('field-featured') as HTMLInputElement;
+
+  const btnCancel = document.getElementById('btn-cancel')!;
+  const btnBackToList = document.getElementById('btn-back-to-list')!;
+
+  let activeLang = localStorage.getItem("admin_lang") || "ca";
+
+  const triggerToast = (message: string, isError = false) => {
+    window.dispatchEvent(new CustomEvent('admin-show-toast', { detail: { message, isError } }));
+  };
+
+  const switchLangTab = (lang: 'ca' | 'es') => {
+    if (lang === 'ca') {
+      tabCa.className = 'px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-primary text-primary transition-all';
+      tabEs.className = 'px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-transparent text-secondary hover:text-primary transition-all';
+      secCa.classList.remove('hidden');
+      secEs.classList.add('hidden');
+    } else {
+      tabEs.className = 'px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-primary text-primary transition-all';
+      tabCa.className = 'px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-transparent text-secondary hover:text-primary transition-all';
+      secEs.classList.remove('hidden');
+      secCa.classList.add('hidden');
+    }
+  };
+
+  tabCa.addEventListener('click', () => switchLangTab('ca'));
+  tabEs.addEventListener('click', () => switchLangTab('es'));
+
+  const generateSlug = (text: string) => {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/·/g, '-')
+      .replace(/ç/g, 'c')
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_]+/g, '-')
+      .replace(/-+/g, '-')
+      .trim()
+      .replace(/^-+|-+$/g, '');
+  };
+
+  const updateImagePreview = () => {
+    const url = fieldImage.value.trim();
+    if (url) {
+      imagePreviewImg.src = url;
+      imagePreviewContainer.classList.remove('hidden');
+    } else {
+      imagePreviewContainer.classList.add('hidden');
+      imagePreviewImg.src = '';
+    }
+  };
+
+  fieldImage.addEventListener('input', updateImagePreview);
+
+  btnRemoveImage.addEventListener('click', () => {
+    fieldImage.value = '';
+    fieldImageFile.value = '';
+    updateImagePreview();
+  });
+
+  fieldImageFile.addEventListener('change', async (e) => {
+    const target = e.target as HTMLInputElement;
+    const file = target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      triggerToast(activeLang === 'ca' ? 'El fitxer seleccionat ha de ser una imatge.' : 'El archivo seleccionado debe ser una imagen.', true);
+      target.value = '';
+      return;
+    }
+
+    const maxSize = 2 * 1024 * 1024;
+    if (file.size > maxSize) {
+      triggerToast(activeLang === 'ca' ? 'La imatge supera el límit permès de 2MB.' : 'La imagen supera el límite permitido de 2MB.', true);
+      target.value = '';
+      return;
+    }
+
+    if (!supabase) return;
+
+    imageUploadSpinner.classList.remove('hidden');
+    imageUploadSpinner.classList.add('flex');
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+      const filePath = `portadas/${fileName}`;
+
+      const { error } = await supabase.storage
+        .from('noticies')
+        .upload(filePath, file);
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('noticies')
+        .getPublicUrl(filePath);
+
+      fieldImage.value = publicUrl;
+      updateImagePreview();
+      triggerToast(activeLang === 'ca' ? 'Imatge pujada correctament!' : '¡Imagen subida correctamente!');
+    } catch (err: any) {
+      triggerToast((activeLang === 'ca' ? 'Error en pujar la imatge: ' : 'Error al subir la imagen: ') + (err.message || err), true);
+    } finally {
+      imageUploadSpinner.classList.add('hidden');
+      imageUploadSpinner.classList.remove('flex');
+    }
+  });
+
+  const showForm = (title: string) => {
+    document.getElementById('form-title')!.textContent = title;
+    viewForm.classList.remove('hidden');
+    switchLangTab('ca');
+  };
+
+  const hideForm = () => {
+    viewForm.classList.add('hidden');
+    window.dispatchEvent(new CustomEvent('admin-refresh-list'));
+  };
+
+  btnCancel.addEventListener('click', hideForm);
+  btnBackToList.addEventListener('click', hideForm);
+
+  const editArticle = async (id: string) => {
+    if (!supabase) return;
+    triggerToast(activeLang === 'ca' ? 'Carregant dades...' : 'Cargando datos...');
+    
+    const { data, error } = await supabase
+      .from('noticies')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      triggerToast((activeLang === 'ca' ? 'Error en carregar les dades: ' : 'Error al cargar los datos: ') + error.message, true);
+      return;
+    }
+
+    fieldId.value = data.id;
+    fieldTitleCa.value = data.title_ca || '';
+    fieldTitleEs.value = data.title_es || '';
+    fieldCategoryCa.value = data.category_ca || '';
+    fieldCategoryEs.value = data.category_es || '';
+    fieldDate.value = data.date || '';
+    const minutes = parseInt(data.readtime_ca || data.readtime_es || '4');
+    fieldReadTime.value = isNaN(minutes) ? '4' : minutes.toString();
+    fieldImage.value = data.image || '';
+    updateImagePreview();
+    fieldAltCa.value = data.alt_ca || '';
+    fieldAltEs.value = data.alt_es || '';
+    fieldDescriptionCa.value = data.description_ca || '';
+    fieldDescriptionEs.value = data.description_es || '';
+    fieldContentCa.value = Array.isArray(data.content_ca) ? data.content_ca.join('\n\n') : (data.content_ca || '');
+    fieldContentEs.value = Array.isArray(data.content_es) ? data.content_es.join('\n\n') : (data.content_es || '');
+    fieldFeatured.checked = !!data.featured;
+
+    showForm(activeLang === 'ca' ? 'Editar Notícia' : 'Editar Noticia');
+  };
+
+  articleForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const requiredFields = [
+      { id: 'field-title_ca', name: activeLang === 'ca' ? 'Títol (Català)' : 'Título (Catalán)', lang: 'ca' },
+      { id: 'field-title_es', name: activeLang === 'ca' ? 'Título (Castellano)' : 'Título (Castellano)', lang: 'es' },
+      { id: 'field-category_ca', name: activeLang === 'ca' ? 'Categoría (Català)' : 'Categoría (Catalán)', lang: 'ca' },
+      { id: 'field-category_es', name: activeLang === 'ca' ? 'Categoría (Castellano)' : 'Categoría (Castellano)', lang: 'es' },
+      { id: 'field-read-time', name: activeLang === 'ca' ? 'Temps de lectura (minuts)' : 'Tiempo de lectura (minutos)', lang: 'shared' },
+      { id: 'field-description_ca', name: activeLang === 'ca' ? 'Descripció curta (Català)' : 'Descripción corta (Catalán)', lang: 'ca' },
+      { id: 'field-description_es', name: activeLang === 'ca' ? 'Descripción corta (Castellano)' : 'Descripción corta (Castellano)', lang: 'es' },
+      { id: 'field-alt_ca', name: activeLang === 'ca' ? 'Alt de la imatge (Català)' : 'Alt de la imagen (Catalán)', lang: 'ca' },
+      { id: 'field-alt_es', name: activeLang === 'ca' ? 'Alt de la imagen (Castellano)' : 'Alt de la imagen (Castellano)', lang: 'es' },
+      { id: 'field-content_ca', name: activeLang === 'ca' ? 'Cos de la notícia (Català)' : 'Cuerpo de la noticia (Catalán)', lang: 'ca' },
+      { id: 'field-content_es', name: activeLang === 'ca' ? 'Cuerpo de la noticia (Castellano)' : 'Cuerpo de la noticia (Castellano)', lang: 'es' },
+      { id: 'field-date', name: activeLang === 'ca' ? 'Data de publicació' : 'Fecha de publicación', lang: 'shared' },
+      { id: 'field-image', name: activeLang === 'ca' ? 'URL de la imatge de portada' : 'URL de la imagen de portada', lang: 'shared' }
+    ];
+
+    for (const field of requiredFields) {
+      const el = document.getElementById(field.id) as HTMLInputElement | HTMLTextAreaElement;
+      if (!el || !el.value.trim()) {
+        if (field.lang === 'ca' || field.lang === 'es') {
+          switchLangTab(field.lang);
+        }
+        el.classList.add('border-error', 'ring-2', 'ring-error');
+        el.focus();
+        el.addEventListener('input', () => {
+          el.classList.remove('border-error', 'ring-2', 'ring-error');
+        }, { once: true });
+
+        triggerToast((activeLang === 'ca' ? `Falta omplir el camp: ` : `Falta rellenar el campo: `) + field.name, true);
+        return;
+      }
+    }
+
+    triggerToast(activeLang === 'ca' ? 'Desant notícia...' : 'Guardando noticia...');
+
+    const id = fieldId.value;
+    const payload = {
+      title_ca: fieldTitleCa.value,
+      title_es: fieldTitleEs.value,
+      category_ca: fieldCategoryCa.value,
+      category_es: fieldCategoryEs.value,
+      date: fieldDate.value,
+      readtime_ca: `${fieldReadTime.value} min de lectura`,
+      readtime_es: `${fieldReadTime.value} min de lectura`,
+      image: fieldImage.value,
+      alt_ca: fieldAltCa.value,
+      alt_es: fieldAltEs.value,
+      slug_ca: generateSlug(fieldTitleCa.value),
+      slug_es: generateSlug(fieldTitleEs.value),
+      description_ca: fieldDescriptionCa.value,
+      description_es: fieldDescriptionEs.value,
+      content_ca: fieldContentCa.value,
+      content_es: fieldContentEs.value,
+      featured: fieldFeatured.checked
+    };
+
+    if (!supabase) return;
+    let response;
+    if (id) {
+      response = await supabase.from('noticies').update(payload).eq('id', id);
+    } else {
+      response = await supabase.from('noticies').insert([payload]);
+    }
+
+    if (response.error) {
+      triggerToast((activeLang === 'ca' ? 'Error en desar la notícia: ' : 'Error al guardar la noticia: ') + response.error.message, true);
+    } else {
+      triggerToast(activeLang === 'ca' ? 'Notícia desada correctament!' : '¡Noticia guardada correctamente!');
+      hideForm();
+    }
+  });
+
+  // Listeners to trigger form actions
+  window.addEventListener('admin-show-form', (e: any) => {
+    const { action, id } = e.detail;
+    if (action === 'new') {
+      articleForm.reset();
+      fieldId.value = '';
+      fieldDate.value = new Date().toISOString().split('T')[0];
+      updateImagePreview();
+      showForm(activeLang === 'ca' ? 'Nova Notícia' : 'Nueva Noticia');
+    } else if (action === 'edit') {
+      editArticle(id);
+    }
+  });
+
+  window.addEventListener('admin-lang-change', (e: any) => {
+    activeLang = e.detail;
+  });
+</script>

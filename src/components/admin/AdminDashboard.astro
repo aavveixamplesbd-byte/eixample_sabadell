@@ -1,0 +1,327 @@
+---
+import AdminTable from './AdminTable.astro';
+---
+
+<!-- Admin Dashboard Component -->
+<div id="dashboard-view" class="hidden flex-col gap-8 w-full">
+  <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-outline-variant/30 pb-6">
+    <div>
+      <h1 id="dashboard-title" class="font-display-lg text-3xl font-extrabold text-on-surface mb-1">Notícies i Activitats</h1>
+      <p id="dashboard-sub" class="font-body-md text-on-surface-variant text-sm">Gestiona el contingut i publica novetats</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button 
+        id="btn-new-article"
+        class="bg-primary hover:bg-primary-container text-white px-5 py-3 rounded-xl font-label-md font-bold transition-all active:scale-95 flex items-center gap-2 text-sm shadow"
+      >
+        <span class="material-symbols-outlined text-[18px]">add</span>
+        <span id="btn-new-article-text">Nova Notícia</span>
+      </button>
+      <button 
+        id="btn-logout"
+        class="border border-outline-variant/65 text-on-surface-variant hover:bg-surface-container-high px-5 py-3 rounded-xl font-label-md font-bold transition-all active:scale-95 text-sm"
+      >
+        Tancar Sessió
+      </button>
+    </div>
+  </div>
+
+  <!-- Quick Actions / Vercel Deploy Hook Status -->
+  <div class="bg-primary/5 border border-primary/20 rounded-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div class="max-w-xl">
+      <h4 id="deploy-title" class="font-headline-md text-primary font-bold text-base flex items-center gap-2 mb-1">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        Publicació a Producció (Vercel)
+      </h4>
+      <p id="deploy-sub" class="font-body-md text-on-secondary-container text-sm leading-relaxed">
+        Quan acabis de desar, crear o eliminar notícies, fes clic en "Publicar Canvis" per regenerar i actualitzar la web oficial a producció amb els nous continguts.
+      </p>
+    </div>
+    <button 
+      id="btn-deploy"
+      class="bg-secondary-container hover:bg-secondary-container/80 text-on-secondary-fixed font-label-md font-bold px-6 py-3 rounded-xl transition-all active:scale-95 flex items-center gap-2 shadow-sm whitespace-nowrap"
+    >
+      <span class="material-symbols-outlined">publish</span>
+      <span id="btn-deploy-text">Publicar Canvis</span>
+    </button>
+  </div>
+
+  <!-- Articles List -->
+  <div class="bg-surface-container border border-outline-variant/35 rounded-3xl overflow-hidden shadow-sm">
+    <!-- Search bar inside list card -->
+    <div class="p-6 border-b border-outline-variant/30 bg-surface-container-low flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="relative w-full sm:w-80">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+        <input 
+          type="text" 
+          id="admin-search" 
+          placeholder="Cercar per títol..." 
+          class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-outline-variant/30 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-sm transition-all"
+        />
+      </div>
+      <div id="admin-table-summary" class="text-xs text-outline font-label-md">
+        Mostrant 0-0 de 0 notícies
+      </div>
+    </div>
+
+    <!-- Table Slot -->
+    <AdminTable />
+
+    <div id="no-articles-msg" class="p-12 text-center text-on-surface-variant hidden">
+      <span class="material-symbols-outlined text-4xl text-outline mb-2">newspaper</span>
+      <p id="no-articles-text">No hi ha notícies creades. Comença per crear-ne una de nova!</p>
+    </div>
+
+    <!-- Table Pagination Controls -->
+    <div class="p-4 border-t border-outline-variant/30 bg-surface-container-low flex justify-between items-center gap-4">
+      <button 
+        type="button"
+        id="admin-prev-page" 
+        class="px-4 py-2 rounded-lg border border-outline-variant/30 hover:bg-surface-container-high disabled:opacity-50 disabled:hover:bg-transparent transition-all text-xs font-bold font-label-md flex items-center gap-1"
+      >
+        <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+        <span id="btn-prev-text">Anterior</span>
+      </button>
+      <span id="admin-page-indicator" class="text-xs font-bold text-on-surface-variant font-label-md">
+        Pàgina 1 de 1
+      </span>
+      <button 
+        type="button"
+        id="admin-next-page" 
+        class="px-4 py-2 rounded-lg border border-outline-variant/30 hover:bg-surface-container-high disabled:opacity-50 disabled:hover:bg-transparent transition-all text-xs font-bold font-label-md flex items-center gap-1"
+      >
+        <span id="btn-next-text">Següent</span>
+        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  const configEl = document.getElementById('admin-config')!;
+  const supabaseUrl = configEl.getAttribute('data-supabase-url') || '';
+  const supabaseKey = configEl.getAttribute('data-supabase-key') || '';
+  const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+  const vercelDeployUrl = configEl.getAttribute('data-vercel-hook') || '';
+
+  const viewDashboard = document.getElementById('dashboard-view')!;
+  const btnLogout = document.getElementById('btn-logout')!;
+  const btnNewArticle = document.getElementById('btn-new-article')!;
+  const btnDeploy = document.getElementById('btn-deploy')!;
+
+  const adminSearch = document.getElementById('admin-search') as HTMLInputElement;
+  const adminTableSummary = document.getElementById('admin-table-summary')!;
+  const adminPrevPage = document.getElementById('admin-prev-page') as HTMLButtonElement;
+  const adminNextPage = document.getElementById('admin-next-page') as HTMLButtonElement;
+  const adminPageIndicator = document.getElementById('admin-page-indicator')!;
+  const articlesListBody = document.getElementById('articles-list-body')!;
+  const noArticlesMsg = document.getElementById('no-articles-msg')!;
+
+  let loadedArticles: any[] = [];
+  let currentAdminPage = 1;
+  const itemsPerAdminPage = 5;
+  let activeLang = localStorage.getItem("admin_lang") || "ca";
+
+  const triggerToast = (message: string, isError = false) => {
+    window.dispatchEvent(new CustomEvent('admin-show-toast', { detail: { message, isError } }));
+  };
+
+  const renderAdminTable = () => {
+    const query = adminSearch.value.trim().toLowerCase();
+    
+    // Filter articles
+    const filtered = loadedArticles.filter((article) => {
+      const titleCa = (article.title_ca || '').toLowerCase();
+      const titleEs = (article.title_es || '').toLowerCase();
+      return titleCa.includes(query) || titleEs.includes(query);
+    });
+
+    const total = filtered.length;
+    const totalPages = Math.ceil(total / itemsPerAdminPage) || 1;
+    
+    if (currentAdminPage > totalPages) currentAdminPage = totalPages;
+    if (currentAdminPage < 1) currentAdminPage = 1;
+
+    const start = (currentAdminPage - 1) * itemsPerAdminPage;
+    const end = Math.min(start + itemsPerAdminPage, total);
+    const paginated = filtered.slice(start, end);
+
+    adminTableSummary.textContent = total > 0 
+      ? (activeLang === 'ca' ? `Mostrant ${start + 1}-${end} de ${total} notícies` : `Mostrando ${start + 1}-${end} de ${total} noticias`) 
+      : (activeLang === 'ca' ? 'Mostrant 0-0 de 0 notícies' : 'Mostrando 0-0 de 0 noticias');
+    adminPageIndicator.textContent = activeLang === 'ca' ? `Pàgina ${currentAdminPage} de ${totalPages}` : `Página ${currentAdminPage} de ${totalPages}`;
+    adminPrevPage.disabled = currentAdminPage === 1;
+    adminNextPage.disabled = currentAdminPage === totalPages;
+
+    if (total === 0) {
+      articlesListBody.innerHTML = '';
+      noArticlesMsg.classList.remove('hidden');
+      return;
+    }
+
+    noArticlesMsg.classList.add('hidden');
+    articlesListBody.innerHTML = '';
+
+    paginated.forEach((article) => {
+      const row = document.createElement('tr');
+      row.className = 'hover:bg-surface-container-low transition-colors';
+      row.innerHTML = `
+        <td class="p-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg overflow-hidden border border-outline-variant/30 flex-shrink-0 bg-surface-container-high">
+              <img src="${article.image || '/og-image.png'}" class="w-full h-full object-cover" alt="" />
+            </div>
+            <div>
+              <div class="font-bold text-on-surface text-sm line-clamp-1">${article.title_ca}</div>
+              <div class="text-xs text-outline line-clamp-1">${article.description_ca || ''}</div>
+            </div>
+          </div>
+        </td>
+        <td class="p-6 text-sm text-on-surface-variant font-medium">${article.category_ca}</td>
+        <td class="p-6 text-sm text-outline-variant font-medium">${article.date}</td>
+        <td class="p-6 text-sm">
+          <span class="${article.featured ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'} px-3 py-1 rounded-full text-xs font-semibold uppercase">
+            ${article.featured ? 'Destacada' : 'Normal'}
+          </span>
+        </td>
+        <td class="p-6 text-right">
+          <div class="flex items-center justify-end gap-3">
+            <button class="btn-edit text-primary hover:bg-primary/5 p-2 rounded-full transition-all" data-id="${article.id}" title="Editar">
+              <span class="material-symbols-outlined text-[20px] pointer-events-none">edit</span>
+            </button>
+            <button class="btn-delete text-error hover:bg-error/5 p-2 rounded-full transition-all" data-id="${article.id}" title="Eliminar">
+              <span class="material-symbols-outlined text-[20px] pointer-events-none">delete</span>
+            </button>
+          </div>
+        </td>
+      `;
+      articlesListBody.appendChild(row);
+    });
+  };
+
+  const loadArticles = async () => {
+    if (!supabase) return;
+    articlesListBody.innerHTML = activeLang === 'ca'
+      ? '<tr><td colspan="5" class="p-6 text-center text-secondary">Carregant notícies...</td></tr>'
+      : '<tr><td colspan="5" class="p-6 text-center text-secondary">Cargando noticias...</td></tr>';
+    
+    const { data, error } = await supabase
+      .from('noticies')
+      .select('*')
+      .order('date', { ascending: false });
+
+    if (error) {
+      triggerToast((activeLang === 'ca' ? 'Error carregant notícies: ' : 'Error cargando noticias: ') + error.message, true);
+      return;
+    }
+
+    loadedArticles = data || [];
+    renderAdminTable();
+  };
+
+  // Search input listener
+  adminSearch.addEventListener('input', () => {
+    currentAdminPage = 1;
+    renderAdminTable();
+  });
+
+  // Pagination clicks
+  adminPrevPage.addEventListener('click', () => {
+    if (currentAdminPage > 1) {
+      currentAdminPage--;
+      renderAdminTable();
+    }
+  });
+
+  adminNextPage.addEventListener('click', () => {
+    const query = adminSearch.value.trim().toLowerCase();
+    const filtered = loadedArticles.filter((article) => {
+      const titleCa = (article.title_ca || '').toLowerCase();
+      const titleEs = (article.title_es || '').toLowerCase();
+      return titleCa.includes(query) || titleEs.includes(query);
+    });
+    const totalPages = Math.ceil(filtered.length / itemsPerAdminPage) || 1;
+    if (currentAdminPage < totalPages) {
+      currentAdminPage++;
+      renderAdminTable();
+    }
+  });
+
+  // Logout listener
+  btnLogout.addEventListener('click', () => {
+    viewDashboard.classList.add('hidden');
+    window.dispatchEvent(new CustomEvent('admin-logout'));
+  });
+
+  // New article listener
+  btnNewArticle.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('admin-show-form', { detail: { action: 'new' } }));
+  });
+
+  // Vercel Deploy Hook
+  btnDeploy.addEventListener('click', async () => {
+    if (!vercelDeployUrl) {
+      triggerToast(activeLang === 'ca' 
+        ? 'El Webhook de publicació no està configurat a les variables d\'entorn.' 
+        : 'El Webhook de publicación no está configurado en las variables de entorno.', true);
+      return;
+    }
+
+    triggerToast(activeLang === 'ca' ? 'Iniciant publicació a Vercel...' : 'Iniciando publicación en Vercel...');
+    btnDeploy.setAttribute('disabled', 'true');
+
+    try {
+      const response = await fetch(vercelDeployUrl, { method: 'POST' });
+      if (response.ok) {
+        triggerToast(activeLang === 'ca' 
+          ? 'Publicació iniciada! La web es reconstruirà en uns 2 minuts.' 
+          : '¡Publicación iniciada! La web se reconstruirá en unos 2 minutos.');
+      } else {
+        triggerToast(activeLang === 'ca' 
+          ? 'Error en cridar al webhook de Vercel.' 
+          : 'Error al llamar al webhook de Vercel.', true);
+      }
+    } catch (err) {
+      triggerToast(activeLang === 'ca' 
+        ? 'Error de xarxa en connectar amb Vercel.' 
+        : 'Error de red al conectar con Vercel.', true);
+    } finally {
+      btnDeploy.removeAttribute('disabled');
+    }
+  });
+
+  // Delete article database call
+  const deleteArticle = async (id: string) => {
+    if (!supabase) return;
+    const { error } = await supabase.from('noticies').delete().eq('id', id);
+    if (error) {
+      triggerToast((activeLang === 'ca' ? 'Error en eliminar: ' : 'Error al eliminar: ') + error.message, true);
+    } else {
+      triggerToast(activeLang === 'ca' ? 'Notícia eliminada!' : '¡Noticia eliminada!');
+      loadArticles();
+    }
+  };
+
+  // Events coordinates
+  window.addEventListener('admin-login-success', () => {
+    viewDashboard.classList.remove('hidden');
+    loadArticles();
+  });
+
+  window.addEventListener('admin-refresh-list', () => {
+    loadArticles();
+  });
+
+  window.addEventListener('admin-delete-article', (e: any) => {
+    deleteArticle(e.detail.id);
+  });
+
+  window.addEventListener('admin-lang-change', (e: any) => {
+    activeLang = e.detail;
+    if (!viewDashboard.classList.contains('hidden')) {
+      renderAdminTable();
+    }
+  });
+</script>

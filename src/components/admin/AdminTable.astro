@@ -1,0 +1,38 @@
+<!-- Admin Table Component -->
+<div class="overflow-x-auto">
+  <table class="w-full text-left border-collapse">
+    <thead>
+      <tr class="border-b border-outline-variant/30 bg-surface-container-high text-xs uppercase font-label-md tracking-wider text-secondary">
+        <th id="th-news" class="p-6">Notícia</th>
+        <th id="th-category" class="p-6">Categoría</th>
+        <th id="th-date" class="p-6">Data</th>
+        <th id="th-status" class="p-6">Estat</th>
+        <th id="th-actions" class="p-6 text-right">Accions</th>
+      </tr>
+    </thead>
+    <tbody id="articles-list-body" class="divide-y divide-outline-variant/20 font-body-md">
+      <!-- Dynamically populated rows -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  const body = document.getElementById('articles-list-body')!;
+
+  // Use event delegation for edit/delete buttons inside the dynamically rendered rows
+  body.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    
+    // Find closest button parent
+    const btnEdit = target.closest('.btn-edit');
+    const btnDelete = target.closest('.btn-delete');
+
+    if (btnEdit) {
+      const id = btnEdit.getAttribute('data-id');
+      window.dispatchEvent(new CustomEvent('admin-show-form', { detail: { action: 'edit', id } }));
+    } else if (btnDelete) {
+      const id = btnDelete.getAttribute('data-id');
+      window.dispatchEvent(new CustomEvent('admin-delete-article', { detail: { id } }));
+    }
+  });
+</script>

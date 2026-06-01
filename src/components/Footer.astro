@@ -40,11 +40,39 @@ const t = {
 const prefix = lang === 'es' ? '/es' : '';
 ---
 
-<footer class="bg-surface-container-low border-t border-outline-variant">
-  <div class="flex flex-col md:flex-row justify-between items-start py-16 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto gap-12 w-full">
-    <div class="max-w-sm">
-      <div class="font-headline-md text-headline-md text-primary font-extrabold mb-6 tracking-tight">
-        Eixample Sabadell
+<footer class="bg-surface-container-low border-t border-outline-variant relative overflow-hidden group/footer">
+  <!-- Old Map Style Monster Decor -->
+  <div class="absolute bottom-[-30px] right-[-20px] md:right-4 w-60 h-60 md:w-96 md:h-96 pointer-events-none select-none z-0 transition-all duration-700">
+    <img 
+      src="/monster1.png" 
+      alt="Mascota Eixample Sabadell" 
+      class="w-full h-full object-contain mascot-old-map"
+    />
+  </div>
+
+  <div class="flex flex-col md:flex-row justify-between items-start py-16 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto gap-12 w-full relative z-10">
+    <div class="max-w-sm flex flex-col items-start w-full">
+      <!-- SVG Filter to colorize the logo in the primary color -->
+      <svg class="absolute w-0 h-0 pointer-events-none" style="visibility: hidden" aria-hidden="true">
+        <defs>
+          <filter id="footer-colorize-mint" x="0" y="0" width="100%" height="100%">
+            <feColorMatrix type="matrix" values="
+              0 0 0 0 0.215
+              0 0 0 0 0.392
+              0 0 0 0 0.365
+              -1 0 0 0 1
+            " result="colorized" />
+            <feComposite operator="in" in="colorized" in2="SourceGraphic" />
+          </filter>
+        </defs>
+      </svg>
+      <div class="mb-6">
+        <img 
+          src="/logo.png" 
+          alt="Eixample Sabadell" 
+          class="h-[70px] w-auto object-contain" 
+          style="filter: url(#footer-colorize-mint)"
+        />
       </div>
       <p class="font-body-md text-body-md text-on-secondary-container">
         {t.desc}
@@ -80,7 +108,7 @@ const prefix = lang === 'es' ? '/es' : '';
     </div>
   </div>
   
-  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4 w-full">
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4 w-full relative z-10">
     <p class="font-label-sm text-label-sm text-on-secondary-container text-center md:text-left font-medium">
       {t.rights}
     </p>
@@ -94,3 +122,27 @@ const prefix = lang === 'es' ? '/es' : '';
     </div>
   </div>
 </footer>
+
+<style>
+  .mascot-old-map {
+    opacity: 0.35;
+    filter: sepia(35%) contrast(90%) brightness(95%);
+    animation: mapFloat 8s ease-in-out infinite;
+    transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  /* Fade in to full color and opacity when the footer is hovered */
+  .group\/footer:hover .mascot-old-map {
+    opacity: 0.95;
+    filter: sepia(0%) contrast(100%) brightness(100%) drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+  }
+
+  @keyframes mapFloat {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-12px) rotate(2deg);
+    }
+  }
+</style>

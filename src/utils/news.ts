@@ -1,55 +1,59 @@
+import { createClient } from '@supabase/supabase-js';
 import type { Article } from '../data/newsData';
 
-// Dynamic helper to fetch CMS articles using import.meta.glob (standard in Vite/Astro)
-export async function getArticles(): Promise<Article[]> {
-  const mdFiles = import.meta.glob('../content/noticies/*.md', { eager: true });
-  
-  const cmsArticles: Article[] = Object.entries(mdFiles).map(([path, file]: [string, any], index) => {
-    const fm = file.frontmatter;
-    
-    // Derive slug and default date from filename (e.g. 2026-06-01-slug-name.md)
-    const filename = path.split('/').pop() || '';
-    const cleanFilename = filename.replace(/\.md$/, '');
-    
-    const dateStr = cleanFilename.substring(0, 10);
-    // Find the dash after the date
-    const slugStr = cleanFilename.substring(11);
-    
-    return {
-      id: 1000 + index, // unique ID
-      title: {
-        ca: fm.title_ca || '',
-        es: fm.title_es || ''
-      },
-      category: {
-        ca: fm.category_ca || 'Activitats',
-        es: fm.category_es || 'Actividades'
-      },
-      date: fm.date || dateStr || new Date().toISOString().split('T')[0],
-      readTime: {
-        ca: fm.readTime_ca || '3 min de lectura',
-        es: fm.readTime_es || '3 min de lectura'
-      },
-      image: fm.image || '/og-image.png',
-      description: {
-        ca: fm.description_ca || '',
-        es: fm.description_es || ''
-      },
-      alt: {
-        ca: fm.alt_ca || '',
-        es: fm.alt_es || ''
-      },
-      slug: {
-        ca: slugStr,
-        es: slugStr
-      },
-      content: {
-        ca: fm.body_ca ? fm.body_ca.split('\n\n') : [],
-        es: fm.body_es ? fm.body_es.split('\n\n') : []
-      },
-      featured: fm.featured || false
-    };
-  });
+const supabaseUrl = import.meta.env.SUPABASE_URL || (typeof process !== 'undefined' ? process.env.SUPABASE_URL : '') || '';
+const supabaseKey = import.meta.env.SUPABASE_ANON_KEY || (typeof process !== 'undefined' ? process.env.SUPABASE_ANON_KEY : '') || '';
 
-  return cmsArticles;
+export const supabase = createClient(supabaseUrl, supabaseKey);
+
+export async function getArticles(): Promise<Article[]> {
+  if (!supabaseUrl || !supabaseKey) {
+    console.warn('Supabase credentials missing. Returning empty news articles list.');
+    return [];
+  }
+  
+  const { data, error } = await supabase
+    .from('noticies')
+    .select('*')
+    .order('date', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching articles from Supabase:', error);
+    return [];
+  }
+
+  return (data || []).map((row) => ({
+    id: row.id,
+    title: {
+      ca: row.title_ca || '',
+      es: row.title_es || ''
+    },
+    category: {
+      ca: row.category_ca || 'Activitats',
+      es: row.category_es || 'Actividades'
+    },
+    date: row.date || '',
+    readTime: {
+      ca: row.readTime_ca || '4 min de lectura',
+      es: row.readTime_es || '4 min de lectura'
+    },
+    image: row.image || '/og-image.png',
+    description: {
+      ca: row.description_ca || '',
+      es: row.description_es || ''
+    },
+    alt: {
+      ca: row.alt_ca || '',
+      es: row.alt_es || ''
+    },
+    slug: {
+      ca: row.slug_ca || '',
+      es: row.slug_es || ''
+    },
+    content: {
+      ca: Array.isArray(row.content_ca) ? row.content_ca : (row.content_ca ? row.content_ca.split('\n\n') : []),
+      es: Array.isArray(row.content_es) ? row.content_es : (row.content_es ? row.content_es.split('\n\n') : [])
+    },
+    featured: !!row.featured
+  }));
 }

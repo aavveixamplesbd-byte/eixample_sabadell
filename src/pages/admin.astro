@@ -1,0 +1,667 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Panell d'Administració - Eixample Sabadell" lang="ca">
+  <Navbar client:load />
+
+  <main class="min-h-screen py-16 px-margin-mobile md:px-margin-desktop max-w-5xl mx-auto w-full flex flex-col justify-center">
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-inverse-surface text-inverse-on-surface px-6 py-3.5 rounded-xl shadow-xl flex items-center gap-3">
+      <span id="toast-icon" class="material-symbols-outlined">info</span>
+      <span id="toast-message" class="font-label-md text-sm font-semibold">Mensaje</span>
+    </div>
+
+    <!-- 1. LOGIN SCREEN -->
+    <div id="login-view" class="w-full max-w-md mx-auto bg-surface-container border border-outline-variant/35 rounded-3xl p-8 sm:p-10 shadow-lg">
+      <div class="text-center mb-8">
+        <h1 class="font-display-lg text-2xl sm:text-3xl font-extrabold text-primary mb-2">Panel de Control</h1>
+        <p class="font-body-md text-on-surface-variant text-sm">Inicia sessió per gestionar les notícies de l'Eixample Sabadell</p>
+      </div>
+
+      <form id="login-form" class="flex flex-col gap-6">
+        <div class="flex flex-col gap-1.5">
+          <label for="email" class="font-label-md text-sm font-semibold text-on-surface">Correu electrònic</label>
+          <input 
+            type="email" 
+            id="email" 
+            required 
+            placeholder="nom@exemple.com" 
+            class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+          />
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label for="password" class="font-label-md text-sm font-semibold text-on-surface">Contrasenya</label>
+          <input 
+            type="password" 
+            id="password" 
+            required 
+            placeholder="••••••••" 
+            class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+          />
+        </div>
+
+        <button 
+          type="submit" 
+          id="btn-login"
+          class="w-full bg-primary hover:bg-primary-container text-white py-4 rounded-xl font-label-md font-bold transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 mt-2"
+        >
+          <span>Iniciar Sessió</span>
+          <span class="material-symbols-outlined text-xl">login</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- 2. DASHBOARD VIEW (Initially Hidden) -->
+    <div id="dashboard-view" class="hidden flex-col gap-8 w-full">
+      <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-outline-variant/30 pb-6">
+        <div>
+          <h1 class="font-display-lg text-3xl font-extrabold text-on-surface mb-1">Notícies i Activitats</h1>
+          <p class="font-body-md text-on-surface-variant text-sm">Gestiona el contingut i publica novetats</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button 
+            id="btn-new-article"
+            class="bg-primary hover:bg-primary-container text-white px-5 py-3 rounded-xl font-label-md font-bold transition-all active:scale-95 flex items-center gap-2 text-sm shadow"
+          >
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            Nueva Noticia
+          </button>
+          <button 
+            id="btn-logout"
+            class="border border-outline-variant/65 text-on-surface-variant hover:bg-surface-container-high px-5 py-3 rounded-xl font-label-md font-bold transition-all active:scale-95 text-sm"
+          >
+            Tancar Sessió
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Actions / Vercel Deploy Hook Status -->
+      <div class="bg-primary/5 border border-primary/20 rounded-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div class="max-w-xl">
+          <h4 class="font-headline-md text-primary font-bold text-base flex items-center gap-2 mb-1">
+            <span class="material-symbols-outlined">cloud_upload</span>
+            Publicació a Producció (Vercel)
+          </h4>
+          <p class="font-body-md text-on-secondary-container text-sm leading-relaxed">
+            Quan acabis de desar, crear o eliminar notícies, fes clic en "Publicar Canvis" per regenerar i actualitzar la web oficial a producció amb els nous continguts.
+          </p>
+        </div>
+        <button 
+          id="btn-deploy"
+          class="bg-secondary-container hover:bg-secondary-container/80 text-on-secondary-fixed font-label-md font-bold px-6 py-3 rounded-xl transition-all active:scale-95 flex items-center gap-2 shadow-sm whitespace-nowrap"
+        >
+          <span class="material-symbols-outlined">publish</span>
+          Publicar Canvis
+        </button>
+      </div>
+
+      <!-- Articles List -->
+      <div class="bg-surface-container border border-outline-variant/35 rounded-3xl overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-outline-variant/30 bg-surface-container-high text-xs uppercase font-label-md tracking-wider text-secondary">
+                <th class="p-6">Notícia</th>
+                <th class="p-6">Categoría</th>
+                <th class="p-6">Data</th>
+                <th class="p-6">Estat</th>
+                <th class="p-6 text-right">Accions</th>
+              </tr>
+            </thead>
+            <tbody id="articles-list-body" class="divide-y divide-outline-variant/20 font-body-md">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+        <div id="no-articles-msg" class="p-12 text-center text-on-surface-variant hidden">
+          <span class="material-symbols-outlined text-4xl text-outline mb-2">newspaper</span>
+          <p>No hi ha notícies creades. Comença per crear-ne una de nova!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. FORM VIEW (Initially Hidden) -->
+    <div id="form-view" class="hidden flex-col gap-8 w-full">
+      <div class="flex items-center gap-4">
+        <button 
+          id="btn-back-to-list"
+          class="w-10 h-10 rounded-full border border-outline-variant/65 flex items-center justify-center text-secondary hover:bg-surface-container transition-all active:scale-90"
+        >
+          <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <div>
+          <h1 id="form-title" class="font-display-lg text-2xl sm:text-3xl font-extrabold text-on-surface">Nova Notícia</h1>
+          <p class="font-body-md text-on-surface-variant text-sm">Emplena els camps bilingües de la publicació</p>
+        </div>
+      </div>
+
+      <form id="article-form" class="bg-surface-container border border-outline-variant/35 rounded-3xl p-6 sm:p-10 flex flex-col gap-8 shadow">
+        
+        <!-- Language Switcher Tabs -->
+        <div class="flex border-b border-outline-variant/30">
+          <button 
+            type="button" 
+            id="tab-ca" 
+            class="px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-primary text-primary transition-all"
+            onclick="switchLangTab('ca')"
+          >
+            Català (CA)
+          </button>
+          <button 
+            type="button" 
+            id="tab-es" 
+            class="px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-transparent text-secondary hover:text-primary transition-all"
+            onclick="switchLangTab('es')"
+          >
+            Castellano (ES)
+          </button>
+        </div>
+
+        <input type="hidden" id="field-id" />
+
+        <!-- CA SECTION -->
+        <div id="section-ca" class="flex flex-col gap-6">
+          <div class="flex flex-col gap-1.5">
+            <label for="field-title_ca" class="font-label-md text-sm font-semibold text-on-surface">Títol de la notícia (CA)</label>
+            <input type="text" id="field-title_ca" required class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-1.5">
+              <label for="field-category_ca" class="font-label-md text-sm font-semibold text-on-surface">Categoría (CA)</label>
+              <input type="text" id="field-category_ca" required placeholder="Activitats, Història, Urbanisme..." class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="field-readTime_ca" class="font-label-md text-sm font-semibold text-on-surface">Temps de Lectura (CA)</label>
+              <input type="text" id="field-readTime_ca" required placeholder="4 min de lectura" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="field-description_ca" class="font-label-md text-sm font-semibold text-on-surface">Descripció curta (CA)</label>
+            <textarea id="field-description_ca" required rows="2" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"></textarea>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="field-alt_ca" class="font-label-md text-sm font-semibold text-on-surface">Alt de la Imatge (CA)</label>
+            <input type="text" id="field-alt_ca" required placeholder="Descripció de la imatge de portada" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="field-content_ca" class="font-label-md text-sm font-semibold text-on-surface">Cos de la Notícia (CA)</label>
+            <span class="text-xs text-outline mb-1">Separa els paràgrafs fent un doble salt de línia (Enter dues vegades).</span>
+            <textarea id="field-content_ca" required rows="10" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-y font-body-md"></textarea>
+          </div>
+        </div>
+
+        <!-- ES SECTION (Initially Hidden) -->
+        <div id="section-es" class="hidden flex flex-col gap-6">
+          <div class="flex flex-col gap-1.5">
+            <label for="field-title_es" class="font-label-md text-sm font-semibold text-on-surface">Título de la noticia (ES)</label>
+            <input type="text" id="field-title_es" required class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-1.5">
+              <label for="field-category_es" class="font-label-md text-sm font-semibold text-on-surface">Categoría (ES)</label>
+              <input type="text" id="field-category_es" required placeholder="Actividades, Historia, Urbanismo..." class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="field-readTime_es" class="font-label-md text-sm font-semibold text-on-surface">Tiempo de Lectura (ES)</label>
+              <input type="text" id="field-readTime_es" required placeholder="4 min de lectura" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="field-description_es" class="font-label-md text-sm font-semibold text-on-surface">Descripción corta (ES)</label>
+            <textarea id="field-description_es" required rows="2" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"></textarea>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="field-alt_es" class="font-label-md text-sm font-semibold text-on-surface">Alt de la Imagen (ES)</label>
+            <input type="text" id="field-alt_es" required placeholder="Descripción de la imagen de portada" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="field-content_es" class="font-label-md text-sm font-semibold text-on-surface">Cuerpo de la Noticia (ES)</label>
+            <span class="text-xs text-outline mb-1">Separa los párrafos haciendo un doble salto de línea (Enter dos veces).</span>
+            <textarea id="field-content_es" required rows="10" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-y font-body-md"></textarea>
+          </div>
+        </div>
+
+        <hr class="border-outline-variant/30" />
+
+        <!-- SHARED FIELDS SECTION -->
+        <div class="flex flex-col gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-1.5">
+              <label for="field-date" class="font-label-md text-sm font-semibold text-on-surface">Data de Publicació</label>
+              <input type="date" id="field-date" required class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="field-image" class="font-label-md text-sm font-semibold text-on-surface">URL de la Imatge Portada</label>
+              <input type="url" id="field-image" required placeholder="https://ejemplo.com/imagen.jpg" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-1.5">
+              <label for="field-slug_ca" class="font-label-md text-sm font-semibold text-on-surface">Ruta / Slug (CA)</label>
+              <input type="text" id="field-slug_ca" required placeholder="titol-noticia-catala" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="field-slug_es" class="font-label-md text-sm font-semibold text-on-surface">Ruta / Slug (ES)</label>
+              <input type="text" id="field-slug_es" required placeholder="titulo-noticia-castellano" class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
+            </div>
+          </div>
+          <div class="flex items-center gap-3 py-2">
+            <input type="checkbox" id="field-featured" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer" />
+            <label for="field-featured" class="font-label-md text-sm font-bold text-on-surface cursor-pointer select-none">Notícia destacada (Apareix a dalt de tot)</label>
+          </div>
+        </div>
+
+        <!-- Submit actions -->
+        <div class="flex justify-end items-center gap-4 mt-4">
+          <button 
+            type="button" 
+            id="btn-cancel"
+            class="border border-outline-variant/65 text-on-surface-variant hover:bg-surface-container-high px-8 py-3.5 rounded-xl font-label-md font-bold transition-all active:scale-95 text-sm"
+          >
+            Cancel·lar
+          </button>
+          <button 
+            type="submit" 
+            id="btn-save"
+            class="bg-primary hover:bg-primary-container text-white px-10 py-3.5 rounded-xl font-label-md font-bold transition-all active:scale-95 text-sm shadow flex items-center gap-2"
+          >
+            Desar Notícia
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </main>
+  
+  <Footer lang="ca" />
+</Layout>
+
+<script>
+  // SUPABASE CLIENT INITIALIZATION DYNAMICALLY ON THE BROWSER
+  import { createClient } from '@supabase/supabase-js';
+
+  // Read environment variables loaded dynamically from Astro configuration
+  const supabaseUrl = (import.meta as any).env.SUPABASE_URL || '';
+  const supabaseKey = (import.meta as any).env.SUPABASE_ANON_KEY || '';
+  
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  // Vercel deployment webhook endpoint (if configured)
+  const vercelDeployUrl = (import.meta as any).env.VERCEL_DEPLOY_HOOK || '';
+
+  // Elements references
+  const viewLogin = document.getElementById('login-view')!;
+  const viewDashboard = document.getElementById('dashboard-view')!;
+  const viewForm = document.getElementById('form-view')!;
+
+  const loginForm = document.getElementById('login-form') as HTMLFormElement;
+  const articleForm = document.getElementById('article-form') as HTMLFormElement;
+  const articlesListBody = document.getElementById('articles-list-body')!;
+  const noArticlesMsg = document.getElementById('no-articles-msg')!;
+
+  const fieldId = document.getElementById('field-id') as HTMLInputElement;
+  const fieldTitleCa = document.getElementById('field-title_ca') as HTMLInputElement;
+  const fieldTitleEs = document.getElementById('field-title_es') as HTMLInputElement;
+  const fieldCategoryCa = document.getElementById('field-category_ca') as HTMLInputElement;
+  const fieldCategoryEs = document.getElementById('field-category_es') as HTMLInputElement;
+  const fieldDate = document.getElementById('field-date') as HTMLInputElement;
+  const fieldReadTimeCa = document.getElementById('field-read_time_ca') as HTMLInputElement || document.getElementById('field-readTime_ca') as HTMLInputElement;
+  const fieldReadTimeEs = document.getElementById('field-read_time_es') as HTMLInputElement || document.getElementById('field-readTime_es') as HTMLInputElement;
+  const fieldImage = document.getElementById('field-image') as HTMLInputElement;
+  const fieldAltCa = document.getElementById('field-alt_ca') as HTMLInputElement;
+  const fieldAltEs = document.getElementById('field-alt_es') as HTMLInputElement;
+  const fieldSlugCa = document.getElementById('field-slug_ca') as HTMLInputElement;
+  const fieldSlugEs = document.getElementById('field-slug_es') as HTMLInputElement;
+  const fieldDescriptionCa = document.getElementById('field-description_ca') as HTMLTextAreaElement;
+  const fieldDescriptionEs = document.getElementById('field-description_es') as HTMLTextAreaElement;
+  const fieldContentCa = document.getElementById('field-content_ca') as HTMLTextAreaElement;
+  const fieldContentEs = document.getElementById('field-content_es') as HTMLTextAreaElement;
+  const fieldFeatured = document.getElementById('field-featured') as HTMLInputElement;
+
+  const btnNewArticle = document.getElementById('btn-new-article')!;
+  const btnLogout = document.getElementById('btn-logout')!;
+  const btnCancel = document.getElementById('btn-cancel')!;
+  const btnDeploy = document.getElementById('btn-deploy')!;
+  const btnBackToList = document.getElementById('btn-back-to-list')!;
+
+  // Toast Function
+  const showToast = (message: string, isError = false) => {
+    const toast = document.getElementById('toast')!;
+    const toastMsg = document.getElementById('toast-message')!;
+    const toastIcon = document.getElementById('toast-icon')!;
+
+    toastMsg.textContent = message;
+    if (isError) {
+      toast.classList.add('bg-error', 'text-on-error');
+      toast.classList.remove('bg-inverse-surface', 'text-inverse-on-surface');
+      toastIcon.textContent = 'error';
+    } else {
+      toast.classList.remove('bg-error', 'text-on-error');
+      toast.classList.add('bg-inverse-surface', 'text-inverse-on-surface');
+      toastIcon.textContent = 'check_circle';
+    }
+
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0');
+    }, 4000);
+  };
+
+  // Check initial user state
+  const checkUserSession = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      showDashboard();
+    } else {
+      showLogin();
+    }
+  };
+
+  const showLogin = () => {
+    viewLogin.classList.remove('hidden');
+    viewDashboard.classList.add('hidden');
+    viewForm.classList.add('hidden');
+  };
+
+  const showDashboard = () => {
+    viewLogin.classList.add('hidden');
+    viewDashboard.classList.remove('hidden');
+    viewForm.classList.add('hidden');
+    loadArticles();
+  };
+
+  const showForm = (title = 'Nova Notícia') => {
+    document.getElementById('form-title')!.textContent = title;
+    viewLogin.classList.add('hidden');
+    viewDashboard.classList.add('hidden');
+    viewForm.classList.remove('hidden');
+    switchLangTab('ca');
+  };
+
+  // Handle Login
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      showToast('Error en iniciar sessió: ' + error.message, true);
+    } else {
+      showToast('Sessió iniciada correctament!');
+      showDashboard();
+    }
+  });
+
+  // Handle Logout
+  btnLogout.addEventListener('click', async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      showToast('Error al tancar sessió', true);
+    } else {
+      showToast('Sessió tancada');
+      showLogin();
+    }
+  });
+
+  // Load news from Supabase
+  const loadArticles = async () => {
+    articlesListBody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-secondary">Carregant notícies...</td></tr>';
+    
+    const { data, error } = await supabase
+      .from('noticies')
+      .select('*')
+      .order('date', { ascending: false });
+
+    if (error) {
+      showToast('Error carregant notícies: ' + error.message, true);
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      articlesListBody.innerHTML = '';
+      noArticlesMsg.classList.remove('hidden');
+      return;
+    }
+
+    noArticlesMsg.classList.add('hidden');
+    articlesListBody.innerHTML = '';
+
+    data.forEach((article) => {
+      const row = document.createElement('tr');
+      row.className = 'hover:bg-surface-container-low transition-colors';
+      row.innerHTML = `
+        <td class="p-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg overflow-hidden border border-outline-variant/30 flex-shrink-0 bg-surface-container-high">
+              <img src="${article.image || '/og-image.png'}" class="w-full h-full object-cover" alt="" />
+            </div>
+            <div>
+              <div class="font-bold text-on-surface text-sm line-clamp-1">${article.title_ca}</div>
+              <div class="text-xs text-outline line-clamp-1">${article.description_ca || ''}</div>
+            </div>
+          </div>
+        </td>
+        <td class="p-6 text-sm text-on-surface-variant font-medium">${article.category_ca}</td>
+        <td class="p-6 text-sm text-outline-variant font-medium">${article.date}</td>
+        <td class="p-6 text-sm">
+          <span class="${article.featured ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'} px-3 py-1 rounded-full text-xs font-semibold uppercase">
+            ${article.featured ? 'Destacada' : 'Normal'}
+          </span>
+        </td>
+        <td class="p-6 text-right">
+          <div class="flex items-center justify-end gap-3">
+            <button class="btn-edit text-primary hover:bg-primary/5 p-2 rounded-full transition-all" data-id="${article.id}" title="Editar">
+              <span class="material-symbols-outlined text-[20px] pointer-events-none">edit</span>
+            </button>
+            <button class="btn-delete text-error hover:bg-error/5 p-2 rounded-full transition-all" data-id="${article.id}" title="Eliminar">
+              <span class="material-symbols-outlined text-[20px] pointer-events-none">delete</span>
+            </button>
+          </div>
+        </td>
+      `;
+      articlesListBody.appendChild(row);
+    });
+
+    // Wire up dynamic click handlers
+    document.querySelectorAll('.btn-edit').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const id = (e.target as HTMLElement).getAttribute('data-id');
+        editArticle(id);
+      });
+    });
+
+    document.querySelectorAll('.btn-delete').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const id = (e.target as HTMLElement).getAttribute('data-id');
+        if (confirm('Estàs segur que vols eliminar aquesta notícia?')) {
+          deleteArticle(id);
+        }
+      });
+    });
+  };
+
+  // Helper to generate slugs
+  const generateSlug = (text: string) => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '') // remove special characters
+      .replace(/[\s_]+/g, '-')   // replace spaces and underscores with hyphens
+      .replace(/-+/g, '-');      // remove duplicate hyphens
+  };
+
+  // Auto generate slugs as the user types titles
+  fieldTitleCa.addEventListener('input', () => {
+    if (!fieldId.value) { // only autogenerate for new articles
+      fieldSlugCa.value = generateSlug(fieldTitleCa.value);
+    }
+  });
+
+  fieldTitleEs.addEventListener('input', () => {
+    if (!fieldId.value) {
+      fieldSlugEs.value = generateSlug(fieldTitleEs.value);
+    }
+  });
+
+  // Click on "New Article"
+  btnNewArticle.addEventListener('click', () => {
+    articleForm.reset();
+    fieldId.value = '';
+    fieldDate.value = new Date().toISOString().split('T')[0];
+    showForm('Nova Notícia');
+  });
+
+  btnCancel.addEventListener('click', showDashboard);
+  btnBackToList.addEventListener('click', showDashboard);
+
+  // Edit action
+  const editArticle = async (id: any) => {
+    showToast('Carregant dades...');
+    const { data, error } = await supabase
+      .from('noticies')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      showToast('Error en carregar les dades: ' + error.message, true);
+      return;
+    }
+
+    // Populate form fields
+    fieldId.value = data.id;
+    fieldTitleCa.value = data.title_ca || '';
+    fieldTitleEs.value = data.title_es || '';
+    fieldCategoryCa.value = data.category_ca || '';
+    fieldCategoryEs.value = data.category_es || '';
+    fieldDate.value = data.date || '';
+    fieldReadTimeCa.value = data.readTime_ca || '';
+    fieldReadTimeEs.value = data.readTime_es || '';
+    fieldImage.value = data.image || '';
+    fieldAltCa.value = data.alt_ca || '';
+    fieldAltEs.value = data.alt_es || '';
+    fieldSlugCa.value = data.slug_ca || '';
+    fieldSlugEs.value = data.slug_es || '';
+    fieldDescriptionCa.value = data.description_ca || '';
+    fieldDescriptionEs.value = data.description_es || '';
+    fieldContentCa.value = Array.isArray(data.content_ca) ? data.content_ca.join('\n\n') : (data.content_ca || '');
+    fieldContentEs.value = Array.isArray(data.content_es) ? data.content_es.join('\n\n') : (data.content_es || '');
+    fieldFeatured.checked = !!data.featured;
+
+    showForm('Editar Notícia');
+  };
+
+  // Delete action
+  const deleteArticle = async (id: any) => {
+    const { error } = await supabase
+      .from('noticies')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      showToast('Error en eliminar: ' + error.message, true);
+    } else {
+      showToast('Notícia eliminada!');
+      loadArticles();
+    }
+  };
+
+  // Form Submit (Save / Edit)
+  articleForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    showToast('Desant notícia...');
+
+    const id = fieldId.value;
+    const payload = {
+      title_ca: fieldTitleCa.value,
+      title_es: fieldTitleEs.value,
+      category_ca: fieldCategoryCa.value,
+      category_es: fieldCategoryEs.value,
+      date: fieldDate.value,
+      readTime_ca: fieldReadTimeCa.value,
+      readTime_es: fieldReadTimeEs.value,
+      image: fieldImage.value,
+      alt_ca: fieldAltCa.value,
+      alt_es: fieldAltEs.value,
+      slug_ca: fieldSlugCa.value,
+      slug_es: fieldSlugEs.value,
+      description_ca: fieldDescriptionCa.value,
+      description_es: fieldDescriptionEs.value,
+      content_ca: fieldContentCa.value,
+      content_es: fieldContentEs.value,
+      featured: fieldFeatured.checked
+    };
+
+    let response;
+    if (id) {
+      response = await supabase
+        .from('noticies')
+        .update(payload)
+        .eq('id', id);
+    } else {
+      response = await supabase
+        .from('noticies')
+        .insert([payload]);
+    }
+
+    if (response.error) {
+      showToast('Error en desar la notícia: ' + response.error.message, true);
+    } else {
+      showToast('Notícia desada correctament!');
+      showDashboard();
+    }
+  });
+
+  // Vercel Deploy webhook trigger
+  btnDeploy.addEventListener('click', async () => {
+    if (!vercelDeployUrl) {
+      showToast('El Webhook de publicació no està configurat a les variables d\'entorn.', true);
+      return;
+    }
+
+    showToast('Iniciant publicació a Vercel...');
+    btnDeploy.setAttribute('disabled', 'true');
+
+    try {
+      const response = await fetch(vercelDeployUrl, { method: 'POST' });
+      if (response.ok) {
+        showToast('Publicació iniciada! La web es reconstruirà en uns 2 minuts.');
+      } else {
+        showToast('Error en cridar al webhook de Vercel.', true);
+      }
+    } catch (err) {
+      showToast('Error de xarxa en connectar amb Vercel.', true);
+    } finally {
+      btnDeploy.removeAttribute('disabled');
+    }
+  });
+
+  // Switch tabs
+  (window as any).switchLangTab = (lang: 'ca' | 'es') => {
+    const tabCa = document.getElementById('tab-ca')!;
+    const tabEs = document.getElementById('tab-es')!;
+    const secCa = document.getElementById('section-ca')!;
+    const secEs = document.getElementById('section-es')!;
+
+    if (lang === 'ca') {
+      tabCa.className = 'px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-primary text-primary transition-all';
+      tabEs.className = 'px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-transparent text-secondary hover:text-primary transition-all';
+      secCa.classList.remove('hidden');
+      secEs.classList.add('hidden');
+    } else {
+      tabEs.className = 'px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-primary text-primary transition-all';
+      tabCa.className = 'px-6 py-3.5 font-label-md font-bold text-sm border-b-2 border-transparent text-secondary hover:text-primary transition-all';
+      secEs.classList.remove('hidden');
+      secCa.classList.add('hidden');
+    }
+  };
+
+  // Start initialization
+  checkUserSession();
+</script>

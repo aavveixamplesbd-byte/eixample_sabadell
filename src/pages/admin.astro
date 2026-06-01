@@ -289,7 +289,7 @@ import Footer from '../components/Footer.astro';
   const supabaseUrl = (import.meta as any).env.SUPABASE_URL || '';
   const supabaseKey = (import.meta as any).env.SUPABASE_ANON_KEY || '';
   
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
   // Vercel deployment webhook endpoint (if configured)
   const vercelDeployUrl = (import.meta as any).env.VERCEL_DEPLOY_HOOK || '';
@@ -354,6 +354,11 @@ import Footer from '../components/Footer.astro';
 
   // Check initial user state
   const checkUserSession = async () => {
+    if (!supabase) {
+      showToast('Configuració de Supabase pendent en les variables d\'entorn.', true);
+      showLogin();
+      return;
+    }
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
       showDashboard();
@@ -386,6 +391,10 @@ import Footer from '../components/Footer.astro';
   // Handle Login
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (!supabase) {
+      showToast('Configuració de Supabase pendent.', true);
+      return;
+    }
     const email = (document.getElementById('email') as HTMLInputElement).value;
     const password = (document.getElementById('password') as HTMLInputElement).value;
 
@@ -400,6 +409,7 @@ import Footer from '../components/Footer.astro';
 
   // Handle Logout
   btnLogout.addEventListener('click', async () => {
+    if (!supabase) return;
     const { error } = await supabase.auth.signOut();
     if (error) {
       showToast('Error al tancar sessió', true);

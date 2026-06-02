@@ -6,20 +6,55 @@ const { lang = 'ca' } = Astro.props;
 
 const t = {
   ca: {
-    title: "Cronologia Industrial",
-    e1Title: "L'Alba del Vapor",
-    e1Body: "L'arribada del ferrocarril i les primeres màquines de vapor transformen l'Eixample en un formiguer d'activitat. Les primeres \"Vapors\" comencen a dominar l'horitzó.",
-    e2Title: "L'Edat d'Or Tèxtil",
-    e2Body: "Sabadell esdevé la \"Manchester Catalana\". Els telers no descansen i l'Eixample creix seguint un traçat ortogonal que defineix la seva identitat moderna."
+    title: "Cronologia Industrial"
   },
   es: {
-    title: "Cronología Industrial",
-    e1Title: "El Alba del Vapor",
-    e1Body: "La llegada del ferrocarril y las primeras máquinas de vapor transforman el Eixample en un hervidero de actividad. Los primeros \"Vapores\" empiezan a dominar el horizonte.",
-    e2Title: "La Edad de Oro Textil",
-    e2Body: "Sabadell se convierte en la \"Manchester Catalana\". Los telares no descansan y el Eixample crece siguiendo un trazado ortogonal que define su identidad moderna."
+    title: "Cronología Industrial"
   }
 }[lang];
+
+const events = [
+  {
+    years: "1855",
+    title_ca: "Arribada del Ferrocarril",
+    title_es: "Llegada del Ferrocarril",
+    body_ca: "La inauguració de la línia de tren de Barcelona a Saragossa crea una barrera física a l'est del nucli antic. Aquest límit obliga a planificar l'expansió de la ciutat, marcant l'inici conceptual de l'Eixample per donar cabuda a noves fàbriques que necessitaven carbó transportat per les vies.",
+    body_es: "La inauguración de la línea de tren de Barcelona a Zaragoza crea una barrera física al este del núcleo antiguo. Este límite obliga a planificar la expansión de la ciudad, marcando el inicio conceptual de L'Eixample para dar cabida a nuevas fábricas que necesitaban carbón transportado por las vías.",
+    image: "/train_arrival_1855.png"
+  },
+  {
+    years: "1880 - 1920",
+    title_ca: "Consolidació de la Quadrícula",
+    title_es: "Consolidación de la Cuadrícula",
+    body_ca: "Es tracen els carrers perpendiculars i paral·lels a les vies de comunicació principals. És l'època daurada del tèxtil laner; el barri s'omple de vapors i cases angleses. L'Eixample es consolida com el motor productiu de la ciutat.",
+    body_es: "Se trazan las calles perpendiculares y paralelas a las vías de comunicación principales. Es la época dorada del textil lanero; el barrio se llena de vapores y casas inglesas. L'Eixample se consolida como el motor productivo de la ciudad.",
+    image: "/vapor_buxeda_1880.png"
+  },
+  {
+    years: "1950 - 1970",
+    title_ca: "Densificació i Blocs de Pisos",
+    title_es: "Densificación y Bloques de Pisos",
+    body_ca: "Sabadell experimenta una explosió demogràfica a causa de la immigració procedent de la resta d'Espanya (especialment Andalusia i Múrcia). La tipologia de casa unifamiliar ja no és suficient. S'enderroquen antigues cases angleses per construir blocs de pisos de diverses plantes, alterant l'homogeneïtat visual original del barri.",
+    body_es: "Sabadell experimenta una explosión demográfica debido a la inmigración procedente del resto de España (especialmente Andalucía y Murcia). La tipología de casa unifamiliar ya no es suficiente. Se derriban antiguas casas inglesas para construir bloques de pisos de varias plantas, alterando la homogeneidad visual original del barrio.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStVsZbcMDYXFxMu4VA-mFR48fvbF1IczF27rw4cvvm4UsnnH8shZRrMSs&s=10"
+  },
+  {
+    years: "1973 - 1990",
+    title_ca: "Soterrament i Creació de la Gran Via",
+    title_es: "Soterramiento y Creación de la Gran Vía",
+    body_ca: "Es cobreixen les vies del tren de RENFE, creant la Gran Via, una artèria massiva per al trànsit rodat que creua i vertebra l'Eixample. Això canvia la dinàmica del barri, convertint una frontera ferroviària en una frontera d'asfalt i trànsit.",
+    body_es: "Se cubren las vías del tren de RENFE, creando la Gran Vía, una arteria masiva para el tráfico rodado que cruza y vertebra el Eixample. Esto cambia la dinámica del barrio, convirtiendo una frontera ferroviaria en una frontera de asfalto y tráfico.",
+    image: "https://i0.wp.com/historiadesabadell.com/wp-content/uploads/2025/02/GhBTbO-XsAA85ov.jpg?w=720&ssl=1"
+  },
+  {
+    years: lang === 'ca' ? 'Segle XXI' : 'Siglo XXI',
+    title_ca: "Desindustrialització i Reconversió",
+    title_es: "Desindustrialización y Reconversión",
+    body_ca: "El tancament definitiu de les grans fàbriques tèxtils dóna pas a una nova etapa. Els antics vapors (com el Vapor Buxeda Vell o Llonch) es rehabiliten com a equipaments municipals, universitats, centres d'empreses o s'enderroquen parcialment per obrir noves places públiques i lofts residencials.",
+    body_es: "El cierre definitivo de las grandes fábricas textiles da paso a una nueva etapa. Los antiguos vapores (como el Vapor Buxeda Vell o Llonch) se rehabilitan como equipamientos municipales, universidades, centros de empresas o se derriban parcialmente para abrir nuevas plazas públicas y lofts residenciales.",
+    image: "https://www.isabadell.cat/app/uploads/sites/36/2023/12/231213-Vapor-Buxeda-Vell.jpg"
+  }
+];
 ---
 
 <section class="py-24 bg-surface-container-lowest overflow-hidden">
@@ -33,43 +68,46 @@ const t = {
       {/* Central Line for desktop */}
       <div class="absolute left-1/2 -translate-x-1/2 w-0.5 h-full industrial-line hidden md:block z-0"></div>
       
-      {/* Event 1 */}
-      <div class="relative mb-24 md:flex items-center justify-between w-full">
-        <div class="md:w-[45%] mb-8 md:mb-0 order-1 md:order-1 text-right z-10">
-          <span class="font-display-lg text-3xl text-primary opacity-50 block mb-2 font-bold">1850 - 1880</span>
-          <h3 class="font-headline-md text-headline-md text-on-surface mb-3 tracking-tight">{t.e1Title}</h3>
-          <p class="text-on-surface-variant leading-relaxed font-body-md text-base">
-            {t.e1Body}
-          </p>
-        </div>
-        <div class="z-20 absolute left-1/2 -translate-x-1/2 bg-primary w-4 h-4 rounded-full border-4 border-surface-container-lowest hidden md:block"></div>
-        <div class="md:w-[45%] order-2 md:order-2 z-10">
-          <img 
-            alt="Antique factory gears" 
-            class="rounded-xl shadow-lg w-full aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-700" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC22i1ndTX4SrfJGX-KDmtKkgVdzSV559uFnyYHXCPoNptc8CYHGwvmt34jJV2Q8Dz3hJQ2rrMLg_jpWECyt04XdPIaQ3JkDp7tBGJv0k_ClSsNOGIe1-Gg8K1WbRYv6BaNUthz8A2fvENZYh7ECO18AgOEAhr85U1M2snajex_idHSpo9kpweRVlTjxpnEijBQqup-__afKFfMJUcRWYRgJhZQPOUk73auL4OYg9XGcWoYyJ2zVt_B9CHaXzKbHrngoJyftmLDLBgD"
-          />
-        </div>
-      </div>
-      
-      {/* Event 2 */}
-      <div class="relative mb-24 md:flex items-center justify-between w-full">
-        <div class="md:w-[45%] mb-8 md:mb-0 order-1 md:order-2 text-left z-10">
-          <span class="font-display-lg text-3xl text-primary opacity-50 block mb-2 font-bold">1890 - 1920</span>
-          <h3 class="font-headline-md text-headline-md text-on-surface mb-3 tracking-tight">{t.e2Title}</h3>
-          <p class="text-on-surface-variant leading-relaxed font-body-md text-base">
-            {t.e2Body}
-          </p>
-        </div>
-        <div class="z-20 absolute left-1/2 -translate-x-1/2 bg-primary w-4 h-4 rounded-full border-4 border-surface-container-lowest hidden md:block"></div>
-        <div class="md:w-[45%] order-2 md:order-1 z-10">
-          <img 
-            alt="Textile factory looms" 
-            class="rounded-xl shadow-lg w-full aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-700" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuINN-nK-qt0E5NIQrVCsTccN8Ic_tdrp3mJxbtt4gfi_pR6wuyMlXWzNeL1Xh1V3hV84cPqiMjFeRQEmkqjFRgHdyIcqETrS_gqQF-SFnbop6b4L-W5mjvqJqv1CG3J0_0jzPb9QD3ugPXihoYLFoyLXyOAcMoOhT2O6F-qAC8rrOuj8KmLn37lx16NUN7WdPLslpkng-UaIumWREEDGLmSdQXmNvXIun4Y0hvwpmUfaQJFEbsZ6zVg1bz1J_5bdpjI-24dfEPU2x"
-          />
-        </div>
-      </div>
+      {
+        events.map((event, idx) => {
+          const isEven = idx % 2 === 0;
+          const title = lang === 'ca' ? event.title_ca : event.title_es;
+          const body = lang === 'ca' ? event.body_ca : event.body_es;
+
+          return (
+            <div class="relative mb-24 md:flex items-center justify-between w-full">
+              {/* Text side */}
+              <div class={`md:w-[45%] mb-8 md:mb-0 z-10 ${
+                isEven 
+                  ? 'order-1 md:order-1 text-right' 
+                  : 'order-1 md:order-2 text-left'
+              }`}>
+                <span class="font-display-lg text-3xl text-primary opacity-50 block mb-2 font-bold">{event.years}</span>
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-3 tracking-tight">{title}</h3>
+                <p class="text-on-surface-variant leading-relaxed font-body-md text-base">
+                  {body}
+                </p>
+              </div>
+
+              {/* Central dot */}
+              <div class="z-20 absolute left-1/2 -translate-x-1/2 bg-primary w-4 h-4 rounded-full border-4 border-surface-container-lowest hidden md:block"></div>
+              
+              {/* Image side */}
+              <div class={`md:w-[45%] z-10 ${
+                isEven 
+                  ? 'order-2 md:order-2' 
+                  : 'order-2 md:order-1'
+              }`}>
+                <img 
+                  alt={title} 
+                  class="rounded-xl shadow-lg w-full aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+                  src={event.image}
+                />
+              </div>
+            </div>
+          );
+        })
+      }
     </div>
   </div>
 </section>

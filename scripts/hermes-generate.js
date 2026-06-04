@@ -134,7 +134,10 @@ async function run() {
         "Comerç": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80"
       };
       imageUrl = unsplashFallbacks[activeTheme.category] || "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80";
-      console.log(`Imagen de fallback     // 1.5 Obtener noticias recientes de Supabase para evitar duplicidades
+      console.log(`Imagen de fallback seleccionada: ${imageUrl}`);
+    }
+
+    // 1.5 Obtener noticias recientes de Supabase para evitar duplicidades
     let recentArticlesContext = "Cap notícia publicada recentment o error en la cerca.";
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;

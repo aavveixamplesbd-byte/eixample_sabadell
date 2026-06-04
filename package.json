@@ -9,7 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "hermes:generate": "node scripts/hermes-generate.js",
+    "news:create": "node scripts/news-manual.js"
   },
   "dependencies": {
     "@astrojs/react": "^3.6.2",

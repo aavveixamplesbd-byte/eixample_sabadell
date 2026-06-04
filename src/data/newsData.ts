@@ -14,6 +14,90 @@ export interface Article {
 
 export const newsArticles: Article[] = [
   {
+    id: 15,
+    title: {
+      ca: "El Casal Pere Quart programa una quinzena d'espectacles de proximitat al juny: una oportunitat per al veïnat de l'Eixample",
+      es: "El Casal Pere Quart programa una quincena de espectáculos de proximidad en junio: una oportunidad para el vecindario del Eixample"
+    },
+    category: {
+      ca: "Cultura",
+      es: "Cultura"
+    },
+    date: "2026-06-04",
+    readTime: {
+      ca: "3 min de lectura",
+      es: "3 min de lectura"
+    },
+    image: "https://web.sabadell.cat/images/nadal/joves.jpg",
+    description: {
+      ca: "El Casal Pere Quart ofereix una àmplia programació cultural per al juny de 2026, amb teatre, música i espectacles familiars. Des de l'AVES valorem molt positivament l'oferta de proximitat, especialment per al veïnat de l'Eixample, que té aquest equipament a pocs minuts a peu.",
+      es: "El Casal Pere Quart ofrece una amplia programación cultural para junio de 2026, con teatro, música y espectáculos familiares. Desde la AVES valoramos muy positivamente la oferta de proximidad, especialmente para el vecindario del Eixample, que tiene este equipamiento a pocos minutos a pie."
+    },
+    alt: {
+      ca: "Fotografia de l'edifici del Casal Pere Quart, equipament cultural de Sabadell",
+      es: "Fotografía del edificio del Casal Pere Quart, equipamiento cultural de Sabadell"
+    },
+    slug: {
+      ca: "casal-pere-quart-programa-quinzena-espectacles-proximitat-juny-oportunitat-veinat-eixample",
+      es: "casal-pere-quart-programa-quincena-espectaculos-proximidad-junio-oportunidad-vecindario-eixample"
+    },
+    content: {
+      ca: [
+        "El Casal Pere Quart, situat al centre de Sabadell, presenta una programació vibrant per al mes de juny de 2026, amb propostes que van del teatre contemporani a la música en viu. L'equipament, gestionat per l'Ajuntament de Sabadell, s'ha consolidat com un espai de referència per a la cultura de proximitat, oferint espectacles a preus assequibles i, en molts casos, amb invitació gratuïta per a col·lectius específics.",
+        "Entre els actes destacats del mes de juny, el dijous 18 de juny tindrà lloc 'Inspirazioa', amb l'Orquestra d'Acordions de Sabadell i Gorka Hermosa, una proposta musical que fusiona l'acordió amb sons contemporanis. El diumenge 21 de juny es representa 'No passareu!', una obra de teatre que rememora el tràgic desenllaç de cinc milicianes que van defensar la legalitat republicana. I el dimecres 10 de juny, de 18.30 a 20 h, se celebren les sessions de benvinguda del 2026 al Casal Pere Quart.",
+        "A més, el Pati del Casal Pere Quart acollirà al llarg de l'estiu espectacles com 'Barberismes' (26 de juny), la 'Gala Lírica' (30 de juny) o el concert 'Jazz amb Històries', entre d'altres. Tota la programació es pot consultar a sabadellcultura.koobin.cat o a través de l'app Sincronitzats.",
+        "Des de l'Associació de Veïns de l'Eixample Sabadell (AVES), valorem molt positivament aquesta oferta. El Casal Pere Quart es troba a pocs minuts a peu del barri de l'Eixample, cosa que el converteix en un recurs cultural especialment accessible per al nostre veïnat. Animem a tots els veïns i veïnes a aprofitar aquesta programació de qualitat, assequible i, sobretot, de proximitat. La cultura és un dret i una eina fonamental per mantenir viu el nostre barri."
+      ],
+      es: [
+        "El Casal Pere Quart, situado en el centro de Sabadell, presenta una programación vibrante para el mes de junio de 2026, con propuestas que van del teatro contemporáneo a la música en vivo. El equipamiento, gestionado por el Ayuntamiento de Sabadell, se ha consolidado como un espacio de referencia para la cultura de proximidad, ofreciendo espectáculos a precios asequibles y, en muchos casos, con invitación gratuita para colectivos específicos.",
+        "Entre los actos destacados del mes de junio, el jueves 18 de junio tendrá lugar 'Inspirazioa', con la Orquestra d'Acordions de Sabadell y Gorka Hermosa, una propuesta musical que fusiona el acordeón con sonidos contemporáneos. El domingo 21 de junio se representa 'No passareu!', una obra de teatro que rememora el trágico desenlace de cinco milicianas que defendieron la legalidad republicana. Y el miércoles 10 de junio, de 18.30 a 20 h, se celebran las sesiones de bienvenida del 2026 en el Casal Pere Quart.",
+        "Además, el Pati del Casal Pere Quart acogerá a lo largo del verano espectáculos como 'Barberismes' (26 de junio), la 'Gala Lírica' (30 de junio) o el concierto 'Jazz amb Històries', entre otros. Toda la programación se puede consultar en sabadellcultura.koobin.cat o a través de la app Sincronitzats.",
+        "Desde la Asociación de Vecinos del Eixample Sabadell (AVES), valoramos muy positivamente esta oferta. El Casal Pere Quart se encuentra a pocos minutos a pie del barrio del Eixample, lo que lo convierte en un recurso cultural especialmente accesible para nuestro vecindario. Animamos a todos los vecinos y vecinas a aprovechar esta programación de calidad, asequible y, sobre todo, de proximidad. La cultura es un derecho y una herramienta fundamental para mantener vivo nuestro barrio."
+      ]
+    }
+  },
+  {
+    id: 14,
+    title: {
+      ca: "El Pati de la Filosa acull el primer cinefòrum veïnal de l'estiu",
+      es: "El Pati de la Filosa acoge el primer cinefòrum vecinal del verano"
+    },
+    category: {
+      ca: "Activitats",
+      es: "Actividades"
+    },
+    date: "2026-06-04",
+    readTime: {
+      ca: "3 min de lectura",
+      es: "3 min de lectura"
+    },
+    image: "https://web.sabadell.cat/images/nadal/joves.jpg",
+    description: {
+      ca: "L'AVES organitza un cicle de cinema a la fresca al parc de la Filosa, amb debat posterior. Comencem aquest divendres amb una proposta que reivindica el passat tèxtil del barri.",
+      es: "La AVES organiza un ciclo de cine al aire libre en el parque de la Filosa, con debate posterior. Empezamos este viernes con una propuesta que reivindica el pasado textil del barrio."
+    },
+    alt: {
+      ca: "Imatge del Pati de la Filosa amb cadires i pantalla de cinema a la fresca, ambientat al capvespre",
+      es: "Imagen del Pati de la Filosa con sillas y pantalla de cine al aire libre, ambientado al atardecer"
+    },
+    slug: {
+      ca: "el-pati-de-la-filosa-acull-el-primer-cineforum-veinal-de-lestiu",
+      es: "el-pati-de-la-filosa-acoge-el-primer-cineforum-vecinal-del-verano"
+    },
+    content: {
+      ca: [
+        "El barri de l'Eixample Sabadell es prepara per viure un estiu de cultura de proximitat gràcies a la nova programació impulsada per l'Associació de Veïns AVES. A partir d’aquest divendres 10 de juliol, el Pati de la Filosa —aquell espai verd que tots coneixem entre l’avinguda de Barberà i el carrer de Calders— es convertirà en una sala de cinema a l’aire lliure. La primera sessió, a les 21.30 h, projectarà un documental sobre les antigues colònies tèxtils de Sabadell, amb un debat posterior conduït per historiadors locals. Una oportunitat per recordar les fàbriques de filatura que van donar vida al nostre barri.",
+        "El cicle, que s'allargarà cada divendres fins a finals d'agost, combinarà pel·lícules, documentals i curts amb un marcat accent social i reivindicatiu. La proposta ha estat ben rebuda pels veïns, especialment per aquells que viuen als voltants del carrer de Brutau i la Gran Via, que podran gaudir d’una activitat cultural sense sortir del barri. L’AVES ha habilitat un espai amb cadires i coixins, i es recomana portar manta per a les nits més fresques. A més, durant les projeccions hi haurà servei de barraques gestionat per entitats locals, amb begudes i productes de comerç just.",
+        "Les novetats culturals no s’aturen aquí. El Casal del Barri, al carrer de Calders, acollirà aquest dissabte 11 de juliol un taller de dansa contemporània per a totes les edats, i diumenge tindrà lloc una assemblea veïnal oberta per decidir les properes activitats de l’agenda d’estiu. Des de l’AVES animen a participar-hi: «Volem que el barri continuï sent un espai viu, de trobada i de lluita pels nostres drets», explica la seva presidenta. Per a més informació, es pot consultar el tauler d’anuncis del Casal o seguir les xarxes socials de l’associació. Un estiu més, l’Eixample Sabadell es reivindica com un barri amb identitat pròpia."
+      ],
+      es: [
+        "El barrio del Eixample Sabadell se prepara para vivir un verano de cultura de proximidad gracias a la nueva programación impulsada por la Asociación de Vecinos AVES. A partir de este viernes 10 de julio, el Pati de la Filosa —aquel espacio verde que todos conocemos entre la avenida de Barberà y la calle de Calders— se convertirá en una sala de cine al aire libre. La primera sesión, a las 21.30 h, proyectará un documental sobre las antiguas colonias textiles de Sabadell, con un debate posterior conducido por historiadores locales. Una oportunidad para recordar las fábricas de hilatura que dieron vida a nuestro barrio.",
+        "El ciclo, que se alargará cada viernes hasta finales de agosto, combinará películas, documentales y cortos con un marcado acento social y reivindicativo. La propuesta ha sido bien recibida por los vecinos, especialmente por aquellos que viven en los alrededores de la calle de Brutau y la Gran Vía, que podrán disfrutar de una actividad cultural sin salir del barrio. La AVES ha habilitado un espacio con sillas y cojines, y se recomienda traer manta para las noches más frescas. Además, durante las proyecciones habrá servicio de casetas gestionado por entidades locales, con bebidas y productos de comercio justo.",
+        "Las novedades culturales no se detienen aquí. El Casal del Barrio, en la calle de Calders, acogerá este sábado 11 de julio un taller de danza contemporánea para todas las edades, y el domingo tendrá lugar una asamblea vecinal abierta para decidir las próximas actividades de la agenda de verano. Desde la AVES animan a participar: «Queremos que el barrio siga siendo un espacio vivo, de encuentro y de lucha por nuestros derechos», explica su presidenta. Para más información, se puede consultar el tablón de anuncios del Casal o seguir las redes sociales de la asociación. Un verano más, el Eixample Sabadell se reivindica como un barrio con identidad propia."
+      ]
+    }
+  },
+  {
     id: 1,
     title: {
       ca: "Digitalització de l'Arxiu Industrial: Un viatge al passat",
@@ -382,5 +466,50 @@ export const newsArticles: Article[] = [
       ]
     },
     featured: true
+  },
+  {
+    id: 16,
+    title: {
+      ca: "El Caprabo històric de l'avinguda de Barberà tanca: l'Eixample perd un referent comercial",
+      es: "El Caprabo histórico de la avenida de Barberà cierra: el Eixample pierde un referente comercial"
+    },
+    category: {
+      ca: "Urbanisme",
+      es: "Urbanismo"
+    },
+    date: "2026-06-04",
+    readTime: {
+      ca: "4 min de lectura",
+      es: "4 min de lectura"
+    },
+    image: "https://www.poblesdecatalunya.cat/fotos/normal/165898.jpeg",
+    description: {
+      ca: "El supermercat Caprabo de l'avinguda de Barberà, ubicat a l'antiga fàbrica Molins Germans, ha iniciat la liquidació total i tancarà definitivament. L'AVES lamenta la pèrdua d'un comerç històric i reclama informació sobre el futur de l'edifici.",
+      es: "El supermercado Caprabo de la avenida de Barberà, ubicado en la antigua fábrica Molins Germans, ha iniciado la liquidación total y cerrará definitivamente. La AVES lamenta la pérdida de un comercio histórico y reclama información sobre el futuro del edificio."
+    },
+    alt: {
+      ca: "Fotografia de l'antiga fàbrica Molins Germans (Cal Molins) a l'avinguda de Barberà, on s'ubicava el Caprabo, a Sabadell. Foto: Marcos Brosel, CC BY-SA 3.0",
+      es: "Fotografía de la antigua fábrica Molins Germans (Cal Molins) en la avenida de Barberà, donde se ubicaba el Caprabo, en Sabadell. Foto: Marcos Brosel, CC BY-SA 3.0"
+    },
+    slug: {
+      ca: "caprabo-historic-avinguda-barbera-tanca-eixample-perd-referent-comercial",
+      es: "caprabo-historico-avenida-barbera-cierra-eixample-pierde-referente-comercial"
+    },
+    content: {
+      ca: [
+        "El supermercat Caprabo situat al número 238 de l'avinguda de Barberà, en ple cor de l'Eixample de Sabadell, ha iniciat la liquidació total d'existències i tancarà definitivament en les properes setemes. S'apaga així un comerç que durant dècades va ser punt de trobada del barri, ubicat dins l'històric complex fabril de Cal Molins, un conjunt arquitectònic protegit construït el 1941 per l'arquitecte racionalista Santiago Casulleras, el mateix que va dissenyar l'edifici de l'Artextil, un altre emblema del patrimoni fabril de Sabadell. La decisió respon a una reordenació territorial de la cadena Caprabo, que ha prioritzat l'obertura d'un nou establiment a la plaça del Mestre, al barri de Gràcia, en detriment de la seva ubicació històrica a l'Eixample.",
+        "El tancament ha generat un profund malestar entre veïns i clients habituals. Maricarmen S., clienta de tota la vida, explicava: «El tancament m'ha deixat feta pols, perquè aquest, per mi, és el millor dels tres supermercats que tinc aquí localitzats». Jessica García ho expressava amb claredat: «Està a un minut de casa, que va molt bé. Ara haurem d'anar molt més lluny per comprar quan el teníem aquí, de tota la vida». I Rosa Batlló, que acudeix cada quinze dies amb el seu pare de 96 anys, destaca la pèrdua del servei a domicili: «Seleccionaven els productes i te'ls duien a casa. Ara algunes alternatives et demanen comprar per internet, i això no és per a tothom».",
+        "Des de l'Associació de Veïns de l'Eixample Sabadell (AVES), el seu president, Antonio, ha expressat la preocupació de la junta veïnal: «El tancament del Caprabo no és només la pèrdua d'un supermercat. És la pèrdua d'un punt de referència per a moltes famílies del barri. Era un comerç on la gent es coneixia, on la gent gran podia fer la compra amb la tranquil·litat de tenir un servei a domicili que funciona. És molt trist que marxen sense que sapiguem què passarà amb l'edifici».",
+        "I és que el futur de l'immoble és una incògnita. La part on s'ubica la botiga és de propietat privada i, a dia d'avui, no hi ha informació pública ni plans coneguts sobre el seu destí. Això preocupa especialment l'AVES, que veu com el barri podria perdre no només un comerç de referència, sinó també part de la seva memòria històrica. El president de l'entitat afegeix: «Ningú sap què passarà amb aquest edifici. Té un valor històric inqüestionable, forma part de la memòria industrial de Sabadell, però en ser propietat privada, els veïns ens quedem a les fosques. Ens temem que acabi sent un solar en desús, o pitjor, que es perdi la seva essència. Cal Molins mereix un futur a l'altura del seu passat».",
+        "L'AVES ja ha anunciat que demanarà reunions amb l'Ajuntament i amb la propietat per conèixer què es planeja per a l'espai. Mentrestant, els veïns de l'Eixample hauran de reubicar les seves compres. L'alternativa més propera és el nou Caprabo de la plaça del Mestre, a uns deu minuts caminant, tot i que qui depenia del cotxe per a la compra setmanal o del servei a domicili per a les persones grans ho tindrà més complicat. Des de l'AVES es reivindica un model de barri que no perdi els seus serveis ni la seva memòria."
+      ],
+      es: [
+        "El supermercado Caprabo situado en el número 238 de la avenida de Barberà, en pleno corazón del Eixample de Sabadell, ha iniciado la liquidación total de existencias y cerrará definitivamente en las próximas semanas. Se apaga así un comercio que durante décadas fue punto de encuentro del barrio, ubicado dentro del histórico complejo fabril de Cal Molins, un conjunto arquitectónico protegido construido en 1941 por el arquitecto racionalista Santiago Casulleras, el mismo que diseñó el edificio del Artextil, otro emblema del patrimonio fabril de Sabadell. La decisión responde a una reordenación territorial de la cadena Caprabo, que ha priorizado la apertura de un nuevo establecimiento en la plaza del Mestre, en el barrio de Gràcia, en detrimento de su ubicación histórica en el Eixample.",
+        "El cierre ha generado un profundo malestar entre vecinos y clientes habituales. Maricarmen S., clienta de toda la vida, explicaba: «El cierre me ha dejado hecha polvo, porque para mí es el mejor de los tres supermercados que tengo aquí localizados». Jessica García lo expresaba con claridad: «Está a un minuto de casa, que va muy bien. Ahora tendremos que ir mucho más lejos para comprar cuando lo teníamos aquí, de toda la vida». Y Rosa Batlló, que acude cada quince días con su padre de 96 años, destaca la pérdida del servicio a domicilio: «Seleccionaban los productos y te los llevaban a casa. Ahora algunas alternativas te piden comprar por internet, y eso no es para todos».",
+        "Desde la Asociación de Vecinos del Eixample Sabadell (AVES), su presidente, Antonio, ha expresado la preocupación de la junta vecinal: «El cierre del Caprabo no es solo la pérdida de un supermercado. Es la pérdida de un punto de referencia para muchas familias del barrio. Era un comercio donde la gente se conocía, donde los mayores podían hacer la compra con la tranquilidad de tener un servicio a domicilio que funciona. Es muy triste que se vayan sin que sepamos qué pasará con el edificio».",
+        "Y es que el futuro del inmueble es una incógnita. La parte donde se ubica la tienda es de propiedad privada y, a día de hoy, no hay información pública ni planes conocidos sobre su destino. Esto preocupa especialmente a la AVES, que ve cómo el barrio podría perder no solo un comercio de referencia, sino también parte de su memoria histórica. El presidente de la entidad añade: «Nadie sabe qué pasará con ese edificio. Tiene un valor histórico incuestionable, forma parte de la memoria industrial de Sabadell, pero al ser propiedad privada, los vecinos nos quedamos a oscuras. Nos tememos que acabe siendo un solar en desuso, o peor, que se pierda su esencia. Cal Molins merece un futuro a la altura de su pasado».",
+        "La AVES ya ha anunciado que pedirá reuniones con el Ayuntamiento y con la propiedad para conocer qué se planea para el espacio. Mientras tanto, los vecinos del Eixample deberán reubicar sus compras. La alternativa más cercana es el nuevo Caprabo de la plaza del Mestre, a unos diez minutos andando, aunque quienes dependían del coche para la compra semanal o del servicio a domicilio para las personas mayores lo tendrán más complicado. Desde la AVES se reivindica un modelo de barrio que no pierda sus servicios ni su memoria."
+      ]
+    }
   }
 ];

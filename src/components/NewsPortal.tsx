@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import type { Article } from '../data/newsData';
+import type { Article } from '../utils/news';
 
 interface NewsPortalProps {
   lang?: "ca" | "es";

@@ -47,7 +47,7 @@ const NEIGHBORHOOD_CONTEXT = {
   name: "Eixample Sabadell",
   city: "Sabadell",
   streets: ["Avinguda de Barberà (artèria principal i eix comercial)", "Gran Via (límit)", "Carretera de Barcelona (límit)", "Carrer de Brutau", "Carrer de Calders"],
-  places: ["Parc de la Filosa", "Pati de l'antiga fàbrica tèxtil", "Casal del Barri"],
+  places: ["Parc de Mestre Planas", "Plaça de la Infància", "Parc de Montserrat Roig"],
   identity: "Barri de passat tèxtil i obrer de finals del segle XIX i principis del segle XX. Molt lligat a les antigues indústries de filatura de Sabadell. La junta oficial de veïns és l'AAVV de l'Eixample de Sabadell (AVES)."
 };
 
@@ -55,33 +55,33 @@ const NEIGHBORHOOD_CONTEXT = {
 const THEMES = {
   1: {
     category: "Urbanisme",
-    prompt: "Notícies sobre mobilitat, pacificació de carrers, obres o infraestructures al barri, especialment al voltant de l'Avinguda de Barberà o els límits de Gran Via i Carretera de Barcelona.",
+    prompt: "Notícies reals sobre mobilitat, pacificació de carrers, obres o infraestructures a Sabadell, especialment al voltant de l'Avinguda de Barberà o els límits de Gran Via i Carretera de Barcelona.",
     query: "obres avinguda barbera sabadell"
   },
   2: {
     category: "Consells i Salut",
-    prompt: "Consells de salut per al dia a dia dels veïns, per exemple, al·lèrgies primaverals per plàtans d'ombra a l'Avinguda de Barberà o els carrers Brutau i Calders, estalvi d'energia, clima o reciclatge.",
+    prompt: "Consells de salut per al dia a dia dels veïns, per exemple, al·lèrgies primaverals per plàtans d'ombra a l'Avinguda de Barberà o zones properes, estalvi d'energia, clima o reciclatge.",
     query: "alergia platans ombra sabadell consells salut"
   },
   3: {
     category: "Història",
-    prompt: "Cròniques sobre el passat tèxtil, memòria obrera, les antigues xemeneies, el carrer Brutau o Calders, o la fàbrica de la Filosa del barri.",
+    prompt: "Cròniques sobre el passat tèxtil, memòria obrera, les antigues xemeneies o la història industrial del barri de l'Eixample de Sabadell.",
     query: "historia eixample sabadell fabriques"
   },
   4: {
-    category: "Activitats",
-    prompt: "Agenda d'activitats de proximitat, assemblees de veïns de l'AVES, cicle de cinema a la fresca o propostes culturals per al cap de setmana al barri.",
-    query: "agenda cultural sabadell activitats de proximitat"
+    category: "Comerç",
+    prompt: "Reportatges sobre comerços locals reals, botigues a l'Avinguda de Barberà, emprenedors o cooperatives de l'Eixample.",
+    query: "comerc local avinguda barbera sabadell"
   },
   5: {
-    category: "Comerç",
-    prompt: "Reportatges sobre comerços locals del barri, botigues històriques a l'Avinguda de Barberà, emprenedors o cooperatives de l'Eixample.",
-    query: "comerc local avinguda barbera sabadell"
+    category: "Activitats",
+    prompt: "Agenda i propostes reals d'oci, natura o cultura per a aquest cap de setmana a Sabadell o municipis del voltant (a menys de 20 minuts en cotxe, com Sant Quirze, Terrassa, Castellar del Vallès, Cerdanyola, Barberà del Vallès).",
+    query: "plans cap de setmana sabadell terrassa"
   }
 };
 
 const today = new Date();
-let dayOfWeek = today.getDay();
+let dayOfWeek = process.argv[2] ? parseInt(process.argv[2], 10) : today.getDay();
 if (dayOfWeek === 0 || dayOfWeek === 6) {
   dayOfWeek = Math.floor(Math.random() * 5) + 1;
 }
@@ -145,6 +145,8 @@ NORMES CRÍTIQUES DE REDACCIÓ:
 - Sota cap concepte utilitzis el terme "Eixample Industrial". El barri s'ha d'anomenar sempre "Eixample Sabadell" o "l'Eixample".
 - L'associació de veïns s'ha d'anomenar sempre "AAVV de l'Eixample de Sabadell" o "AVES", mai de "l'Eixample Industrial".
 - CONTROL DE DADES REALS (NO ALUCINAR): Basa't ÚNICAMENT en la informació real aportada pels resultats de cerca d'internet. No t'inventis dates de concerts, adreces web, noms de persones o detalls que no apareguin de manera explícita en els resultats obtinguts. Si un detall no es troba en els resultats, no l'especifiquis o parla'n de forma genèrica.
+- NO INVENTIS ESDEVENIMENTS VEÏNALS: Sota cap concepte t'inventis convocatòries d'assemblees de l'AVES, cicles de cinema a la fresca o qualsevol activitat que no estigui explícitament descrita com un fet real i confirmat en els resultats obtinguts de la cerca d'internet. Si no hi ha convocatòries o actes propis documentats a la cerca, limita't a fer ressò o recomanar de forma informativa els actes reals i confirmats que trobis a Sabadell.
+- GEOGRAFIA I LOCALS COM A REFERÈNCIA: Pots esmentar els parcs i carrers del barri ("Parc de Mestre Planas", "Plaça de la Infància", "Parc de Montserrat Roig") com a context territorial del veïnat (p. ex. 'veïns que passegen prop de la Plaça de la Infància') o com a referències de proximitat a altres llocs de Sabadell, però mai t'inventis que s'està duent a terme cap acte fictici dins d'aquests espais.
 - DISTINCIÓ D'ORGANITZACIÓ: Distingeix clarament entre el que organitza directament l'AVES (com les assemblees pròpies, cinema a la fresca del barri o tallers veïnals) i el que organitzen altres entitats o l'Ajuntament de Sabadell (com l'agenda general dels teatres municipals, l'Estruch, la Faràndula o el Casal Pere Quart). L'AVES no organitza aquests últims, sinó que es limita a recomanar-los i fer-ne difusió com a opcions d'interès per al veïnat.
 
 Has de generar una notícia que combini de forma coherent la teva línia temática del dia juntament amb les notícies o context de proximitat que hem recuperat d'internet.
@@ -271,89 +273,52 @@ Instruccions de format:
       content: generatedArticle.content
     };
 
-    // 4. Modificar newsData.ts
-    const newsDataFilePath = path.resolve(process.cwd(), 'src/data/newsData.ts');
-    if (!fs.existsSync(newsDataFilePath)) {
-      throw new Error(`No se encuentra el archivo: ${newsDataFilePath}`);
+    // 4. PUBLICACIÓN EN SUPABASE (EN VIVO - OBLIGATORIO)
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+      throw new Error("ERROR: Supabase URL o Anon/Service Key no configurados. La noticia no se puede publicar.");
     }
 
-    let fileContent = fs.readFileSync(newsDataFilePath, 'utf8');
-
-    const idRegex = /id:\s*(\d+)/g;
-    let match;
-    let maxId = 0;
-    while ((match = idRegex.exec(fileContent)) !== null) {
-      const currentId = parseInt(match[1], 10);
-      if (currentId > maxId) {
-        maxId = currentId;
-      }
-    }
-
-    finalArticle.id = maxId + 1;
-    console.log(`ID asignado para local: ${finalArticle.id}`);
-
-    const arrayStartMarker = "export const newsArticles: Article[] = [";
-    const markerIndex = fileContent.indexOf(arrayStartMarker);
-
-    if (markerIndex === -1) {
-      throw new Error("No se pudo encontrar el marcador del array de noticias en newsData.ts");
-    }
-
-    const insertPosition = markerIndex + arrayStartMarker.length;
+    console.log("Intentando publicar en base de datos en vivo de Supabase...");
+    const supabaseRestEndpoint = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/noticies`;
     
-    const articleString = `\n  {\n    id: ${finalArticle.id},\n    title: {\n      ca: "${finalArticle.title.ca.replace(/"/g, '\\"')}",\n      es: "${finalArticle.title.es.replace(/"/g, '\\"')}"\n    },\n    category: {\n      ca: "${finalArticle.category.ca}",\n      es: "${finalArticle.category.es}"\n    },\n    date: "${finalArticle.date}",\n    readTime: {\n      ca: "${finalArticle.readTime.ca}",\n      es: "${finalArticle.readTime.es}"\n    },\n    image: "${finalArticle.image}",\n    description: {\n      ca: "${finalArticle.description.ca.replace(/"/g, '\\"')}",\n      es: "${finalArticle.description.es.replace(/"/g, '\\"')}"\n    },\n    alt: {\n      ca: "${finalArticle.alt.ca.replace(/"/g, '\\"')}",\n      es: "${finalArticle.alt.es.replace(/"/g, '\\"')}"\n    },\n    slug: {\n      ca: "${finalArticle.slug.ca}",\n      es: "${finalArticle.slug.es}"\n    },\n    content: {\n      ca: [\n        ${finalArticle.content.ca.map(p => `"${p.replace(/"/g, '\\"')}"`).join(',\n        ')}\n      ],\n      es: [\n        ${finalArticle.content.es.map(p => `"${p.replace(/"/g, '\\"')}"`).join(',\n        ')}\n      ]\n    }\n  },`;
+    const payload = {
+      title_ca: finalArticle.title.ca,
+      title_es: finalArticle.title.es,
+      category_ca: finalArticle.category.ca,
+      category_es: finalArticle.category.es,
+      date: finalArticle.date,
+      readtime_ca: finalArticle.readTime.ca,
+      readtime_es: finalArticle.readTime.es,
+      image: finalArticle.image,
+      alt_ca: finalArticle.alt.ca,
+      alt_es: finalArticle.alt.es,
+      slug_ca: finalArticle.slug.ca,
+      slug_es: finalArticle.slug.es,
+      description_ca: finalArticle.description.ca,
+      description_es: finalArticle.description.es,
+      content_ca: finalArticle.content.ca.join("\n\n"),
+      content_es: finalArticle.content.es.join("\n\n"),
+      featured: false
+    };
 
-    const newFileContent = fileContent.slice(0, insertPosition) + articleString + fileContent.slice(insertPosition);
-    fs.writeFileSync(newsDataFilePath, newFileContent, 'utf8');
-    console.log("NOTICIA AÑADIDA CON ÉXITO A newsData.ts");
+    const supabaseResponse = await fetch(supabaseRestEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(payload)
+    });
 
-    // 5. PUBLICACIÓN OPCIONAL EN SUPABASE (EN VIVO)
-    let publishedToSupabase = false;
-    if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-      console.log("Detectadas credenciales de Supabase. Intentando publicar en base de datos en vivo...");
-      const supabaseRestEndpoint = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/noticies`;
-      
-      const payload = {
-        title_ca: finalArticle.title.ca,
-        title_es: finalArticle.title.es,
-        category_ca: finalArticle.category.ca,
-        category_es: finalArticle.category.es,
-        date: finalArticle.date,
-        readtime_ca: finalArticle.readTime.ca,
-        readtime_es: finalArticle.readTime.es,
-        image: finalArticle.image,
-        alt_ca: finalArticle.alt.ca,
-        alt_es: finalArticle.alt.es,
-        slug_ca: finalArticle.slug.ca,
-        slug_es: finalArticle.slug.es,
-        description_ca: finalArticle.description.ca,
-        description_es: finalArticle.description.es,
-        content_ca: finalArticle.content.ca.join("\n\n"),
-        content_es: finalArticle.content.es.join("\n\n"),
-        featured: false
-      };
-
-      const supabaseResponse = await fetch(supabaseRestEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_ANON_KEY,
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-          "Prefer": "return=minimal"
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!supabaseResponse.ok) {
-        const errText = await supabaseResponse.text();
-        console.warn(`[Supabase Warning] No se pudo insertar directamente en Supabase: ${errText}`);
-      } else {
-        console.log("✅ NOTICIA PUBLICADA CON ÉXITO EN LA BASE DE DATOS DE SUPABASE!");
-        publishedToSupabase = true;
-      }
-    } else {
-      console.log("Supabase no configurado. La noticia solo se guardará localmente en Git.");
+    if (!supabaseResponse.ok) {
+      const errText = await supabaseResponse.text();
+      throw new Error(`[Supabase Error] No se pudo insertar en Supabase: ${errText}`);
     }
+
+    console.log("✅ NOTICIA PUBLICADA CON ÉXITO EN LA BASE DE DATOS DE SUPABASE!");
+    let publishedToSupabase = true;
 
     // 6. ACTIVAR WEBHOOK DE REDESPLIEGUE EN VERCEL (SI APLICA)
     if (publishedToSupabase && VERCEL_DEPLOY_HOOK) {

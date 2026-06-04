@@ -2,6 +2,29 @@ import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
 
+// Cargar variables de entorno locales de .env si existe
+const envPath = path.resolve(process.cwd(), '.env');
+if (fs.existsSync(envPath)) {
+  const envContent = fs.readFileSync(envPath, 'utf8');
+  envContent.split('\n').forEach(line => {
+    const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+    if (match) {
+      const key = match[1];
+      let value = match[2] || '';
+      if (value.startsWith('"') && value.endsWith('"')) {
+        value = value.slice(1, -1);
+      } else if (value.startsWith("'") && value.endsWith("'")) {
+        value = value.slice(1, -1);
+      }
+      process.env[key] = value.trim();
+    }
+  });
+}
+
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+const VERCEL_DEPLOY_HOOK = process.env.VERCEL_DEPLOY_HOOK;
+
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -25,7 +48,7 @@ const generateSlug = (text) => {
 
 async function main() {
   console.log("=== CREADOR MANUAL DE NOTICIES (eixample_industrial_sabadell) ===");
-  console.log("Aquest script afegirà una notícia directament a src/data/newsData.ts\n");
+  console.log("Aquest script afegirà una notícia directament a Supabase\n");
 
   const titleCa = await askQuestion("Títol de la notícia (CA): ");
   const titleEs = await askQuestion("Título de la noticia (ES): ");
@@ -69,7 +92,6 @@ async function main() {
   rl.close();
 
   const finalArticle = {
-    id: 0,
     title: { ca: titleCa, es: titleEs },
     category: { ca: categoryCa, es: categoryEs },
     date: new Date().toISOString().split('T')[0],
@@ -88,43 +110,60 @@ async function main() {
   };
 
   try {
-    const newsDataFilePath = path.resolve(process.cwd(), 'src/data/newsData.ts');
-    if (!fs.existsSync(newsDataFilePath)) {
-      throw new Error(`No es troba el fitxer: ${newsDataFilePath}`);
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+      throw new Error("Supabase URL o Anon/Service Key no configurados en .env");
     }
 
-    let fileContent = fs.readFileSync(newsDataFilePath, 'utf8');
+    console.log("Publicant en Supabase...");
+    const supabaseRestEndpoint = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/noticies`;
+    
+    const payload = {
+      title_ca: finalArticle.title.ca,
+      title_es: finalArticle.title.es,
+      category_ca: finalArticle.category.ca,
+      category_es: finalArticle.category.es,
+      date: finalArticle.date,
+      readtime_ca: finalArticle.readTime.ca,
+      readtime_es: finalArticle.readTime.es,
+      image: finalArticle.image,
+      alt_ca: finalArticle.alt.ca,
+      alt_es: finalArticle.alt.es,
+      slug_ca: finalArticle.slug.ca,
+      slug_es: finalArticle.slug.es,
+      description_ca: finalArticle.description.ca,
+      description_es: finalArticle.description.es,
+      content_ca: finalArticle.content.ca.join("\n\n"),
+      content_es: finalArticle.content.es.join("\n\n"),
+      featured: false
+    };
 
-    // Trobar el ID màxim
-    const idRegex = /id:\s*(\d+)/g;
-    let match;
-    let maxId = 0;
-    while ((match = idRegex.exec(fileContent)) !== null) {
-      const currentId = parseInt(match[1], 10);
-      if (currentId > maxId) {
-        maxId = currentId;
+    const supabaseResponse = await fetch(supabaseRestEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!supabaseResponse.ok) {
+      const errText = await supabaseResponse.text();
+      throw new Error(`[Supabase Error]: ${errText}`);
+    }
+
+    console.log(`\n✅ NOTÍCIA INTEGRADA AMB ÈXIT EN SUPABASE!`);
+
+    if (VERCEL_DEPLOY_HOOK) {
+      console.log("Disparant webhook de redespliegue en Vercel...");
+      const vercelResponse = await fetch(VERCEL_DEPLOY_HOOK, { method: "POST" });
+      if (vercelResponse.ok) {
+        console.log("✅ REDESPLIEGUE EN VERCEL SOLICITADO CORRECTAMENTE!");
       }
     }
-
-    finalArticle.id = maxId + 1;
-
-    const arrayStartMarker = "export const newsArticles: Article[] = [";
-    const markerIndex = fileContent.indexOf(arrayStartMarker);
-
-    if (markerIndex === -1) {
-      throw new Error("No s'ha pogut trobar el marcador de l'array de notícies a newsData.ts");
-    }
-
-    const insertPosition = markerIndex + arrayStartMarker.length;
-    
-    const articleString = `\n  {\n    id: ${finalArticle.id},\n    title: {\n      ca: "${finalArticle.title.ca.replace(/"/g, '\\"')}",\n      es: "${finalArticle.title.es.replace(/"/g, '\\"')}"\n    },\n    category: {\n      ca: "${finalArticle.category.ca}",\n      es: "${finalArticle.category.es}"\n    },\n    date: "${finalArticle.date}",\n    readTime: {\n      ca: "${finalArticle.readTime.ca}",\n      es: "${finalArticle.readTime.es}"\n    },\n    image: "${finalArticle.image}",\n    description: {\n      ca: "${finalArticle.description.ca.replace(/"/g, '\\"')}",\n      es: "${finalArticle.description.es.replace(/"/g, '\\"')}"\n    },\n    alt: {\n      ca: "${finalArticle.alt.ca.replace(/"/g, '\\"')}",\n      es: "${finalArticle.alt.es.replace(/"/g, '\\"')}"\n    },\n    slug: {\n      ca: "${finalArticle.slug.ca}",\n      es: "${finalArticle.slug.es}"\n    },\n    content: {\n      ca: [\n        ${finalArticle.content.ca.map(p => `"${p.replace(/"/g, '\\"')}"`).join(',\n        ')}\n      ],\n      es: [\n        ${finalArticle.content.es.map(p => `"${p.replace(/"/g, '\\"')}"`).join(',\n        ')}\n      ]\n    }\n  },`;
-
-    const newFileContent = fileContent.slice(0, insertPosition) + articleString + fileContent.slice(insertPosition);
-    fs.writeFileSync(newsDataFilePath, newFileContent, 'utf8');
-
-    console.log(`\n✅ NOTÍCIA INTEGRADA AMB ÈXIT (ID: ${finalArticle.id})!`);
   } catch (error) {
-    console.error("❌ Error en desar la notícia:", error);
+    console.error("❌ Error en desar la notícia:", error.message);
   }
 }
 

@@ -31,19 +31,6 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: node scripts/hermes-generate.js
-
-      - name: Confirmar y subir los cambios (Commit & Push)
-        run: |
-          git config --global user.name "Hermes Asistente"
-          git config --global user.email "hermes@aves.local"
-          
-          # Verificar si newsData.ts ha sido modificado
-          if git diff --name-only | grep -q "src/data/newsData.ts"; then
-            echo "Nueva noticia detectada. Subiendo cambios..."
-            git add src/data/newsData.ts
-            git commit -m "chore(news): nueva noticia del dia creada por Hermes [skip ci]"
-            git push origin HEAD:${{ github.ref }}
-          else
-            echo "No se ha generado ningún cambio en las noticias."
-          fi

@@ -1,7 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
 import type { WebSocketLikeConstructor } from '@supabase/realtime-js';
-import { newsArticles, type Article } from '../data/newsData';
 import ws from 'ws';
+
+export interface Article {
+  id: number;
+  title: Record<"ca" | "es", string>;
+  category: Record<"ca" | "es", string>;
+  date: string; // ISO date string for sorting
+  readTime: Record<"ca" | "es", string>;
+  image: string;
+  description: Record<"ca" | "es", string>;
+  alt: Record<"ca" | "es", string>;
+  slug: Record<"ca" | "es", string>;
+  content: Record<"ca" | "es", string[]>;
+  featured?: boolean; // Flag to highlight an article at the top of the news portal
+}
 
 const supabaseUrl = import.meta.env.SUPABASE_URL || (typeof process !== 'undefined' ? process.env.SUPABASE_URL : '') || '';
 const supabaseKey = import.meta.env.SUPABASE_ANON_KEY || (typeof process !== 'undefined' ? process.env.SUPABASE_ANON_KEY : '') || '';
@@ -19,8 +32,8 @@ export const supabase = supabaseUrl && supabaseKey
 
 export async function getArticles(): Promise<Article[]> {
   if (!supabase) {
-    console.warn('Supabase credentials missing. Returning fallback static news articles list.');
-    return newsArticles;
+    console.warn('Supabase credentials missing. Returning empty static news articles list.');
+    return [];
   }
   
   const { data, error } = await supabase
@@ -30,7 +43,7 @@ export async function getArticles(): Promise<Article[]> {
 
   if (error) {
     console.error('Error fetching articles from Supabase:', error);
-    return newsArticles;
+    return [];
   }
 
   const mapped = (data || []).map((row) => ({
@@ -69,8 +82,8 @@ export async function getArticles(): Promise<Article[]> {
   }));
 
   if (mapped.length === 0) {
-    console.warn('No articles found in Supabase. Returning fallback static news articles list.');
-    return newsArticles;
+    console.warn('No articles found in Supabase. Returning empty list.');
+    return [];
   }
 
   return mapped;

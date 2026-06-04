@@ -112,7 +112,13 @@ async function run() {
 
     let imageUrl = "";
     if (tavilyData.images && tavilyData.images.length > 0) {
-      const validImages = tavilyData.images.filter(img => img.startsWith("http") && !img.includes(".svg"));
+      const validImages = tavilyData.images.filter(img => 
+        img.startsWith("http") && 
+        !img.includes(".svg") &&
+        !img.includes("lookaside") &&
+        !img.includes("fbcdn") &&
+        !img.includes("instagram.com")
+      );
       if (validImages.length > 0) {
         imageUrl = validImages[0];
         console.log(`Imagen seleccionada de Tavily: ${imageUrl}`);
@@ -128,7 +134,30 @@ async function run() {
         "Comerç": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80"
       };
       imageUrl = unsplashFallbacks[activeTheme.category] || "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80";
-      console.log(`Imagen de fallback seleccionada: ${imageUrl}`);
+      console.log(`Imagen de fallback     // 1.5 Obtener noticias recientes de Supabase para evitar duplicidades
+    let recentArticlesContext = "Cap notícia publicada recentment o error en la cerca.";
+    const SUPABASE_URL = process.env.SUPABASE_URL;
+    const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+    if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+      try {
+        console.log("Obteniendo artículos recientes de Supabase para evitar duplicidades...");
+        const response = await fetch(`${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/noticies?select=title_ca,title_es,date&order=date.desc&limit=100`, {
+          method: "GET",
+          headers: {
+            "apikey": SUPABASE_ANON_KEY,
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+        if (response.ok) {
+          const recentArticles = await response.json();
+          if (recentArticles.length > 0) {
+            recentArticlesContext = recentArticles.map(a => `- [${a.date}] CA: "${a.title_ca}" | ES: "${a.title_es}"`).join("\n");
+          }
+          console.log("Artículos recientes recuperados con éxito.");
+        }
+      } catch (err) {
+        console.warn("No se pudieron recuperar artículos recientes de Supabase:", err.message);
+      }
     }
 
     // 2. Preparar prompts
@@ -144,9 +173,12 @@ Context del barri:
 NORMES CRÍTIQUES DE REDACCIÓ:
 - Sota cap concepte utilitzis el terme "Eixample Industrial". El barri s'ha d'anomenar sempre "Eixample Sabadell" o "l'Eixample".
 - L'associació de veïns s'ha d'anomenar sempre "AAVV de l'Eixample de Sabadell" o "AVES", mai de "l'Eixample Industrial".
+- EVITAR DUPLICITATS: No repeteixis de cap manera temes o esdeveniments dels quals ja s'hagi parlat recentment. Compara el que penses redactar amb la llista de notícies recents i assegura't que el contingut sigui diferent.
+  Darreres notícies publicades:
+  ${recentArticlesContext}
 - CONTROL DE DADES REALS (NO ALUCINAR): Basa't ÚNICAMENT en la informació real aportada pels resultats de cerca d'internet. No t'inventis dates de concerts, adreces web, noms de persones o detalls que no apareguin de manera explícita en els resultats obtinguts. Si un detall no es troba en els resultats, no l'especifiquis o parla'n de forma genèrica.
 - NO INVENTIS ESDEVENIMENTS VEÏNALS: Sota cap concepte t'inventis convocatòries d'assemblees de l'AVES, cicles de cinema a la fresca o qualsevol activitat que no estigui explícitament descrita com un fet real i confirmat en els resultats obtinguts de la cerca d'internet. Si no hi ha convocatòries o actes propis documentats a la cerca, limita't a fer ressò o recomanar de forma informativa els actes reals i confirmats que trobis a Sabadell.
-- GEOGRAFIA I LOCALS COM A REFERÈNCIA: Pots esmentar els parcs i carrers del barri ("Parc de Mestre Planas", "Plaça de la Infància", "Parc de Montserrat Roig") com a context territorial del veïnat (p. ex. 'veïns que passegen prop de la Plaça de la Infància') o com a referències de proximitat a altres llocs de Sabadell, però mai t'inventis que s'està duent a terme cap acte fictici dins d'aquests espais.
+- GEOGRAFIA I LOCALS COM A REFERÈNCIA: Pots esmentar els parcs i carrers del barri ("Parc de Mestre Planas", "Plaça de la Infància", "Parc de Montserrat Roig") com a context territorial del veïnat (p. ex. 'veïns que passegen prop de la Plaça de la Infància') o com a referències de proximitat a altres llocs de Sabadell, però mai t'inventis que s'està duent a terme cap acto fictici dins d'aquests espais.
 - DISTINCIÓ D'ORGANITZACIÓ: Distingeix clarament entre el que organitza directament l'AVES (com les assemblees pròpies, cinema a la fresca del barri o tallers veïnals) i el que organitzen altres entitats o l'Ajuntament de Sabadell (com l'agenda general dels teatres municipals, l'Estruch, la Faràndula o el Casal Pere Quart). L'AVES no organitza aquests últims, sinó que es limita a recomanar-los i fer-ne difusió com a opcions d'interès per al veïnat.
 
 Has de generar una notícia que combini de forma coherent la teva línia temática del dia juntament amb les notícies o context de proximitat que hem recuperat d'internet.

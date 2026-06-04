@@ -39,7 +39,8 @@ export async function getArticles(): Promise<Article[]> {
   const { data, error } = await supabase
     .from('noticies')
     .select('*')
-    .order('date', { ascending: false });
+    .order('date', { ascending: false })
+    .order('id', { ascending: false });
 
   if (error) {
     console.error('Error fetching articles from Supabase:', error);

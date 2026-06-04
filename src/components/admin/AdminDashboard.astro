@@ -210,7 +210,8 @@ import AdminTable from './AdminTable.astro';
     const { data, error } = await supabase
       .from('noticies')
       .select('*')
-      .order('date', { ascending: false });
+      .order('date', { ascending: false })
+      .order('id', { ascending: false });
 
     if (error) {
       triggerToast((activeLang === 'ca' ? 'Error carregant notícies: ' : 'Error cargando noticias: ') + error.message, true);

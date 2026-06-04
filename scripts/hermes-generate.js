@@ -48,7 +48,7 @@ const NEIGHBORHOOD_CONTEXT = {
   city: "Sabadell",
   streets: ["Avinguda de Barberà (artèria principal i eix comercial)", "Gran Via (límit)", "Carretera de Barcelona (límit)", "Carrer de Brutau", "Carrer de Calders"],
   places: ["Parc de la Filosa", "Pati de l'antiga fàbrica tèxtil", "Casal del Barri"],
-  identity: "Barri de passat tèxtil i obrer de finals del segle XIX i principis del segle XX. Molt lligat a les antigues indústries de filatura de Sabadell. La junta oficial de veïns és l'Associació de Veïns Eixample Sabadell (AVES)."
+  identity: "Barri de passat tèxtil i obrer de finals del segle XIX i principis del segle XX. Molt lligat a les antigues indústries de filatura de Sabadell. La junta oficial de veïns és l'AAVV de l'Eixample de Sabadell (AVES)."
 };
 
 // Temas y queries correspondientes por día
@@ -132,7 +132,7 @@ async function run() {
     }
 
     // 2. Preparar prompts
-    const systemInstruction = `Ets en Hermes, un redactor de notícies local, molt proper i de total confiança, per a l'Associació de Veïns de l'Eixample Sabadell (AVES). 
+    const systemInstruction = `Ets en Hermes, un redactor de notícies local, molt proper i de total confiança, per a l'AAVV de l'Eixample de Sabadell (AVES). 
 El teu públic objectiu són els veïns i veïnes del barri. El barri és petit i molt de proximitat, així que la notícia ha d'estar redactada obligatòriament des de la mirada d'un veí del barri, fent esment a llocs reals i afectacions del dia a dia del nostre entorn immediat.
 
 Context del barri:
@@ -143,7 +143,9 @@ Context del barri:
 
 NORMES CRÍTIQUES DE REDACCIÓ:
 - Sota cap concepte utilitzis el terme "Eixample Industrial". El barri s'ha d'anomenar sempre "Eixample Sabadell" o "l'Eixample".
-- L'associació de veïns s'ha d'anomenar sempre "Associació de Veïns de l'Eixample Sabadell" o "AVES", mai de "l'Eixample Industrial".
+- L'associació de veïns s'ha d'anomenar sempre "AAVV de l'Eixample de Sabadell" o "AVES", mai de "l'Eixample Industrial".
+- CONTROL DE DADES REALS (NO ALUCINAR): Basa't ÚNICAMENT en la informació real aportada pels resultats de cerca d'internet. No t'inventis dates de concerts, adreces web, noms de persones o detalls que no apareguin de manera explícita en els resultats obtinguts. Si un detall no es troba en els resultats, no l'especifiquis o parla'n de forma genèrica.
+- DISTINCIÓ D'ORGANITZACIÓ: Distingeix clarament entre el que organitza directament l'AVES (com les assemblees pròpies, cinema a la fresca del barri o tallers veïnals) i el que organitzen altres entitats o l'Ajuntament de Sabadell (com l'agenda general dels teatres municipals, l'Estruch, la Faràndula o el Casal Pere Quart). L'AVES no organitza aquests últims, sinó que es limita a recomanar-los i fer-ne difusió com a opcions d'interès per al veïnat.
 
 Has de generar una notícia que combini de forma coherent la teva línia temática del dia juntament amb les notícies o context de proximitat que hem recuperat d'internet.
 Tema d'avui (${activeTheme.category}): ${activeTheme.prompt}
@@ -167,7 +169,7 @@ Instruccions de format:
 - No incloguis títols com "Notícia del dia" o similars de farciment. Fes-lo periodístic, proper, cívic i amè.`;
 
     const searchContext = tavilyData.results.map(r => `Títol: ${r.title}\nContingut: ${r.content}\nURL: ${r.url}`).join("\n\n");
-    const userPrompt = `Utilitzant la informació real obtinguda d'internet per a la teva redacció:\n\n${searchContext}\n\nSi us plau, redacta la notícia d'avui. Recorda utilitzar la geolocalització del barri per connectar els fets generals amb els carrers i entorns del nostre barri.`;
+    const userPrompt = `Utilitzant la informació real obtinguda d'internet per a la teva redacció:\n\n${searchContext}\n\nSi us plau, redacta la notícia d'avui basant-te exclusivament en els fets reals anteriors. Recorda utilitzar la geolocalització del barri per connectar els fets generals amb els carrers i entorns del nostre barri.`;
 
     let generatedArticle;
     
@@ -191,7 +193,8 @@ Instruccions de format:
             { role: "system", content: systemInstruction },
             { role: "user", content: userPrompt }
           ],
-          response_format: { type: "json_object" }
+          response_format: { type: "json_object" },
+          temperature: 0.2
         })
       });
 
@@ -219,7 +222,8 @@ Instruccions de format:
             parts: [{ text: systemInstruction }]
           },
           generationConfig: {
-            responseMimeType: "application/json"
+            responseMimeType: "application/json",
+            temperature: 0.2
           }
         })
       });

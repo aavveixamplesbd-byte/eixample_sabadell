@@ -6,24 +6,24 @@ const { lang = 'ca' } = Astro.props;
 
 const t = {
   ca: {
-    category: "Arquitectura",
-    titlePrefix: "L'Elegància del",
-    titleItalic: "Modernisme",
-    body: "L'èxit industrial va portar una nova burgesia que va voler reflectir el seu estatus a través de l'art. L'Eixample es va omplir de façanes ornamentades, ferro forjat i mosaics que trencaven la monotonia industrial amb línies corbes i motius florals.",
-    item1Title: "Artesania Única",
-    item1Desc: "Treball meticulós en vidre, ceràmica i fusta noble.",
-    item2Title: "Cases Senyorials",
-    item2Desc: "Residències que definien el prestigi dels capitans d'indústria."
+    category: "Llegenda Urbana",
+    titlePrefix: "El Monstre de les",
+    titleItalic: "Clavegueres",
+    body: "El setembre de 1981, el carrer Brutau de l'Eixample va viure un dels capítols més insòlits de la seva història. Després d'un embossament al clavegueram del Bar Sans, es va extreure una criatura viscosa de 4 metres de llargada amb aspecte de calamar gegant. El veterinari municipal va arribar a parlar d'una possible mutació abans que es descobrís la veritat: eren budells de cavall en descomposició. La llegenda del 'Bitxo de Sabadell', però, ja s'havia quedat per sempre al barri.",
+    item1Title: "La Histèria Col·lectiva",
+    item1Desc: "La policia i desenes de curiosos es van aplegar al voltant del clavegueram del carrer Brutau.",
+    item2Title: "El Bar Sans",
+    item2Desc: "El punt zero de l'Eixample on es va originar un dels misteris més comentats de la Catalunya dels 80."
   },
   es: {
-    category: "Arquitectura",
-    titlePrefix: "La Elegancia del",
-    titleItalic: "Modernismo",
-    body: "El éxito industrial trajo una nueva burguesía que quiso reflejar su estatus a través del arte. El Eixample se llenó de fachadas ornamentadas, hierro forjado y mosaicos que rompían la monotonía industrial con líneas curvas y motivos florales.",
-    item1Title: "Artesanía Única",
-    item1Desc: "Trabajo meticuloso en vidrio, cerámica y madera noble.",
-    item2Title: "Casas Señoriales",
-    item2Desc: "Residencias que definían el prestigio de los capitanes de industria."
+    category: "Leyenda Urbana",
+    titlePrefix: "El Monstruo de las",
+    titleItalic: "Cloacas",
+    body: "En septiembre de 1981, la calle Brutau del Eixample vivió uno de los capítulos más insólitos de su historia. Tras un atasco en las tuberías del Bar Sans, se extrajo una criatura viscosa de 4 metros de largo con aspecto de calamar gigante. El veterinario municipal llegó a hablar de una posible mutación antes de que se descubriera la verdad: eran intestinos de caballo en descomposición. Sin embargo, la leyenda del 'Bicho de Sabadell' ya se había quedado para siempre en el barrio.",
+    item1Title: "La Histeria Colectiva",
+    item1Desc: "La policía y decenas de curiosos se agolparon alrededor del alcantarillado de la calle Brutau.",
+    item2Title: "El Bar Sans",
+    item2Desc: "El punto cero del Eixample donde se originó uno de los misterios más comentados de la Cataluña de los 80."
   }
 }[lang];
 ---
@@ -33,9 +33,9 @@ const t = {
     <div class="relative w-full">
       <div class="absolute -top-10 -left-10 w-40 h-40 bg-primary-fixed-dim/20 rounded-full blur-3xl z-0"></div>
       <img 
-        alt="Catalan Modernism facade" 
+        alt="Sewer Monster of Sabadell 1981" 
         class="rounded-2xl shadow-2xl relative z-10 w-full aspect-[4/5] object-cover" 
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgBsqhJergu2aENKrydmGpHHgfZZhw042lbYPxd5o1byGP6oSN0_9YLtGmd6Ay2WmZPgUlRKtRqGn4v5vnWZQq57q0xmcNHyDpFAIJJDs-X-wGLopF6SX9BpPsufiYhi_0dp3PoioHNghWpC29UiKsvjV-y_GaNE0VTzfduD8m_Lf-_VlclPY-Mg2hf9PdNw-h8lfS1Y2wr9r5A2H3-JInbnlIJo6b7W-g4SxgBYoIyc5U8rKIwcqP8CJCljZobI31qyshxKsnslg_"
+        src="/sewer_monster_sabadell.png"
       />
     </div>
     <div class="w-full relative z-10">
@@ -49,7 +49,7 @@ const t = {
       <ul class="space-y-6">
         <li class="flex gap-4 items-start">
           <div class="w-12 h-12 rounded-full bg-secondary-fixed flex-shrink-0 flex items-center justify-center">
-            <span class="material-symbols-outlined text-primary">palette</span>
+            <span class="material-symbols-outlined text-primary">groups</span>
           </div>
           <div>
             <h5 class="font-label-md text-primary font-bold text-base">{t.item1Title}</h5>
@@ -58,7 +58,7 @@ const t = {
         </li>
         <li class="flex gap-4 items-start">
           <div class="w-12 h-12 rounded-full bg-secondary-fixed flex-shrink-0 flex items-center justify-center">
-            <span class="material-symbols-outlined text-primary">home_work</span>
+            <span class="material-symbols-outlined text-primary">local_bar</span>
           </div>
           <div>
             <h5 class="font-label-md text-primary font-bold text-base">{t.item2Title}</h5>

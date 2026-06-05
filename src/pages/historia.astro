@@ -7,6 +7,7 @@ import Timeline from '../components/Timeline.astro';
 import Modernism from '../components/Modernism.astro';
 import ModernismGallery from '../components/ModernismGallery.astro';
 import FloodLegend from '../components/FloodLegend.astro';
+import AirRaidShelter from '../components/AirRaidShelter.astro';
 import Footer from '../components/Footer.astro';
 
 const t = {
@@ -19,6 +20,7 @@ const t = {
 const navItems = [
   { id: "cronologia-industrial", label: "Cronologia Industrial" },
   { id: "monstre-clavegueres", label: "El Bitxo de Sabadell" },
+  { id: "refugi-buxeda", label: "Refugi Antiaeri" },
   { id: "riuada-62", label: "La Riuada del 62" }
 ];
 ---
@@ -74,6 +76,7 @@ const navItems = [
     <Modernism lang="ca" />
     <ModernismGallery lang="ca" />
     <FloodLegend lang="ca" />
+    <AirRaidShelter lang="ca" />
 
     {/* Custom History CTA Section */}
     <section class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">

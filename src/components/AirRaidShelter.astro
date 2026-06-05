@@ -1,0 +1,151 @@
+---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    sectionTitle: "El Refugi Antiaeri de Buxeda 23",
+    sectionSubtitle: "Un tresor amagat sota l'Eixample",
+    badge: "GUERRA CIVIL (1937-1939)",
+    intro: "Sabadell va projectar 12 refugis antiaeris durant la Guerra Civil Espanyola, però només se'n van construir 3. Un d'ells, el del carrer de Buxada 23 (cantoada amb Tetuan), és l'únic al qual encara es pot accedir. I està al cor del nostre barri.",
+    discoveryTitle: "El refugi, en xifres",
+    stats: [
+      { number: "300 m²", label: "Superfície subterrània", desc: "Tres naus paral·leles de 100 m² cadascuna" },
+      { number: "450-675", label: "Persones de capacitat", desc: "Un dels refugis civils més grans de Sabadell" },
+      { number: "5 m", label: "Profunditat", desc: "S'hi baixa per una escala de 30 esglaons" },
+      { number: "16", label: "Respiraderos de ventilació", desc: "Garantien l'aire fresc durant les llargues estones" }
+    ],
+    storyTitle: "Un refugi que gairebé no es va usar",
+    storyDesc: "Construït entre 1937 i 1939 per la Junta Local de Defensa Passiva, el refugi va tenir poc ús real. Sabadell només va patir dos bombardejos aeris durant tota la guerra: un el 13 de febrer de 1937 a les rodalies de l'aeròdrom, i un altre el 25 de gener de 1939 a les afueres de la ciutat. Una hipòtesi apunta que molts industrials tèxtils del barri es van passar al bando nacional per protegir les seves fàbriques dels atacs.",
+    curiosityTitle: "De refugi a... cultiu de xampinyons",
+    curiosityDesc: "Entre 1956 i 1987, un cultivador anomenat Pere Salaet va utilitzar el refugi (i d'altres) per fer créixer xampinyons, aprofitant la humitat constant i la temperatura estable de l'espai subterrani. Durant dècades, mentre els veïns feien vida al carrer de Buxeda, sota els seus peus hi creixien bolets.",
+    protectedTitle: "Protegit, però invisible",
+    protectedDesc: "El refugi està catalogat al Pla Especial de Protecció del Patrimoni (PEPS) de Sabadell com a 'arquitectura de defensa'. No es pot alterar ni destruir. Tanmateix, és de propietat privada —l'accés és des de l'interior d'un pis al número 23— i no està obert al públic. Una placa informativa al carrer seria el primer pas per donar a conèixer aquesta joia amagada.",
+    source: "Font: Diari de Sabadell / Museu d'Història de Sabadell (MHS)"
+  },
+  es: {
+    sectionTitle: "El Refugio Antiaéreo de Buxeda 23",
+    sectionSubtitle: "Un tesoro escondido bajo el Eixample",
+    badge: "GUERRA CIVIL (1937-1939)",
+    intro: "Sabadell proyectó 12 refugios antiaéreos durante la Guerra Civil Española, pero solo se construyeron 3. Uno de ellos, el de la calle Buxeda 23 (esquina con Tetuán), es el único al que todavía se puede acceder. Y está en el corazón de nuestro barrio.",
+    discoveryTitle: "El refugio, en cifras",
+    stats: [
+      { number: "300 m²", label: "Superficie subterránea", desc: "Tres naves paralelas de 100 m² cada una" },
+      { number: "450-675", label: "Personas de capacidad", desc: "Uno de los refugios civiles más grandes de Sabadell" },
+      { number: "5 m", label: "Profundidad", desc: "Se baja por una escalera de 30 peldaños" },
+      { number: "16", label: "Respiraderos de ventilación", desc: "Garantizaban el aire fresco durante las largas estancias" }
+    ],
+    storyTitle: "Un refugio que apenas se usó",
+    storyDesc: "Construido entre 1937 y 1939 por la Junta Local de Defensa Pasiva, el refugio tuvo poco uso real. Sabadell solo sufrió dos bombardeos aéreos durante toda la guerra: uno el 13 de febrero de 1937 en los alrededores del aeródromo, y otro el 25 de enero de 1939 en las afueras de la ciudad. Una hipótesis apunta que muchos industriales textiles del barrio se pasaron al bando nacional para proteger sus fábricas de los ataques.",
+    curiosityTitle: "De refugio a... cultivo de champiñones",
+    curiosityDesc: "Entre 1956 y 1987, un cultivador llamado Pere Salaet utilizó el refugio (y otros) para hacer crecer champiñones, aprovechando la humedad constante y la temperatura estable del espacio subterráneo. Durante décadas, mientras los vecinos hacían vida en la calle Buxeda, bajo sus pies crecían setas.",
+    protectedTitle: "Protegido, pero invisible",
+    protectedDesc: "El refugio está catalogado en el Plan Especial de Protección del Patrimonio (PEPS) de Sabadell como 'arquitectura de defensa'. No se puede alterar ni destruir. Sin embargo, es de propiedad privada —el acceso es desde el interior de un piso en el número 23— y no está abierto al público. Una placa informativa en la calle sería el primer paso para dar a conocer esta joya escondida.",
+    source: "Fuente: Diari de Sabadell / Museu d'Història de Sabadell (MHS)"
+  }
+}[lang];
+
+// Image URL (via CloudFront CDN del Diari de Sabadell)
+const interiorImg = "https://d5r1tkwwv7d5g.cloudfront.net/articulos/articulos-534305.jpg";
+---
+
+<section id="refugi-buxeda" class="py-24 bg-surface-container-lowest relative overflow-hidden" style="scroll-margin-top: 80px">
+  {/* Decorative elements */}
+  <div class="absolute top-0 left-0 w-96 h-96 bg-amber-900/5 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 right-0 w-80 h-80 bg-stone-800/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+
+    {/* Header with image */}
+    <div class="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="relative w-full order-2 lg:order-1">
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-amber-900/10 rounded-full blur-3xl z-0"></div>
+        <img
+          alt="Interior del refugi antiaeri del carrer Buxeda 23"
+          class="rounded-2xl shadow-2xl relative z-10 w-full aspect-[4/3] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+          src={interiorImg}
+        />
+        <p class="text-xs text-on-surface-variant mt-2 text-center">Lluís Franco / Diari de Sabadell</p>
+      </div>
+      <div class="w-full relative z-10 order-1 lg:order-2">
+        <span class="font-label-md uppercase tracking-[0.25em] text-amber-700 font-semibold block mb-4">
+          {t.sectionTitle}
+        </span>
+        <h2 class="font-display-lg text-3xl sm:text-4xl md:text-5xl text-on-surface font-extrabold tracking-tight mb-6">
+          {t.sectionSubtitle}
+        </h2>
+        <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed">
+          {t.intro}
+        </p>
+      </div>
+    </div>
+
+    {/* Stats Grid */}
+    <div class="mb-20">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-12 text-center">{t.discoveryTitle}</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        {
+          t.stats.map((stat) => (
+            <div class="bg-white rounded-2xl p-8 text-center hover:shadow-md transition-all border border-outline-variant/10">
+              <span class="font-display-lg text-3xl sm:text-4xl text-amber-700 font-extrabold block mb-2">{stat.number}</span>
+              <h4 class="font-bold text-sm text-on-surface mb-1">{stat.label}</h4>
+              <p class="text-xs text-on-surface-variant">{stat.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Story + Mapa de situació */}
+    <div class="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+      <div>
+        <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-6">{t.storyTitle}</h3>
+        <p class="text-on-surface-variant text-base leading-relaxed">{t.storyDesc}</p>
+      </div>
+      <div class="relative">
+        <iframe
+          width="100%"
+          height="300"
+          style="border:0; border-radius: 16px;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2982.12!2d2.1051!3d41.5488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4986c824fe6c7%3A0x7b8e7e8e8e8e8e8e!2sCarrer%20de%20Buxeda%2C%2023%2C%2008204%20Sabadell!5e0!3m2!1sca!2ses!4v1"
+        ></iframe>
+        <p class="text-xs text-on-surface-variant mt-2 text-center">Carrer de Buxeda, 23 — cantonada Tetuan</p>
+      </div>
+    </div>
+
+    {/* Curiosity Card */}
+    <div class="mb-16">
+      <div class="bg-gradient-to-br from-amber-900 via-stone-900 to-slate-900 rounded-[32px] p-8 sm:p-12 md:p-16 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 blur-[100px] rounded-full"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-stone-500/10 blur-[80px] rounded-full"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+          <span class="text-6xl mb-4 block">🍄</span>
+          <h3 class="font-display-lg text-3xl sm:text-4xl text-white font-extrabold mb-6">{t.curiosityTitle}</h3>
+          <p class="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
+            {t.curiosityDesc}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Protected section + source */}
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-5 py-2 bg-amber-50 rounded-full text-amber-800 font-bold text-sm mb-6">
+        <span class="material-symbols-outlined text-lg">shield</span>
+        <span>Protegit / Protegido</span>
+      </div>
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-6">{t.protectedTitle}</h3>
+      <p class="text-on-surface-variant text-base leading-relaxed max-w-3xl mx-auto mb-8">
+        {t.protectedDesc}
+      </p>
+      <p class="text-xs text-on-surface-variant/60 italic">{t.source}</p>
+    </div>
+
+  </div>
+</section>

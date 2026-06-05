@@ -97,7 +97,7 @@ async function run() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         api_key: TAVILY_API_KEY,
-        query: `${activeTheme.query} Sabadell`,
+        query: `${activeTheme.query} Sabadell ${new Date().getFullYear()}`,
         include_images: true,
         search_depth: "advanced"
       })
@@ -120,21 +120,89 @@ async function run() {
         !img.includes("instagram.com")
       );
       if (validImages.length > 0) {
-        imageUrl = validImages[0];
-        console.log(`Imagen seleccionada de Tavily: ${imageUrl}`);
+        // Seleccionar una imagen al azar de las primeras 3 válidas para dar mayor variedad
+        const limit = Math.min(validImages.length, 3);
+        const randomIndex = Math.floor(Math.random() * limit);
+        imageUrl = validImages[randomIndex];
+        console.log(`Imagen seleccionada de Tavily (índice ${randomIndex}): ${imageUrl}`);
       }
     }
 
     if (!imageUrl) {
+      console.log("No se encontraron imágenes en la primera búsqueda. Intentando búsqueda simplificada de Tavily...");
+      try {
+        const fallbackQuery = `${activeTheme.category} Sabadell`;
+        const tavilyFallbackResponse = await fetch("https://api.tavily.com/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            api_key: TAVILY_API_KEY,
+            query: fallbackQuery,
+            include_images: true,
+            search_depth: "basic"
+          })
+        });
+        if (tavilyFallbackResponse.ok) {
+          const fallbackData = await tavilyFallbackResponse.json();
+          if (fallbackData.images && fallbackData.images.length > 0) {
+            const validFallbackImages = fallbackData.images.filter(img => 
+              img.startsWith("http") && 
+              !img.includes(".svg") &&
+              !img.includes("lookaside") &&
+              !img.includes("fbcdn") &&
+              !img.includes("instagram.com")
+            );
+            if (validFallbackImages.length > 0) {
+              const limit = Math.min(validFallbackImages.length, 3);
+              const randomIndex = Math.floor(Math.random() * limit);
+              imageUrl = validFallbackImages[randomIndex];
+              console.log(`Imagen seleccionada de Tavily simplificada (índice ${randomIndex}): ${imageUrl}`);
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Error al intentar buscar imagen simplificada en Tavily:", err.message);
+      }
+    }
+
+    if (!imageUrl) {
+      console.log("No se obtuvieron imágenes de Tavily. Seleccionando del banco de fotos de respaldo...");
       const unsplashFallbacks = {
-        "Urbanisme": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80",
-        "Consells i Salut": "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=800&q=80",
-        "Història": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
-        "Activitats": "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
-        "Comerç": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80"
+        "Urbanisme": [
+          "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=800&q=80"
+        ],
+        "Consells i Salut": [
+          "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1447433589675-4adf566200c9?auto=format&fit=crop&w=800&q=80"
+        ],
+        "Història": [
+          "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1455165814004-1126a7199f9b?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?auto=format&fit=crop&w=800&q=80"
+        ],
+        "Activitats": [
+          "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=800&q=80"
+        ],
+        "Comerç": [
+          "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80"
+        ]
       };
-      imageUrl = unsplashFallbacks[activeTheme.category] || "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80";
-      console.log(`Imagen de fallback seleccionada: ${imageUrl}`);
+      const pool = unsplashFallbacks[activeTheme.category] || ["https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80"];
+      const randomFallbackIndex = Math.floor(Math.random() * pool.length);
+      imageUrl = pool[randomFallbackIndex];
+      console.log(`Imagen de fallback seleccionada (índice ${randomFallbackIndex}): ${imageUrl}`);
     }
 
     // 1.5 Obtener noticias recientes de Supabase para evitar duplicidades

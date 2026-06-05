@@ -1,0 +1,98 @@
+---
+interface Section {
+  id: string;
+  icon: string;
+  title: string;
+  subtitle: string;
+  color: string; // Tailwind color class
+}
+
+interface Props {
+  lang?: 'ca' | 'es';
+}
+
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    heading: "Explora la història de l'Eixample",
+    sections: [
+      {
+        id: "cronologia-industrial",
+        icon: "timeline",
+        title: "Cronologia Industrial",
+        subtitle: "Del ferrocarril al segle XXI: l'evolució del barri",
+        color: "from-primary/80 to-primary/40"
+      },
+      {
+        id: "monstre-clavegueres",
+        icon: "bio",
+        title: "El Bitxo de Sabadell",
+        subtitle: "La llegenda urbana que va paralitzar l'Eixample el 1981",
+        color: "from-emerald-600/80 to-emerald-500/40"
+      },
+      {
+        id: "riuada-62",
+        icon: "water_damage",
+        title: "La Riuada del 62",
+        subtitle: "La pitjor catàstrofe natural de la història de Sabadell",
+        color: "from-red-600/80 to-red-500/40"
+      }
+    ]
+  },
+  es: {
+    heading: "Explora la historia del Eixample",
+    sections: [
+      {
+        id: "cronologia-industrial",
+        icon: "timeline",
+        title: "Cronología Industrial",
+        subtitle: "Del ferrocarril al siglo XXI: la evolución del barrio",
+        color: "from-primary/80 to-primary/40"
+      },
+      {
+        id: "monstre-clavegueres",
+        icon: "bio",
+        title: "El Bicho de Sabadell",
+        subtitle: "La leyenda urbana que paralizó el Eixample en 1981",
+        color: "from-emerald-600/80 to-emerald-500/40"
+      },
+      {
+        id: "riuada-62",
+        icon: "water_damage",
+        title: "La Riada del 62",
+        subtitle: "La peor catástrofe natural de la historia de Sabadell",
+        color: "from-red-600/80 to-red-500/40"
+      }
+    ]
+  }
+}[lang];
+---
+
+<section class="py-16 bg-surface-container-lowest">
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+    <div class="text-center mb-10">
+      <h2 class="font-headline-lg text-2xl text-on-surface font-bold">{t.heading}</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {t.sections.map((section) => (
+        <a
+          href={`#${section.id}`}
+          class="group relative overflow-hidden rounded-2xl bg-surface-container-low border border-outline-variant/10 p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg block"
+        >
+          {/* Color bar on top */}
+          <div class={`h-1.5 w-full bg-gradient-to-r ${section.color} absolute top-0 left-0`}></div>
+          
+          <div class="pt-2">
+            <div class="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center mb-5 group-hover:bg-primary/10 transition-colors">
+              <span class="material-symbols-outlined text-primary text-2xl">{section.icon}</span>
+            </div>
+            <h3 class="font-bold text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">{section.title}</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">{section.subtitle}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

@@ -4,8 +4,9 @@ import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import HistoryHero from '../components/HistoryHero.astro';
 import Timeline from '../components/Timeline.astro';
-import ChimneysBento from '../components/ChimneysBento.astro';
 import Modernism from '../components/Modernism.astro';
+import ModernismGallery from '../components/ModernismGallery.astro';
+import FloodLegend from '../components/FloodLegend.astro';
 import Footer from '../components/Footer.astro';
 
 const t = {
@@ -14,17 +15,65 @@ const t = {
   btn1: "Reservar Visita",
   btn2: "Veure l'Arxiu"
 };
+
+const navItems = [
+  { id: "cronologia-industrial", label: "Cronologia Industrial" },
+  { id: "monstre-clavegueres", label: "El Bitxo de Sabadell" },
+  { id: "riuada-62", label: "La Riuada del 62" }
+];
 ---
 
 <Layout title="Història - Eixample Sabadell" lang="ca">
   <Navbar client:load />
   
-  <main>
+  {/* Sidebar - fixed left on desktop */}
+  <nav class="hidden md:block fixed left-0 top-0 h-screen w-64 z-40 pt-24 pb-8 overflow-y-auto bg-surface-container-lowest border-r border-outline-variant/10">
+    <div class="px-6">
+      <span class="font-label-md uppercase tracking-[0.2em] text-primary font-semibold text-xs block mb-6">
+        En aquesta pàgina
+      </span>
+      
+      <ul class="space-y-1">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={`#${item.id}`}
+              class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200 border-l-2 border-transparent hover:border-primary"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      
+      <div class="mt-8 pt-6 border-t border-outline-variant/10">
+        <p class="text-xs text-on-surface-variant leading-relaxed">
+          Fes clic en una secció per desplaçar-t'hi ràpidament.
+        </p>
+      </div>
+    </div>
+  </nav>
+
+  {/* Mobile bottom nav */}
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-outline-variant/10 shadow-lg px-4 py-3 flex justify-around">
+    {navItems.map((item) => (
+      <a
+        href={`#${item.id}`}
+        class="flex flex-col items-center gap-0.5 text-xs text-on-surface-variant hover:text-primary transition-colors font-medium"
+      >
+        <span class="font-medium truncate max-w-[80px]">{item.label}</span>
+      </a>
+    ))}
+  </div>
+
+  {/* Main content - offset left for sidebar on desktop */}
+  <main class="md:ml-64 pb-16 md:pb-0">
     <Breadcrumbs lang="ca" items={[{ label: 'Història' }]} />
     <HistoryHero lang="ca" />
     <Timeline lang="ca" />
-    <ChimneysBento lang="ca" />
     <Modernism lang="ca" />
+    <ModernismGallery lang="ca" />
+    <FloodLegend lang="ca" />
 
     {/* Custom History CTA Section */}
     <section class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">

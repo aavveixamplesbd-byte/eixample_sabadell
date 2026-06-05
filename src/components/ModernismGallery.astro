@@ -1,0 +1,330 @@
+---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    sectionTitle: "El Bitxo de Sabadell",
+    sectionSubtitle: "La llegenda urbana que va paralitzar l'Eixample el 1981",
+    intro: "El 2 de setembre de 1981, un embussament al lavadero del Bar Sans, al carrer Brutau, va desencadenar una histèria col·lectiva que va traspassar les fronteres de Sabadell. Durant dies, veïns, mitjans de comunicació i fins i tot el veterinari municipal van especular sobre l'origen d'una misteriosa criatura viscosa extreta de les clavegueres.",
+    timelineTitle: "Cronologia dels fets",
+    timeline: [
+      { date: "2 setembre 1981", title: "L'embussament", desc: "Els propietaris del Bar Sans (cantonada Brutau amb Buxeda) detecten una averia al lavadero. En obrir les canonades, una massa viscosa de 3-4 metres comença a emergir." },
+      { date: "2-3 setembre 1981", title: "La histèria col·lectiva", desc: "Veïns s'apleguen al carrer Brutau. La policia local acordon la zona. Es diu que la criatura té ventoses i pell negra, com un calamar gegant." },
+      { date: "3 setembre 1981", title: "El veterinari municipal", desc: "El veterinari de Sabadell examina la massa i suggereix que podria tractar-se d'una espècie desconeguda o un mutant. La notícia surt a la premsa comarcal." },
+      { date: "4 setembre 1981", title: "El desenllaç", desc: "Anàlisis posteriors revelen que no era cap criatura viva: eren budells de cavall en descomposició, barrejats amb greixos, detergents i residus orgànics acumulats." },
+      { date: "2024-2025", title: "Llegenda viva", desc: "El 'Bitxo de Sabadell' torna als mitjans: Cuarto Milenio li dedica un reportatge, la Cadena SER en parla, i xarxes com TikTok i Instagram el redescobreixen." }
+    ],
+    pressTitle: "La premsa se'n va fer ressò",
+    pressDesc: "El cas va aparèixer en diversos mitjans locals i nacionals. Des de la premsa comarcal fins a programes de misteri com Cuarto Milenio, el 'Bitxo de Sabadell' s'ha convertit en una de les llegendes urbanes més singulars de Catalunya.",
+    pressClippings: [
+      {
+        newspaper: "Diari de Sabadell",
+        headline: "Una misteriosa criatura apareix al clavegueram del carrer Brutau",
+        excerpt: "Veïns de l'Eixample van alertar ahir a la policia després que una massa informe i gelatinosa emergís del desguàs del Bar Sans. La 'cosa', de quasi 4 metres, va provocar el trasbals al barri.",
+        date: "3 setembre 1981"
+      },
+      {
+        newspaper: "El Caso (estil)",
+        headline: "El monstre de les clavegueres aterroritza Sabadell",
+        excerpt: "Els clients del Bar Sans van viure moments d'autèntic pànic en veure emergir de les canonades una criatura negra i viscosa. Corren rumors de mutació radioactiva.",
+        date: "Setembre 1981"
+      },
+      {
+        newspaper: "Cuarto Milenio (Cuatro TV)",
+        headline: "El monstruo de las cloacas de Sabadell",
+        excerpt: "Iker Jiménez analitza un dels casos de criptozoologia més curiosos d'Espanya. Un ésser que vivia a les aigües estancades de l'Eixample.",
+        date: "2024"
+      },
+      {
+        newspaper: "Cadena SER",
+        headline: "El misterio del bicho de Sabadell",
+        excerpt: "David Justo recull la història del 'monstre' que va fer que tota una ciutat tingués por d'anar al lavabo. La conclusió: era una bola de greix i residus.",
+        date: "Agost 2025"
+      }
+    ],
+    testimoniesTitle: "Testimonis i veus",
+    testimonies: [
+      {
+        quote: "Mi padre tuvo ese bar durante unos años. No era ni un monstruo ni tonterías... fue un atasco gordo, nada más.",
+        author: "Veí de Sabadell (testimoni a TikTok)",
+        role: "Fill d'un antic propietari del Bar Sans"
+      },
+      {
+        quote: "El hombre, en vez de tranquilizar a la población, se puso en plan Steven Spielberg y comenzó a decir que tal vez se trataba de una especie nueva. Un mutante subterráneo.",
+        author: "David Justo (Cadena SER)",
+        role: "Periodista"
+      },
+      {
+        quote: "Se decía que había colonias enteras de estos bichos underground. La gente tenía miedo de usar el baño, no te exagero.",
+        author: "Ràdio Sabadell",
+        role: "Ressenya històrica 2025"
+      }
+    ],
+    explanationTitle: "Què era realment?",
+    explanationDesc: "Tot i el rebombori mediàtic, la veritat és molt menys terrorífica (tot i que igual de desagradable).",
+    explanationItems: [
+      {
+        icon: "science",
+        title: "Acumulació de residus",
+        desc: "Greixos, detergents, restes orgàniques i espuma s'havien anat acumulant a les canonades del Bar Sans durant mesos o anys."
+      },
+      {
+        icon: "biotech",
+        title: "Reacció química",
+        desc: "La barreja de productes de neteja amb matèria orgànica va crear una massa gelatinosa que, per la pendent de les tuberies, semblava moure's sola."
+      },
+      {
+        icon: "clean_hands",
+        title: "Budells de cavall",
+        desc: "L'origen probable: restes de budells de cavall del escorxador proper (carrer Costa i Deu) que van anar a parar al clavegueram i es van barrejar amb la porqueria acumulada."
+      },
+      {
+        icon: "emoji_objects",
+        title: "Efecte òptic",
+        desc: "La massa, en ser extreta i manipular-la, va donar una aparença de criatura. La imaginació popular i els rumors van fer la resta."
+      }
+    ],
+    legacyTitle: "El 'Bitxo' avui",
+    legacyDesc: "44 anys després, el Bitxo de Sabadell continua viu a la memòria col·lectiva del barri. Programes de televisió, pòdcasts i xarxes socials l'han redescobert, convertint-lo en una icona pop de la criptozoologia catalana. El 2025, la Cadena SER li va dedicar un reportatge, demostrant que algunes llegendes no moren mai.",
+    legacyCta: "Vols saber-ne més? Visita el Bar Sans (carrer Brutau) i parla amb els veïns de tota la vida. La història és d'ells."
+  },
+  es: {
+    sectionTitle: "El Bicho de Sabadell",
+    sectionSubtitle: "La leyenda urbana que paralizó el Eixample en 1981",
+    intro: "El 2 de septiembre de 1981, un atasco en el lavadero del Bar Sans, en la calle Brutau, desencadenó una histeria colectiva que traspasó las fronteras de Sabadell. Durante días, vecinos, medios de comunicación e incluso el veterinario municipal especularon sobre el origen de una misteriosa criatura viscosa extraída de las alcantarillas.",
+    timelineTitle: "Cronología de los hechos",
+    timeline: [
+      { date: "2 septiembre 1981", title: "El atasco", desc: "Los propietarios del Bar Sans (esquina Brutau con Buxeda) detectan una avería en el lavadero. Al abrir las tuberías, una masa viscosa de 3-4 metros comienza a emerger." },
+      { date: "2-3 septiembre 1981", title: "La histeria colectiva", desc: "Vecinos se agolpan en la calle Brutau. La policía local acordona la zona. Se dice que la criatura tiene ventosas y piel negra, como un calamar gigante." },
+      { date: "3 septiembre 1981", title: "El veterinario municipal", desc: "El veterinario de Sabadell examina la masa y sugiere que podría tratarse de una especie desconocida o un mutante. La noticia sale en la prensa comarcal." },
+      { date: "4 septiembre 1981", title: "El desenlace", desc: "Análisis posteriores revelan que no era ninguna criatura viva: eran intestinos de caballo en descomposición, mezclados con grasas, detergentes y residuos orgánicos acumulados." },
+      { date: "2024-2025", title: "Leyenda viva", desc: "El 'Bicho de Sabadell' vuelve a los medios: Cuarto Milenio le dedica un reportaje, la Cadena SER habla de él, y redes como TikTok e Instagram lo redescubren." }
+    ],
+    pressTitle: "La prensa se hizo eco",
+    pressDesc: "El caso apareció en varios medios locales y nacionales. Desde la prensa comarcal hasta programas de misterio como Cuarto Milenio, el 'Bicho de Sabadell' se ha convertido en una de las leyendas urbanas más singulares de Cataluña.",
+    pressClippings: [
+      {
+        newspaper: "Diari de Sabadell",
+        headline: "Una misteriosa criatura aparece en el alcantarillado de la calle Brutau",
+        excerpt: "Vecinos del Eixample alertaron ayer a la policía tras emerger una masa informe y gelatinosa del desagüe del Bar Sans. La 'cosa', de casi 4 metros, provocó el revuelo en el barrio.",
+        date: "3 septiembre 1981"
+      },
+      {
+        newspaper: "El Caso (estilo)",
+        headline: "El monstruo de las cloacas aterroriza Sabadell",
+        excerpt: "Los clientes del Bar Sans vivieron momentos de auténtico pánico al ver emerger de las tuberías una criatura negra y viscosa. Corren rumores de mutación radiactiva.",
+        date: "Septiembre 1981"
+      },
+      {
+        newspaper: "Cuarto Milenio (Cuatro TV)",
+        headline: "El monstruo de las cloacas de Sabadell",
+        excerpt: "Iker Jiménez analiza uno de los casos de criptozoología más curiosos de España. Un ser que vivía en las aguas estancadas del Eixample.",
+        date: "2024"
+      },
+      {
+        newspaper: "Cadena SER",
+        headline: "El misterio del bicho de Sabadell",
+        excerpt: "David Justo recoge la historia del 'monstruo' que hizo que toda una ciudad tuviera miedo de ir al baño. La conclusión: era una bola de grasa y residuos.",
+        date: "Agosto 2025"
+      }
+    ],
+    testimoniesTitle: "Testimonios y voces",
+    testimonies: [
+      {
+        quote: "Mi padre tuvo ese bar durante unos años. No era ni un monstruo ni tonterías... fue un atasco gordo, nada más.",
+        author: "Vecino de Sabadell (testimonio en TikTok)",
+        role: "Hijo de un antiguo propietario del Bar Sans"
+      },
+      {
+        quote: "El hombre, en vez de tranquilizar a la población, se puso en plan Steven Spielberg y comenzó a decir que tal vez se trataba de una especie nueva. Un mutante subterráneo.",
+        author: "David Justo (Cadena SER)",
+        role: "Periodista"
+      },
+      {
+        quote: "Se decía que había colonias enteras de estos bichos underground. La gente tenía miedo de usar el baño, no te exagero.",
+        author: "Ràdio Sabadell",
+        role: "Reseña histórica 2025"
+      }
+    ],
+    explanationTitle: "¿Qué era realmente?",
+    explanationDesc: "A pesar del revuelo mediático, la verdad es mucho menos terrorífica (aunque igual de desagradable).",
+    explanationItems: [
+      {
+        icon: "science",
+        title: "Acumulación de residuos",
+        desc: "Grasas, detergentes, restos orgánicos y espuma se habían ido acumulando en las tuberías del Bar Sans durante meses o años."
+      },
+      {
+        icon: "biotech",
+        title: "Reacción química",
+        desc: "La mezcla de productos de limpieza con materia orgánica creó una masa gelatinosa que, por la pendiente de las tuberías, parecía moverse sola."
+      },
+      {
+        icon: "clean_hands",
+        title: "Intestinos de caballo",
+        desc: "El origen probable: restos de intestinos de caballo del matadero cercano (calle Costa i Deu) que fueron a parar al alcantarillado y se mezclaron con la porquería acumulada."
+      },
+      {
+        icon: "emoji_objects",
+        title: "Efecto óptico",
+        desc: "La masa, al ser extraída y manipulada, daba una apariencia de criatura. La imaginación popular y los rumores hicieron el resto."
+      }
+    ],
+    legacyTitle: "El 'Bicho' hoy",
+    legacyDesc: "44 años después, el Bicho de Sabadell sigue vivo en la memoria colectiva del barrio. Programas de televisión, pódcasts y redes sociales lo han redescubierto, convirtiéndolo en un icono pop de la criptozoología catalana. En 2025, la Cadena SER le dedicó un reportaje, demostrando que algunas leyendas nunca mueren.",
+    legacyCta: "¿Quieres saber más? Visita el Bar Sans (calle Brutau) y habla con los vecinos de toda la vida. La historia es suya."
+  }
+}[lang];
+---
+
+<section class="py-24 bg-surface-container-lowest relative overflow-hidden">
+  {/* Decorative background blob */}
+  <div class="absolute top-0 right-0 w-96 h-96 bg-primary-fixed-dim/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-80 h-80 bg-secondary-fixed/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+    
+    {/* Section Header */}
+    <div class="mb-16 text-center">
+      <span class="font-label-md uppercase tracking-[0.25em] text-primary font-semibold block mb-4">
+        {t.sectionTitle}
+      </span>
+      <h2 class="font-display-lg text-3xl sm:text-4xl md:text-5xl text-on-surface font-extrabold tracking-tight mb-6">
+        {t.sectionSubtitle}
+      </h2>
+      <p class="max-w-3xl mx-auto text-on-surface-variant text-base sm:text-lg leading-relaxed">
+        {t.intro}
+      </p>
+    </div>
+
+    {/* Timeline */}
+    <div class="mb-24">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-12 text-center">{t.timelineTitle}</h3>
+      <div class="relative max-w-3xl mx-auto">
+        {/* Vertical line */}
+        <div class="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 w-0.5 h-full bg-primary/20"></div>
+        
+        <div class="space-y-12">
+          {
+            t.timeline.map((event, idx) => (
+              <div class={`relative flex items-start gap-6 md:gap-0 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                {/* Dot */}
+                <div class="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-3 h-3 bg-primary rounded-full z-10 ring-4 ring-surface-container-lowest mt-1.5"></div>
+                
+                {/* Content */}
+                <div class={`ml-14 md:ml-0 md:w-[45%] ${idx % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
+                  <span class="text-primary font-bold text-sm tracking-wider">{event.date}</span>
+                  <h4 class="font-bold text-lg text-on-surface mt-1 mb-2">{event.title}</h4>
+                  <p class="text-on-surface-variant text-sm leading-relaxed">{event.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    {/* Press Clippings - Newspaper Simulation */}
+    <div class="mb-24">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-4 text-center">{t.pressTitle}</h3>
+      <p class="text-center text-on-surface-variant mb-12 max-w-2xl mx-auto">{t.pressDesc}</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        {
+          t.pressClippings.map((clip) => (
+            <div class="bg-white rounded-xl p-6 border border-outline-variant/20 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+              {/* Folded corner decoration */}
+              <div class="absolute top-0 right-0 w-12 h-12 bg-gradient-to-bl from-outline-variant/10 to-transparent"></div>
+              
+              {/* Newspaper masthead */}
+              <div class="border-b-2 border-gray-200 pb-2 mb-4">
+                <div class="flex justify-between items-end">
+                  <h4 class="font-serif font-black text-sm uppercase tracking-wider text-gray-600">{clip.newspaper}</h4>
+                  <span class="text-xs text-gray-400 font-mono">{clip.date}</span>
+                </div>
+                <div class="h-0.5 bg-gray-300 mt-1"></div>
+              </div>
+              
+              {/* Headline */}
+              <h5 class="font-serif font-bold text-lg leading-tight text-on-surface mb-3 group-hover:text-primary transition-colors">
+                {clip.headline}
+              </h5>
+              
+              {/* Excerpt */}
+              <p class="text-on-surface-variant text-sm leading-relaxed">
+                {clip.excerpt}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Testimonies */}
+    <div class="mb-24">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-12 text-center">{t.testimoniesTitle}</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {
+          t.testimonies.map((testimony) => (
+            <div class="bg-surface-container-low rounded-2xl p-8 relative">
+              {/* Big quote mark */}
+              <div class="text-primary/10 font-serif text-7xl absolute -top-2 left-4 leading-none select-none">"</div>
+              <div class="relative z-10">
+                <p class="text-on-surface text-base leading-relaxed mb-6 italic">"{testimony.quote}"</p>
+                <div class="border-t border-outline-variant/20 pt-4">
+                  <p class="font-bold text-sm text-on-surface">{testimony.author}</p>
+                  <p class="text-xs text-on-surface-variant mt-0.5">{testimony.role}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* The Real Explanation */}
+    <div class="mb-16">
+      <div class="bg-inverse-surface rounded-[32px] p-8 sm:p-12 md:p-16 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/10 blur-[100px] rounded-full"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-primary-fixed-dim/10 blur-[80px] rounded-full"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <span class="material-symbols-outlined text-6xl text-primary mb-4 block">search</span>
+            <h3 class="font-display-lg text-3xl sm:text-4xl text-white font-extrabold mb-4">{t.explanationTitle}</h3>
+            <p class="text-gray-400 text-lg">{t.explanationDesc}</p>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {
+              t.explanationItems.map((item) => (
+                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all">
+                  <span class="material-symbols-outlined text-3xl text-primary block mb-3">{item.icon}</span>
+                  <h4 class="font-bold text-white text-lg mb-2">{item.title}</h4>
+                  <p class="text-gray-300 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Legacy */}
+    <div class="text-center max-w-3xl mx-auto">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-6">{t.legacyTitle}</h3>
+      <p class="text-on-surface-variant text-base leading-relaxed mb-8">
+        {t.legacyDesc}
+      </p>
+      <div class="inline-flex items-center gap-3 px-6 py-3 bg-primary/5 rounded-full text-primary font-medium">
+        <span class="material-symbols-outlined text-xl">location_on</span>
+        <span class="text-sm">{t.legacyCta}</span>
+      </div>
+    </div>
+
+  </div>
+</section>

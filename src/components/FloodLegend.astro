@@ -1,0 +1,226 @@
+---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    sectionTitle: "La Riuada del 62",
+    sectionSubtitle: "La nit que el Vallès va ofegar-se",
+    intro: "La nit del 25 al 26 de setembre de 1962, Sabadell va viure la pitjor catàstrofe natural de la seva història. En menys de tres hores van caure 212 litres per metre quadrat. El riu Ripoll i les rieres es van desbordar, arrasant barris sencers. Oficialment van morir 39 persones a la ciutat, tot i que el nombre real podria ser molt més alt.",
+    timelineTitle: "Cronologia de la tragèdia",
+    timeline: [
+      { date: "25 setembre 1962 — 19:20", title: "La tempesta esclata", desc: "Després d'una llarga sequera, una gota freda descarrega amb violència sobre el Vallès. En poc més de dues hores cauen 212 l/m²." },
+      { date: "25 setembre 1962 — 21:00", title: "Les rieres es desborden", desc: "El Ripoll, la riera de les Arenes i la riera de Rubí es converteixen en torrents d'aigua i fang que arrosseguen cotxes, arbres i cases." },
+      { date: "25-26 setembre 1962", title: "La nit del pànic", desc: "Els barris de Torre-romeu, Can Puiggener, Plana del Pintor i Campoamor queden anegats. Desenes de famílies pugen als terrats per salvar-se." },
+      { date: "26 setembre 1962", title: "El despertar", desc: "El sol revela la magnitud de la tragèdia: cases desaparegudes, fangs per tot arreu, centenars de víctimes. La xifra oficial a Sabadell: 39 morts, 3.307 reallotjats." },
+      { date: "Octubre 1962", title: "Onada solidària", desc: "Picasso dona un quadre per subhastar-lo als damnificats. Ràdio Barcelona recapta 11 milions de pessetes en dos dies. Franco visita Sabadell." }
+    ],
+    victimsTitle: "Les xifres de la tragèdia",
+    victimsSubtitle: "Les riades del Vallès van ser la pitjor catàstrofe natural de la història d'Espanya.",
+    stats: [
+      { number: "39", label: "Morts oficials a Sabadell", desc: "El nombre real podria ser molt superior: moltes víctimes no estaven empadronades" },
+      { number: "3.307", label: "Persones reallotjades", desc: "Centenars de famílies van perdre-ho tot i van viure en barraques improvisades" },
+      { number: "400+", label: "Habitatges inhabitables", desc: "Barris sencers van quedar destruïts, especialment al costat del Ripoll" },
+      { number: "80%", label: "Indústries tèxtils afectades", desc: "El 40% de la capacitat tèxtil d'Espanya estava a Sabadell — bona part va quedar arrasada" }
+    ],
+    testimoniesTitle: "Veus de la riuada",
+    testimonies: [
+      {
+        quote: "Los rayos iluminaban una ciudad regentada por el caos; era la única luz que permitía ver aquello que la riada se llevaba: muebles, personas y máquinas.",
+        author: "Josefa Púas",
+        role: "Veïna d'un suburbi de Sabadell"
+      },
+      {
+        quote: "Los vecinos, bajo la lluvia, huían espantados de las casas y, cuando no podían huir, se enfilaban en los terrados y tejados para pedir socorro. Los mismos vecinos veían como el agua se los llevaba.",
+        author: "Jordi Calvet",
+        role: "Historiador (testimoni de 1984)"
+      },
+      {
+        quote: "El efecto devastador no fue tanto por el fenómeno meteorológico en sí, sino por el modelo de desarrollo económico y urbanístico del franquismo: falta de inversión en vivienda y especulación sin control.",
+        author: "Eduard Masjuan",
+        role: "Historiador"
+      }
+    ],
+    impactTitle: "El perfil de les víctimes",
+    impactDesc: "El 90% de les víctimes de Sabadell eren població jove i immigrada, amb una mitjana d'edat de 25 anys. Treballadors del torn de nit vivien en barraques i cases autoconstruïdes a les vores del Ripoll, sense cap mena de planificació urbanística. La riuada no va ser només un desastre natural: va ser la conseqüència d'anys de desídia política i especulació.",
+    afterTitle: "Què va passar després?",
+    afterDesc: "La riuada del 62 va canviar Sabadell per sempre. Les autoritats van canalitzar el riu Ripoll i van construir defenses de formigó. Es van enderrocar barraques i es van crear polígons d'habitatge públic. Però el cost humà va ser irreparable. Avui, una placa als barris afectats recorda les víctimes, i cada 25 de setembre la ciutat fa memòria.",
+    afterCta: "Passeja pels barris de Torre-romeu o Can Puiggener: les cicatrius de l'aigua encara es veuen en algunes parets."
+  },
+  es: {
+    sectionTitle: "La Riada del 62",
+    sectionSubtitle: "La noche que el Vallès se ahogó",
+    intro: "La noche del 25 al 26 de septiembre de 1962, Sabadell vivió la peor catástrofe natural de su historia. En menos de tres horas cayeron 212 litros por metro cuadrado. El río Ripoll y las rieras se desbordaron, arrasando barrios enteros. Oficialmente murieron 39 personas en la ciudad, aunque el número real podría ser mucho más alto.",
+    timelineTitle: "Cronología de la tragedia",
+    timeline: [
+      { date: "25 septiembre 1962 — 19:20", title: "La tormenta estalla", desc: "Tras una larga sequía, una gota fría descarga con violencia sobre el Vallès. En poco más de dos horas caen 212 l/m²." },
+      { date: "25 septiembre 1962 — 21:00", title: "Las rieras se desbordan", desc: "El Ripoll, la riera de les Arenes y la riera de Rubí se convierten en torrentes de agua y barro que arrastran coches, árboles y casas." },
+      { date: "25-26 septiembre 1962", title: "La noche del pánico", desc: "Los barrios de Torre-romeu, Can Puiggener, Plana del Pintor y Campoamor quedan anegados. Decenas de familias suben a los tejados para salvarse." },
+      { date: "26 septiembre 1962", title: "El despertar", desc: "El sol revela la magnitud de la tragedia: casas desaparecidas, fango por todas partes, cientos de víctimas. La cifra oficial en Sabadell: 39 muertos, 3.307 realojados." },
+      { date: "Octubre 1962", title: "Ola solidaria", desc: "Picasso dona un cuadro para subastarlo por los damnificados. Radio Barcelona recauda 11 millones de pesetas en dos días. Franco visita Sabadell." }
+    ],
+    victimsTitle: "Las cifras de la tragedia",
+    victimsSubtitle: "Las riadas del Vallès fueron la peor catástrofe natural de la historia de España.",
+    stats: [
+      { number: "39", label: "Muertos oficiales en Sabadell", desc: "La cifra real podría ser muy superior: muchas víctimas no estaban empadronadas" },
+      { number: "3.307", label: "Personas realojadas", desc: "Cientos de familias lo perdieron todo y vivieron en barracas improvisadas" },
+      { number: "400+", label: "Viviendas inhabitables", desc: "Barrios enteros quedaron destruidos, especialmente a orillas del Ripoll" },
+      { number: "80%", label: "Industrias textiles afectadas", desc: "El 40% de la capacidad textil de España estaba en Sabadell — buena parte quedó arrasada" }
+    ],
+    testimoniesTitle: "Voces de la riada",
+    testimonies: [
+      {
+        quote: "Los rayos iluminaban una ciudad regentada por el caos; era la única luz que permitía ver aquello que la riada se llevaba: muebles, personas y máquinas.",
+        author: "Josefa Púas",
+        role: "Vecina de un suburbio de Sabadell"
+      },
+      {
+        quote: "Los vecinos, bajo la lluvia, huían espantados de las casas y, cuando no podían huir, se enfilaban en los terrados y tejados para pedir socorro. Los mismos vecinos veían como el agua se los llevaba.",
+        author: "Jordi Calvet",
+        role: "Historiador (testimonio de 1984)"
+      },
+      {
+        quote: "El efecto devastador no fue tanto por el fenómeno meteorológico en sí, sino por el modelo de desarrollo económico y urbanístico del franquismo: falta de inversión en vivienda y especulación sin control.",
+        author: "Eduard Masjuan",
+        role: "Historiador"
+      }
+    ],
+    impactTitle: "El perfil de las víctimas",
+    impactDesc: "El 90% de las víctimas de Sabadell eran población joven e inmigrada, con una media de edad de 25 años. Trabajadores del turno de noche vivían en barracas y casas autoconstruidas a orillas del Ripoll, sin ninguna planificación urbanística. La riada no fue solo un desastre natural: fue la consecuencia de años de desidia política y especulación.",
+    afterTitle: "¿Qué pasó después?",
+    afterDesc: "La riada del 62 cambió Sabadell para siempre. Las autoridades canalizaron el río Ripoll y construyeron defensas de hormigón. Se derribaron barracas y se crearon polígonos de vivienda pública. Pero el coste humano fue irreparable. Hoy, una placa en los barrios afectados recuerda a las víctimas, y cada 25 de septiembre la ciudad hace memoria.",
+    afterCta: "Pasea por los barrios de Torre-romeu o Can Puiggener: las cicatrices del agua aún se ven en algunas paredes."
+  }
+}[lang];
+---
+
+<section id="riuada-62" class="py-24 bg-white relative overflow-hidden" style="scroll-margin-top: 80px">
+  {/* Decorative background blob */}
+  <div class="absolute top-0 right-0 w-96 h-96 bg-red-500/5 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+    
+    {/* Section Header - Hero style with image */}
+    <div class="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="relative w-full order-2 lg:order-1">
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-red-500/10 rounded-full blur-3xl z-0"></div>
+        <img
+          alt="Riada del Vallès 1962 — Puente de la Renfe sobre la riera de Les Arenes"
+          class="rounded-2xl shadow-2xl relative z-10 w-full aspect-[4/3] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+          src="https://estaticos-cdn.prensaiberica.es/clip/fdd6a112-7989-480b-9aa9-5b425d1b4169_alta-libre-aspect-ratio_default_0.jpg"
+        />
+        <p class="text-xs text-on-surface-variant mt-2 text-center">Jaume Altimira / Arxiu — El Periódico</p>
+      </div>
+      <div class="w-full relative z-10 order-1 lg:order-2">
+        <span class="font-label-md uppercase tracking-[0.25em] text-red-600 font-semibold block mb-4">
+          {t.sectionTitle}
+        </span>
+        <h2 class="font-display-lg text-3xl sm:text-4xl md:text-5xl text-on-surface font-extrabold tracking-tight mb-6">
+          {t.sectionSubtitle}
+        </h2>
+        <p class="text-on-surface-variant text-base sm:text-lg leading-relaxed">
+          {t.intro}
+        </p>
+      </div>
+    </div>
+
+    {/* Timeline */}
+    <div class="mb-24">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-12 text-center">{t.timelineTitle}</h3>
+      <div class="relative max-w-3xl mx-auto">
+        {/* Vertical line */}
+        <div class="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 w-0.5 h-full bg-red-400/20"></div>
+        
+        <div class="space-y-12">
+          {
+            t.timeline.map((event, idx) => (
+              <div class={`relative flex items-start gap-6 md:gap-0 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                {/* Dot */}
+                <div class="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-3 h-3 bg-red-500 rounded-full z-10 ring-4 ring-white mt-1.5"></div>
+                
+                {/* Content */}
+                <div class={`ml-14 md:ml-0 md:w-[45%] ${idx % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
+                  <span class="text-red-600 font-bold text-sm tracking-wider">{event.date}</span>
+                  <h4 class="font-bold text-lg text-on-surface mt-1 mb-2">{event.title}</h4>
+                  <p class="text-on-surface-variant text-sm leading-relaxed">{event.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    {/* Stats Grid */}
+    <div class="mb-24">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-4 text-center">{t.victimsTitle}</h3>
+      <p class="text-center text-on-surface-variant mb-12 max-w-2xl mx-auto">{t.victimsSubtitle}</p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        {
+          t.stats.map((stat) => (
+            <div class="bg-surface-container-low rounded-2xl p-8 text-center hover:shadow-md transition-all border border-outline-variant/10">
+              <span class="font-display-lg text-4xl sm:text-5xl text-red-500 font-extrabold block mb-2">{stat.number}</span>
+              <h4 class="font-bold text-sm text-on-surface mb-1">{stat.label}</h4>
+              <p class="text-xs text-on-surface-variant">{stat.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Testimonies */}
+    <div class="mb-24">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-12 text-center">{t.testimoniesTitle}</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {
+          t.testimonies.map((testimony) => (
+            <div class="bg-surface-container-low rounded-2xl p-8 relative">
+              <div class="text-red-200 font-serif text-7xl absolute -top-2 left-4 leading-none select-none">"</div>
+              <div class="relative z-10">
+                <p class="text-on-surface text-base leading-relaxed mb-6 italic">"{testimony.quote}"</p>
+                <div class="border-t border-outline-variant/20 pt-4">
+                  <p class="font-bold text-sm text-on-surface">{testimony.author}</p>
+                  <p class="text-xs text-on-surface-variant mt-0.5">{testimony.role}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Impact Section */}
+    <div class="mb-16">
+      <div class="bg-gradient-to-br from-red-900 via-red-950 to-slate-900 rounded-[32px] p-8 sm:p-12 md:p-16 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-red-500/10 blur-[100px] rounded-full"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 blur-[80px] rounded-full"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+          <span class="material-symbols-outlined text-6xl text-red-300 mb-4 block">water_damage</span>
+          <h3 class="font-display-lg text-3xl sm:text-4xl text-white font-extrabold mb-6">{t.impactTitle}</h3>
+          <p class="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
+            {t.impactDesc}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Aftermath */}
+    <div class="text-center max-w-3xl mx-auto">
+      <h3 class="font-headline-lg text-2xl text-on-surface font-bold mb-6">{t.afterTitle}</h3>
+      <p class="text-on-surface-variant text-base leading-relaxed mb-8">
+        {t.afterDesc}
+      </p>
+      <div class="inline-flex items-center gap-3 px-6 py-3 bg-red-50 rounded-full text-red-700 font-medium">
+        <span class="material-symbols-outlined text-xl">location_on</span>
+        <span class="text-sm">{t.afterCta}</span>
+      </div>
+    </div>
+
+  </div>
+</section>

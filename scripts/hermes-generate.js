@@ -91,27 +91,49 @@ console.log(`Hoy toca tema: ${activeTheme.category}. Buscando en Tavily...`);
 
 async function run() {
   try {
-    // 1. Llamar a Tavily
-    const tavilyResponse = await fetch("https://api.tavily.com/search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        api_key: TAVILY_API_KEY,
-        query: `${activeTheme.query} Sabadell ${new Date().getFullYear()}`,
-        include_images: true,
-        search_depth: "advanced"
-      })
-    });
+    // 1. Llamar a Tavily (con reintentos: hasta 5 intentos con backoff exponencial)
+    let tavilyData = { results: [], images: [] };
+    const TAVILY_MAX_RETRIES = 5;
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    if (!tavilyResponse.ok) {
-      throw new Error(`Error en Tavily: ${tavilyResponse.statusText}`);
+    let tavilySuccess = false;
+    for (let attempt = 1; attempt <= TAVILY_MAX_RETRIES; attempt++) {
+      try {
+        console.log(`Realizando búsqueda en Tavily... (intento ${attempt}/${TAVILY_MAX_RETRIES})`);
+        const tavilyResponse = await fetch("https://api.tavily.com/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            api_key: TAVILY_API_KEY,
+            query: `${activeTheme.query} Sabadell ${new Date().getFullYear()}`,
+            include_images: true,
+            search_depth: "advanced"
+          })
+        });
+
+        if (!tavilyResponse.ok) {
+          const waitMs = Math.pow(2, attempt - 1) * 2000; // 2s, 4s, 8s, 16s, 32s
+          console.warn(`[Tavily Warning] Intento ${attempt} fallido: ${tavilyResponse.statusText} (${tavilyResponse.status}).${attempt < TAVILY_MAX_RETRIES ? ` Reintentando en ${waitMs / 1000}s...` : " Sin más reintentos, se usará contenido de respaldo."}`);
+          if (attempt < TAVILY_MAX_RETRIES) await sleep(waitMs);
+        } else {
+          tavilyData = await tavilyResponse.json();
+          console.log(`Resultados de Tavily recibidos correctamente en el intento ${attempt}.`);
+          tavilySuccess = true;
+          break;
+        }
+      } catch (tavilyError) {
+        const waitMs = Math.pow(2, attempt - 1) * 2000;
+        console.warn(`[Tavily Warning] Intento ${attempt} - Error de conexión: ${tavilyError.message}.${attempt < TAVILY_MAX_RETRIES ? ` Reintentando en ${waitMs / 1000}s...` : " Sin más reintentos, se usará contenido de respaldo."}`);
+        if (attempt < TAVILY_MAX_RETRIES) await sleep(waitMs);
+      }
     }
 
-    const tavilyData = await tavilyResponse.json();
-    console.log("Resultados de Tavily recibidos correctamente.");
+    if (!tavilySuccess) {
+      console.warn("[Tavily Warning] Todos los intentos fallaron. Se generará el artículo sin datos en tiempo real de internet.");
+    }
 
     let imageUrl = "";
-    if (tavilyData.images && tavilyData.images.length > 0) {
+    if (tavilyData && tavilyData.images && tavilyData.images.length > 0) {
       const validImages = tavilyData.images.filter(img => 
         img.startsWith("http") && 
         !img.includes(".svg") &&
@@ -128,7 +150,7 @@ async function run() {
       }
     }
 
-    if (!imageUrl) {
+    if (!imageUrl && TAVILY_API_KEY) {
       console.log("No se encontraron imágenes en la primera búsqueda. Intentando búsqueda simplificada de Tavily...");
       try {
         const fallbackQuery = `${activeTheme.category} Sabadell`;
@@ -144,7 +166,7 @@ async function run() {
         });
         if (tavilyFallbackResponse.ok) {
           const fallbackData = await tavilyFallbackResponse.json();
-          if (fallbackData.images && fallbackData.images.length > 0) {
+          if (fallbackData && fallbackData.images && fallbackData.images.length > 0) {
             const validFallbackImages = fallbackData.images.filter(img => 
               img.startsWith("http") && 
               !img.includes(".svg") &&
@@ -247,12 +269,12 @@ NORMES CRÍTIQUES DE REDACCIÓ:
 - EVITAR DUPLICITATS: No repeteixis de cap manera temes o esdeveniments dels quals ja s'hagi parlat recentment. Compara el que penses redactar amb la llista de notícies recents i assegura't que el contingut sigui diferent.
   Darreres notícies publicades:
   ${recentArticlesContext}
-- CONTROL DE DADES REALS (NO ALUCINAR): Basa't ÚNICAMENT en la informació real aportada pels resultats de cerca d'internet. No t'inventis dates de concerts, adreces web, noms de persones o detalls que no apareguin de manera explícita en els resultats obtinguts. Si un detall no es troba en els resultats, no l'especifiquis o parla'n de forma genèrica.
-- NO INVENTIS ESDEVENIMENTS VEÏNALS: Sota cap concepte t'inventis convocatòries d'assemblees de l'AVES, cicles de cinema a la fresca o qualsevol activitat que no estigui explícitament descrita com un fet real i confirmat en els resultats obtinguts de la cerca d'internet. Si no hi ha convocatòries o actes propis documentats a la cerca, limita't a fer ressò o recomanar de forma informativa els actes reals i confirmats que trobis a Sabadell.
+- CONTROL DE DADES REALS (NO ALUCINAR): Si disposes de resultats de cerca d'internet, basa't ÚNICAMENT en la informació real aportada per ells. No t'inventis dates de concerts, adreces web, noms de persones o detalls que no apareguin de manera explícita. Si no disposes de resultats de cerca de Tavily (està buit), pots redactar un article divulgatiu, consells pràctics o una crònica general del barri basada en el tema del dia i la teva pròpia línia de coneixements genèrics de Sabadell, sempre sense inventar-te esdeveniments específics del barri ni dates concretes.
+- NO INVENTIS ESDEVENIMENTS VEÏNALS: Sota cap concepte t'inventis convocatòries d'assemblees de l'AVES, cicles de cinema a la fresca o qualsevol activitat que no estigui explícitament descrita com un fet real i confirmat en els resultats obtinguts de la cerca d'internet. Si no hi ha convocatòries o actes propis documentats, limita't a fer ressò o recomanar de forma informativa els actes reals i confirmats que trobis a Sabadell, o dona consells/crònica general sense convocar res.
 - GEOGRAFIA I LOCALS COM A REFERÈNCIA: Pots esmentar els parcs i carrers del barri ("Parc de Mestre Planas", "Plaça de la Infància", "Parc de Montserrat Roig") com a context territorial del veïnat (p. ex. 'veïns que passegen prop de la Plaça de la Infància') o com a referències de proximitat a altres llocs de Sabadell, però mai t'inventis que s'està duent a terme cap acto fictici dins d'aquests espais.
 - DISTINCIÓ D'ORGANITZACIÓ: Distingeix clarament entre el que organitza directament l'AVES (com les assemblees pròpies, cinema a la fresca del barri o tallers veïnals) i el que organitzen altres entitats o l'Ajuntament de Sabadell (com l'agenda general dels teatres municipals, l'Estruch, la Faràndula o el Casal Pere Quart). L'AVES no organitza aquests últims, sinó que es limita a recomanar-los i fer-ne difusió com a opcions d'interès per al veïnat.
 
-Has de generar una notícia que combini de forma coherent la teva línia temática del dia juntament amb les notícies o context de proximitat que hem recuperat d'internet.
+Has de generar una notícia que combini de forma coherent la teva línia temática del dia juntament amb les notícies o context de proximitat que hem recuperat d'internet (si n'hi ha).
 Tema d'avui (${activeTheme.category}): ${activeTheme.prompt}
 
 Instruccions de format:
@@ -273,8 +295,10 @@ Instruccions de format:
 - El contingut en català i en castellà ha de ser equivalent.
 - No incloguis títols com "Notícia del dia" o similars de farciment. Fes-lo periodístic, proper, cívic i amè.`;
 
-    const searchContext = tavilyData.results.map(r => `Títol: ${r.title}\nContingut: ${r.content}\nURL: ${r.url}`).join("\n\n");
-    const userPrompt = `Utilitzant la informació real obtinguda d'internet per a la teva redacció:\n\n${searchContext}\n\nSi us plau, redacta la notícia d'avui basant-te exclusivament en els fets reals anteriors. Recorda utilitzar la geolocalització del barri per connectar els fets generals amb els carrers i entorns del nostre barri.`;
+    const searchContext = (tavilyData.results || []).map(r => `Títol: ${r.title}\nContingut: ${r.content}\nURL: ${r.url}`).join("\n\n");
+    const userPrompt = searchContext.trim()
+      ? `Utilitzant la informació real obtinguda d'internet per a la teva redacció:\n\n${searchContext}\n\nSi us plau, redacta la notícia d'avui basant-te exclusivament en els fets reals anteriors. Recorda utilitzar la geolocalització del barri per connectar els fets generals amb els carrers i entorns del nostre barri.`
+      : `No s'ha pogut obtenir informació en temps real d'internet per a la temàtica d'avui ("${activeTheme.category}"). Si us plau, redacta un article d'interès general o consells útils sobre aquest tema orientat als veïns de l'Eixample Sabadell. Fes servir de referència els carrers i espais del barri per contextualitzar el relat de forma propera, però sense inventar dades o notícies fictícies de darrera hora.`;
 
     let generatedArticle;
     

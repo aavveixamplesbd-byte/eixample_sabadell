@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Enviar correo al usuario
     await resend.emails.send({
-      from: 'Associació de Veïns <socis@send.aveixamplesbd.com>',
+      from: 'Associació de Veïns <socis@aveixamplesbd.com>',
       to: email,
       subject: subjectUser,
       text: bodyUser
@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Enviar correo al administrador
     await resend.emails.send({
-      from: 'Web AVES <info@send.aveixamplesbd.com>',
+      from: 'Web AVES <info@aveixamplesbd.com>',
       to: 'hola@aveixamplesbd.com',
       subject: subjectAdmin,
       text: bodyAdmin

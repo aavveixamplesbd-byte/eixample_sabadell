@@ -41,14 +41,6 @@ const prefix = lang === 'es' ? '/es' : '';
 ---
 
 <footer class="bg-surface-container-low border-t border-outline-variant relative overflow-hidden group/footer">
-  <!-- Old Map Style Monster Decor -->
-  <div class="absolute bottom-[-30px] right-[-20px] md:right-4 w-60 h-60 md:w-96 md:h-96 pointer-events-none select-none z-0 transition-all duration-700">
-    <img 
-      src="/monster1.png" 
-      alt="Mascota Eixample Sabadell" 
-      class="w-full h-full object-contain mascot-old-map"
-    />
-  </div>
 
   <div class="flex flex-col md:flex-row justify-between items-start py-16 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto gap-12 w-full relative z-10">
     <div class="max-w-sm flex flex-col items-start w-full">
@@ -103,7 +95,9 @@ const prefix = lang === 'es' ? '/es' : '';
       </div>
       <div class="flex items-center gap-3">
         <span class="material-symbols-outlined text-primary">mail</span>
-        <span class="font-label-sm text-label-sm text-on-secondary-container font-medium">secretaria@aveixamplesbd.com</span>
+        <a href="mailto:secretaria@aveixamplesbd.com" class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium">
+          secretaria@aveixamplesbd.com
+        </a>
       </div>
     </div>
   </div>
@@ -124,25 +118,5 @@ const prefix = lang === 'es' ? '/es' : '';
 </footer>
 
 <style>
-  .mascot-old-map {
-    opacity: 0.35;
-    filter: sepia(35%) contrast(90%) brightness(95%);
-    animation: mapFloat 8s ease-in-out infinite;
-    transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
 
-  /* Fade in to full color and opacity when the footer is hovered */
-  .group\/footer:hover .mascot-old-map {
-    opacity: 0.95;
-    filter: sepia(0%) contrast(100%) brightness(100%) drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
-  }
-
-  @keyframes mapFloat {
-    0%, 100% {
-      transform: translateY(0) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-12px) rotate(2deg);
-    }
-  }
 </style>

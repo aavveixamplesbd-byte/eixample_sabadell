@@ -18,10 +18,7 @@ const t = {
     legalCookies: "Cookies",
     legalArchive: "Arxiu",
     contactTitle: "Contacte",
-    rights: "© 2026 Associació de Veïns Eixample Sabadell. Tots els drets reservats.",
-    coffeeTitle: "Invita'ns a un cafè ☕",
-    coffeeDesc: "Invita'ns a un cafè per seguir treballant pel barri.",
-    coffeeBtn: "Invita per 2€"
+    rights: "© 2026 Associació de Veïns Eixample Sabadell. Tots els drets reservats."
   },
   es: {
     desc: "Trabajando por la mejora del barrio y la cohesión social desde 1978. Construyendo un futuro compartido sobre nuestro legado industrial.",
@@ -36,21 +33,17 @@ const t = {
     legalCookies: "Cookies",
     legalArchive: "Archivo",
     contactTitle: "Contacto",
-    rights: "© 2024 Asociación de Vecinos Eixample Sabadell. Todos los derechos reservados.",
-    coffeeTitle: "Invítanos a un café ☕",
-    coffeeDesc: "Invítanos a un café para seguir trabajando por el barrio.",
-    coffeeBtn: "Invitar por 2€"
+    rights: "© 2024 Asociación de Vecinos Eixample Sabadell. Todos los derechos reservados."
   }
 }[lang];
 
 const prefix = lang === 'es' ? '/es' : '';
-const paypalLink = "https://paypal.me/aveixamplesbd/2";
 ---
 
 <footer class="bg-surface-container-low border-t border-outline-variant relative overflow-hidden group/footer">
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 py-16 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full relative z-10">
-    <div class="flex flex-col items-start w-full lg:col-span-3">
+  <div class="flex flex-col md:flex-row justify-between items-start py-16 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto gap-12 w-full relative z-10">
+    <div class="max-w-sm flex flex-col items-start w-full">
       <!-- SVG Filter to colorize the logo in the primary color -->
       <svg class="absolute w-0 h-0 pointer-events-none" style="visibility: hidden" aria-hidden="true">
         <defs>
@@ -78,22 +71,23 @@ const paypalLink = "https://paypal.me/aveixamplesbd/2";
       </p>
     </div>
     
-    <div class="flex flex-col gap-4 lg:col-span-2">
-      <span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold mb-2">{t.navTitle}</span>
-      <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href={`${prefix || '/'}`}>Home</a>
-      <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href={`${prefix}/historia`}>{t.navHistory}</a>
-      <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href={`${prefix}/noticies`}>{t.navNews}</a>
-    </div>
-
-    <div class="flex flex-col gap-4 lg:col-span-2">
-      <span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold mb-2">{t.legalTitle}</span>
-      <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">{t.legalNotice}</a>
-      <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">{t.legalPrivacy}</a>
-      <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">{t.legalCookies}</a>
-      <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">{t.legalArchive}</a>
+    <div class="grid grid-cols-2 gap-12 md:gap-24">
+      <div class="flex flex-col gap-4">
+        <span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold mb-2">{t.navTitle}</span>
+        <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href={`${prefix || '/'}`}>Home</a>
+        <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href={`${prefix}/historia`}>{t.navHistory}</a>
+        <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href={`${prefix}/noticies`}>{t.navNews}</a>
+      </div>
+      <div class="flex flex-col gap-4">
+        <span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold mb-2">{t.legalTitle}</span>
+        <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">{t.legalNotice}</a>
+        <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">{t.legalPrivacy}</a>
+        <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">{t.legalCookies}</a>
+        <a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-colors font-medium" href="#">{t.legalArchive}</a>
+      </div>
     </div>
     
-    <div class="flex flex-col gap-6 lg:col-span-2" id="contacte">
+    <div class="flex flex-col gap-6" id="contacte">
       <span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold mb-2">{t.contactTitle}</span>
       <div class="flex items-center gap-3">
         <span class="material-symbols-outlined text-primary">location_on</span>
@@ -105,26 +99,6 @@ const paypalLink = "https://paypal.me/aveixamplesbd/2";
           secretaria@aveixamplesbd.com
         </a>
       </div>
-    </div>
-
-    <!-- Buy us a coffee card -->
-    <div class="flex flex-col gap-4 p-6 rounded-2xl bg-primary/5 border border-primary/10 w-full lg:col-span-3">
-      <span class="font-label-md text-label-md text-on-surface uppercase tracking-widest font-extrabold flex items-center gap-2">
-        <span class="material-symbols-outlined text-primary text-lg">local_cafe</span>
-        {t.coffeeTitle}
-      </span>
-      <p class="font-body-sm text-body-sm text-on-secondary-container leading-relaxed">
-        {t.coffeeDesc}
-      </p>
-      <a 
-        href={paypalLink} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="mt-2 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-white font-label-md hover:bg-primary/95 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 shadow-sm hover:shadow-md cursor-pointer font-bold text-center"
-      >
-        <span class="material-symbols-outlined text-base">payments</span>
-        {t.coffeeBtn}
-      </a>
     </div>
   </div>
   

@@ -16,6 +16,7 @@ const {
 } = Astro.props;
 
 import JoinModal from '../components/JoinModal';
+import CoffeeBanner from '../components/CoffeeBanner.astro';
 ---
 
 <!doctype html>
@@ -57,6 +58,7 @@ import JoinModal from '../components/JoinModal';
 	<body class="bg-surface text-on-surface min-h-screen">
 		<slot />
 		<JoinModal lang={lang} client:load />
+		<CoffeeBanner lang={lang} />
 	</body>
 </html>
 

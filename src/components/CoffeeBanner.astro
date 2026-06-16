@@ -1,0 +1,101 @@
+---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    text: "☕ Ens convides a un cafè per seguir treballant pel barri?",
+    btn: "Invitar (2€)",
+    closeAlt: "Tancar"
+  },
+  es: {
+    text: "☕ ¿Nos invitas a un café para seguir trabajando por el barrio?",
+    btn: "Invitar (2€)",
+    closeAlt: "Cerrar"
+  }
+}[lang];
+
+const paypalLink = "https://paypal.me/aveixamplesbd/2";
+---
+
+<div 
+  id="coffee-banner"
+  class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-2xl z-40 bg-surface/90 backdrop-blur-md border border-outline-variant/60 rounded-2xl shadow-xl px-4 py-3 flex items-center justify-between gap-4 transition-all duration-500 ease-out transform translate-y-32 opacity-0 pointer-events-none"
+  role="alert"
+>
+  <div class="flex items-center gap-3 min-w-0">
+    <span class="text-sm font-medium text-on-surface truncate">
+      {t.text}
+    </span>
+  </div>
+  
+  <div class="flex items-center gap-2 flex-shrink-0">
+    <a 
+      href={paypalLink} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-primary text-white font-label-md hover:bg-primary/95 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer font-bold text-sm whitespace-nowrap"
+    >
+      {t.btn}
+    </a>
+    <button 
+      id="coffee-banner-close"
+      class="p-2 rounded-lg text-on-surface-variant hover:bg-primary/5 transition-colors cursor-pointer flex items-center justify-center"
+      aria-label={t.closeAlt}
+    >
+      <span class="material-symbols-outlined text-lg">close</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  function initCoffeeBanner() {
+    const banner = document.getElementById('coffee-banner');
+    const closeBtn = document.getElementById('coffee-banner-close');
+    
+    if (!banner || !closeBtn) return;
+    
+    let isClosed = false;
+
+    // Check if closed in this session
+    if (sessionStorage.getItem('coffee-banner-closed') === 'true') {
+      isClosed = true;
+      banner.style.display = 'none';
+    }
+
+    if (!isClosed) {
+      // Show after 3 seconds
+      setTimeout(() => {
+        if (sessionStorage.getItem('coffee-banner-closed') !== 'true') {
+          banner.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+        }
+      }, 3000);
+    }
+    
+    closeBtn.addEventListener('click', () => {
+      sessionStorage.setItem('coffee-banner-closed', 'true');
+      banner.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+    });
+    
+    window.addEventListener('scroll', () => {
+      if (sessionStorage.getItem('coffee-banner-closed') === 'true') return;
+      
+      const scrollPos = window.innerHeight + window.pageYOffset;
+      const totalHeight = document.documentElement.scrollHeight;
+      
+      // If scrolled to within 160px of the bottom of the page (near the main footer), hide it
+      if (scrollPos >= totalHeight - 160) {
+        banner.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+      } else {
+        // Show it back if it was already showing (only after initial load has finished)
+        banner.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+      }
+    }, { passive: true });
+  }
+
+  // Run on load and on astro page transitions if enabled
+  window.addEventListener('load', initCoffeeBanner);
+  document.addEventListener('astro:page-load', initCoffeeBanner);
+</script>

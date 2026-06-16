@@ -160,8 +160,23 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
 
     if (hasError) return;
 
-    // Simulate API call
-    setSubmitted(true);
+    // Call API
+    fetch("/api/join", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, dni, email, phone, iban, lang })
+    })
+      .then((res) => {
+        if (res.ok) {
+          setSubmitted(true);
+        } else {
+          alert(lang === "es" ? "Error al enviar la solicitud. Por favor, inténtalo de nuevo." : "Error en enviar la sol·licitud. Si us plau, torna-ho a intentar.");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(lang === "es" ? "Error de conexión. Por favor, inténtalo de nuevo." : "Error de connexió. Si us plau, torna-ho a intentar.");
+      });
   };
 
   if (!isOpen) return null;

@@ -121,14 +121,30 @@ export default function Navbar() {
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setName("");
-      setEmail("");
-      setMessage("");
-      setSubmitted(false);
-      setIsContactOpen(false);
-    }, 2000);
+    
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message, lang })
+    })
+      .then((res) => {
+        if (res.ok) {
+          setSubmitted(true);
+          setTimeout(() => {
+            setName("");
+            setEmail("");
+            setMessage("");
+            setSubmitted(false);
+            setIsContactOpen(false);
+          }, 3000);
+        } else {
+          alert(lang === "es" ? "Error al enviar el mensaje. Por favor, inténtalo de nuevo." : "Error en enviar el missatge. Si us plau, torna-ho a intentar.");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(lang === "es" ? "Error de conexión. Por favor, inténtalo de nuevo." : "Error de connexió. Si us plau, torna-ho a intentar.");
+      });
   };
 
   const isActive = (href: string) => {

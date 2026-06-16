@@ -62,50 +62,60 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
   const t = {
     ca: {
       title: "Fes-te Soci / Sòcia",
-      subtitle: "Quota de 10€ anuals domiciliats",
+      subtitle: "Quota de 12€ anuals domiciliats",
       nameLabel: "Nom i cognoms del titular",
       namePlaceholder: "Ex. Joan Garcia i Pujol",
       dniLabel: "DNI / NIE",
       dniPlaceholder: "Ex. 12345678Z o Y1234567Z",
-      dniErrorMsg: "DNI o NIE no vàlid. Comprova el format i la lletra de control.",
+      dniErrorMsg:
+        "DNI o NIE no vàlid. Comprova el format i la lletra de control.",
       phoneLabel: "Telèfon",
       phonePlaceholder: "Ex. 600 000 000",
       emailLabel: "Correu electrònic",
       emailPlaceholder: "Ex. joan@exemple.cat",
       ibanLabel: "Número de Compte Bancari (IBAN)",
       ibanPlaceholder: "ES00 0000 0000 0000 0000 0000",
-      ibanErrorMsg: "IBAN espanyol no vàlid (ha de començar per ES i tenir 24 caràcters).",
-      sepaLabel: "Autoritzo l'Associació de Veïns Eixample Sabadell a realitzar una domiciliació bancària anual de 10,00 € en la compta indicada d'acord amb les condicions del Mandat SEPA.",
+      ibanErrorMsg:
+        "IBAN espanyol no vàlid (ha de començar per ES i tenir 24 caràcters).",
+      sepaLabel:
+        "Autoritzo l'Associació de Veïns Eixample Sabadell a realitzar una domiciliació bancària anual de 10,00 € en la compta indicada d'acord amb les condicions del Mandat SEPA.",
       submitBtn: "Enviar sol·licitud",
       successTitle: "Sol·licitud Rebuta!",
-      successText: "Gràcies per unir-te a l'Associació de Veïns Eixample Sabadell.",
+      successText:
+        "Gràcies per unir-te a l'Associació de Veïns Eixample Sabadell.",
       securityTitle: "Seguretat i confirmació de compte",
-      securityText: "Per prevenció del frau i complir la normativa de domiciliacions, t'hem enviat un correu electrònic amb el document de Mandat SEPA de format digital. L'hauràs de signar per procedir a l'activació de la teva quota.",
-      closeBtn: "Entès"
+      securityText:
+        "Per prevenció del frau i complir la normativa de domiciliacions, t'hem enviat un correu electrònic amb el document de Mandat SEPA de format digital. L'hauràs de signar per procedir a l'activació de la teva quota.",
+      closeBtn: "Entès",
     },
     es: {
       title: "Hazte Socio / Socia",
-      subtitle: "Cuota de 10€ anuales domiciliados",
+      subtitle: "Cuota de 12€ anuales domiciliados",
       nameLabel: "Nombre y apellidos del titular",
       namePlaceholder: "Ej. Juan García y Pujol",
       dniLabel: "DNI / NIE",
       dniPlaceholder: "Ej. 12345678Z o Y1234567Z",
-      dniErrorMsg: "DNI o NIE no válido. Comprueba el formato y la letra de control.",
+      dniErrorMsg:
+        "DNI o NIE no válido. Comprueba el formato y la letra de control.",
       phoneLabel: "Teléfono",
       phonePlaceholder: "Ej. 600 000 000",
       emailLabel: "Correo electrónico",
       emailPlaceholder: "Ej. juan@ejemplo.es",
       ibanLabel: "Número de Cuenta Bancaria (IBAN)",
       ibanPlaceholder: "ES00 0000 0000 0000 0000 0000",
-      ibanErrorMsg: "IBAN español no válido (debe empezar por ES y tener 24 caracteres).",
-      sepaLabel: "Autorizo a la Asociación de Vecinos Eixample Sabadell a realizar una domiciliación bancaria anual de 10,00 € en la cuenta indicada de acuerdo con las condiciones del Mandato SEPA.",
+      ibanErrorMsg:
+        "IBAN español no válido (debe empezar por ES y tener 24 caracteres).",
+      sepaLabel:
+        "Autorizo a la Asociación de Vecinos Eixample Sabadell a realizar una domiciliación bancaria anual de 10,00 € en la cuenta indicada de acuerdo con las condiciones del Mandato SEPA.",
       submitBtn: "Enviar solicitud",
       successTitle: "¡Solicitud Recibida!",
-      successText: "Gracias por unirte a la Asociación de Vecinos Eixample Sabadell.",
+      successText:
+        "Gracias por unirte a la Asociación de Vecinos Eixample Sabadell.",
       securityTitle: "Seguridad y confirmación de cuenta",
-      securityText: "Por prevención del fraude y cumplir la normativa de domiciliaciones, te hemos enviado un correo electrónico con el documento de Mandato SEPA de formato digital. Deberás firmarlo para proceder a la activación de tu cuota.",
-      closeBtn: "Entendido"
-    }
+      securityText:
+        "Por prevención del fraude y cumplir la normativa de domiciliaciones, te hemos enviado un correo electrónico con el documento de Mandato SEPA de formato digital. Deberás firmarlo para proceder a la activación de tu cuota.",
+      closeBtn: "Entendido",
+    },
   }[lang];
 
   useEffect(() => {
@@ -159,7 +169,7 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
         onClick={() => setIsOpen(false)}
       ></div>
@@ -169,15 +179,22 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-outline-variant/30 shrink-0">
           <div>
-            <h3 className="font-headline-md text-headline-md text-primary font-bold">{t.title}</h3>
-            <p className="font-label-sm text-label-sm text-on-surface-variant">{t.subtitle}</p>
+            <h3 className="font-headline-md text-headline-md text-primary font-bold">
+              {t.title}
+            </h3>
+            <p className="font-label-sm text-label-sm text-on-surface-variant">
+              {t.subtitle}
+            </p>
           </div>
-          <button 
+          <button
             onClick={() => setIsOpen(false)}
             className="p-2 hover:bg-surface-container rounded-full transition-colors"
             aria-label="Tancar finestra"
           >
-            <span className="material-symbols-outlined text-on-surface" style={{ fontSize: "24px" }}>
+            <span
+              className="material-symbols-outlined text-on-surface"
+              style={{ fontSize: "24px" }}
+            >
               close
             </span>
           </button>
@@ -188,18 +205,24 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
           {submitted ? (
             <div className="flex flex-col items-center justify-center text-center py-8 space-y-6">
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary animate-bounce">
-                <span className="material-symbols-outlined text-[40px]">mark_email_read</span>
+                <span className="material-symbols-outlined text-[40px]">
+                  mark_email_read
+                </span>
               </div>
               <div className="space-y-3">
-                <h4 className="font-headline-md text-primary font-bold">{t.successTitle}</h4>
+                <h4 className="font-headline-md text-primary font-bold">
+                  {t.successTitle}
+                </h4>
                 <p className="font-body-md text-on-surface-variant px-4 leading-relaxed font-semibold">
                   {t.successText}
                 </p>
               </div>
-              
+
               <div className="bg-surface-container-low p-5 rounded-2xl border border-outline-variant/20 text-left max-w-sm">
                 <h5 className="font-label-md text-primary font-bold mb-2 flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[18px]">verified_user</span>
+                  <span className="material-symbols-outlined text-[18px]">
+                    verified_user
+                  </span>
                   {t.securityTitle}
                 </h5>
                 <p className="font-body-sm text-on-surface-variant leading-relaxed">
@@ -217,7 +240,10 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="flex flex-col gap-1">
-                <label htmlFor="join-name" className="font-label-md text-on-surface font-semibold">
+                <label
+                  htmlFor="join-name"
+                  className="font-label-md text-on-surface font-semibold"
+                >
                   {t.nameLabel}
                 </label>
                 <input
@@ -233,7 +259,10 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="join-dni" className="font-label-md text-on-surface font-semibold">
+                  <label
+                    htmlFor="join-dni"
+                    className="font-label-md text-on-surface font-semibold"
+                  >
                     {t.dniLabel}
                   </label>
                   <input
@@ -250,11 +279,18 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
                       dniError ? "border-error" : "border-outline-variant/40"
                     }`}
                   />
-                  {dniError && <span className="text-error font-label-sm text-xs mt-1">{dniError}</span>}
+                  {dniError && (
+                    <span className="text-error font-label-sm text-xs mt-1">
+                      {dniError}
+                    </span>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="join-phone" className="font-label-md text-on-surface font-semibold">
+                  <label
+                    htmlFor="join-phone"
+                    className="font-label-md text-on-surface font-semibold"
+                  >
                     {t.phoneLabel}
                   </label>
                   <input
@@ -270,7 +306,10 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
               </div>
 
               <div className="flex flex-col gap-1">
-                <label htmlFor="join-email" className="font-label-md text-on-surface font-semibold">
+                <label
+                  htmlFor="join-email"
+                  className="font-label-md text-on-surface font-semibold"
+                >
                   {t.emailLabel}
                 </label>
                 <input
@@ -285,7 +324,10 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
               </div>
 
               <div className="flex flex-col gap-1">
-                <label htmlFor="join-iban" className="font-label-md text-on-surface font-semibold">
+                <label
+                  htmlFor="join-iban"
+                  className="font-label-md text-on-surface font-semibold"
+                >
                   {t.ibanLabel}
                 </label>
                 <input
@@ -302,7 +344,11 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
                     ibanError ? "border-error" : "border-outline-variant/40"
                   }`}
                 />
-                {ibanError && <span className="text-error font-label-sm text-xs mt-1">{ibanError}</span>}
+                {ibanError && (
+                  <span className="text-error font-label-sm text-xs mt-1">
+                    {ibanError}
+                  </span>
+                )}
               </div>
 
               <div className="flex gap-3 items-start bg-surface-container-low p-4 rounded-xl border border-outline-variant/20">
@@ -314,7 +360,10 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
                   onChange={(e) => setSepaConsent(e.target.checked)}
                   className="mt-1 w-4 h-4 text-primary bg-white border-outline-variant rounded focus:ring-primary cursor-pointer"
                 />
-                <label htmlFor="join-sepa" className="font-body-sm text-on-surface-variant leading-relaxed select-none cursor-pointer">
+                <label
+                  htmlFor="join-sepa"
+                  className="font-body-sm text-on-surface-variant leading-relaxed select-none cursor-pointer"
+                >
                   {t.sepaLabel}
                 </label>
               </div>
@@ -324,7 +373,9 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
                 className="w-full bg-primary hover:bg-primary-container text-white font-label-md font-bold py-4 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-md mt-4"
               >
                 <span>{t.submitBtn}</span>
-                <span className="material-symbols-outlined text-[20px]">how_to_reg</span>
+                <span className="material-symbols-outlined text-[20px]">
+                  how_to_reg
+                </span>
               </button>
             </form>
           )}

@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Enviar correo al administrador
     await resend.emails.send({
       from: 'Web AVES <hola@aveixamplesbd.com>',
-      to: 'aavveixamplesbd@gmail.com',
+      to: 'secretaria@aveixamplesbd.com',
       subject: subjectAdmin,
       text: bodyAdmin
     });

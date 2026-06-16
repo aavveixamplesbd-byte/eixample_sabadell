@@ -2,8 +2,8 @@ name: Hermes - Generador de Notícies Autònom
 
 on:
   schedule:
-    # Se ejecuta a las 13:30 UTC (15:30 hora de Sabadell/Madrid en verano) de lunes a viernes
-    - cron: '30 13 * * 1-5'
+    # Se ejecuta a las 05:00 UTC (07:00 hora de Sabadell/Madrid en verano, 06:00 en invierno) de lunes a viernes
+    - cron: '0 5 * * 1-5'
   workflow_dispatch:
     # Permite ejecutarlo manualmente desde la pestaña Actions en GitHub
 

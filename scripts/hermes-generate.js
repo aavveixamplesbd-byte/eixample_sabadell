@@ -305,66 +305,89 @@ Instruccions de format:
     // Determinar si usamos el protocolo universal OpenAI (si AI_API_URL está definida) o el de Gemini
     const isGeminiDefault = !AI_API_URL && AI_MODEL.startsWith("gemini");
 
-    if (!isGeminiDefault) {
-      // Flujo Universal compatible con OpenAI / DeepSeek / OpenRouter / Together AI / Ollama
-      const endpoint = `${AI_API_URL.replace(/\/$/, '')}/chat/completions`;
-      console.log(`Usando proveedor universal OpenAI en: ${endpoint} (Modelo: ${AI_MODEL})`);
-      
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${AI_API_KEY}`
-        },
-        body: JSON.stringify({
-          model: AI_MODEL,
-          messages: [
-            { role: "system", content: systemInstruction },
-            { role: "user", content: userPrompt }
-          ],
-          response_format: { type: "json_object" },
-          temperature: 0.2
-        })
-      });
+    // Reintentos para la API de IA (hasta 5 intentos con backoff exponencial: 10s, 20s, 40s, 80s, 160s)
+    const AI_MAX_RETRIES = 5;
+    let aiSuccess = false;
 
-      if (!response.ok) {
-        const errText = await response.text();
-        throw new Error(`Error en Proveedor de IA Universal (${response.status}): ${errText}`);
-      }
+    for (let aiAttempt = 1; aiAttempt <= AI_MAX_RETRIES; aiAttempt++) {
+      try {
+        if (!isGeminiDefault) {
+          // Flujo Universal compatible con OpenAI / DeepSeek / OpenRouter / Together AI / Ollama
+          const endpoint = `${AI_API_URL.replace(/\/$/, '')}/chat/completions`;
+          console.log(`[Intento ${aiAttempt}/${AI_MAX_RETRIES}] Usando proveedor universal OpenAI en: ${endpoint} (Modelo: ${AI_MODEL})`);
+          
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${AI_API_KEY}`
+            },
+            body: JSON.stringify({
+              model: AI_MODEL,
+              messages: [
+                { role: "system", content: systemInstruction },
+                { role: "user", content: userPrompt }
+              ],
+              response_format: { type: "json_object" },
+              temperature: 0.2
+            })
+          });
 
-      const resData = await response.json();
-      const contentText = resData.choices[0].message.content.trim();
-      generatedArticle = JSON.parse(contentText);
-    } else {
-      // Flujo específico para Google Gemini API
-      console.log(`Usando proveedor Gemini API (Modelo: ${AI_MODEL})`);
-      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${AI_MODEL}:generateContent?key=${AI_API_KEY}`;
-      
-      const response = await fetch(geminiUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [
-            { parts: [{ text: userPrompt }] }
-          ],
-          systemInstruction: {
-            parts: [{ text: systemInstruction }]
-          },
-          generationConfig: {
-            responseMimeType: "application/json",
-            temperature: 0.2
+          if (!response.ok) {
+            const errText = await response.text();
+            throw new Error(`Error en Proveedor de IA Universal (${response.status}): ${errText}`);
           }
-        })
-      });
 
-      if (!response.ok) {
-        const errText = await response.text();
-        throw new Error(`Error en Gemini API (${response.status}): ${errText}`);
+          const resData = await response.json();
+          const contentText = resData.choices[0].message.content.trim();
+          generatedArticle = JSON.parse(contentText);
+        } else {
+          // Flujo específico para Google Gemini API
+          console.log(`[Intento ${aiAttempt}/${AI_MAX_RETRIES}] Usando proveedor Gemini API (Modelo: ${AI_MODEL})`);
+          const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${AI_MODEL}:generateContent?key=${AI_API_KEY}`;
+          
+          const response = await fetch(geminiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [
+                { parts: [{ text: userPrompt }] }
+              ],
+              systemInstruction: {
+                parts: [{ text: systemInstruction }]
+              },
+              generationConfig: {
+                responseMimeType: "application/json",
+                temperature: 0.2
+              }
+            })
+          });
+
+          if (!response.ok) {
+            const errText = await response.text();
+            throw new Error(`Error en Gemini API (${response.status}): ${errText}`);
+          }
+
+          const resData = await response.json();
+          const contentText = resData.candidates[0].content.parts[0].text.trim();
+          generatedArticle = JSON.parse(contentText);
+        }
+
+        // Si llegamos aquí, la llamada fue exitosa
+        aiSuccess = true;
+        console.log(`✅ Respuesta de IA recibida correctamente en el intento ${aiAttempt}.`);
+        break;
+
+      } catch (aiError) {
+        const waitMs = Math.pow(2, aiAttempt - 1) * 10000; // 10s, 20s, 40s, 80s, 160s
+        if (aiAttempt < AI_MAX_RETRIES) {
+          console.warn(`[IA Warning] Intento ${aiAttempt}/${AI_MAX_RETRIES} fallido: ${aiError.message}`);
+          console.warn(`Reintentando en ${waitMs / 1000} segundos...`);
+          await sleep(waitMs);
+        } else {
+          throw new Error(`Todos los ${AI_MAX_RETRIES} intentos de llamada a la IA han fallado. Último error: ${aiError.message}`);
+        }
       }
-
-      const resData = await response.json();
-      const contentText = resData.candidates[0].content.parts[0].text.trim();
-      generatedArticle = JSON.parse(contentText);
     }
 
     console.log("Noticia generada correctamente por la Inteligencia Artificial.");

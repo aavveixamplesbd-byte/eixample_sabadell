@@ -78,7 +78,7 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
       ibanErrorMsg:
         "IBAN espanyol no vàlid (ha de començar per ES i tenir 24 caràcters).",
       sepaLabel:
-        "Autoritzo l'Associació de Veïns Eixample Sabadell a realitzar una domiciliació bancària anual de 10,00 € en la compta indicada d'acord amb les condicions del Mandat SEPA.",
+        "Autoritzo l'Associació de Veïns Eixample Sabadell a realitzar una domiciliació bancària anual de 12,00 € en la compta indicada d'acord amb les condicions del Mandat SEPA.",
       submitBtn: "Enviar sol·licitud",
       successTitle: "Sol·licitud Rebuta!",
       successText:
@@ -106,7 +106,7 @@ export default function JoinModal({ lang = "ca" }: JoinModalProps) {
       ibanErrorMsg:
         "IBAN español no válido (debe empezar por ES y tener 24 caracteres).",
       sepaLabel:
-        "Autorizo a la Asociación de Vecinos Eixample Sabadell a realizar una domiciliación bancaria anual de 10,00 € en la cuenta indicada de acuerdo con las condiciones del Mandato SEPA.",
+        "Autorizo a la Asociación de Vecinos Eixample Sabadell a realizar una domiciliación bancaria anual de 12,00 € en la cuenta indicada de acuerdo con las condiciones del Mandato SEPA.",
       submitBtn: "Enviar solicitud",
       successTitle: "¡Solicitud Recibida!",
       successText:

@@ -55,6 +55,7 @@ const t = {
           alt={featuredArticle.alt.ca} 
           class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
           src={featuredArticle.image}
+          onerror="this.onerror=null; this.src='/og-image.png';"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-6 sm:p-12 text-left">
           <div class="mb-4">

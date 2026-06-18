@@ -57,6 +57,7 @@ const formatDate = (dateStr: string) => {
                 alt={article.alt[lang]} 
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
                 src={article.image}
+                onerror="this.onerror=null; this.src='/og-image.png';"
               />
             </div>
             <div class="px-2 text-left">

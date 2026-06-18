@@ -89,6 +89,38 @@ if (dayOfWeek === 0 || dayOfWeek === 6) {
 const activeTheme = THEMES[dayOfWeek] || THEMES[1];
 console.log(`Hoy toca tema: ${activeTheme.category}. Buscando en Tavily...`);
 
+async function isImageAccessible(url) {
+  if (!url) return false;
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+    const res = await fetch(url, {
+      method: "HEAD",
+      signal: controller.signal,
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      }
+    });
+    clearTimeout(timeoutId);
+    if (res.ok) return true;
+    
+    // Fallback to GET in case HEAD method is blocked
+    const controllerGet = new AbortController();
+    const timeoutIdGet = setTimeout(() => controllerGet.abort(), 3000);
+    const resGet = await fetch(url, {
+      method: "GET",
+      signal: controllerGet.signal,
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      }
+    });
+    clearTimeout(timeoutIdGet);
+    return resGet.ok;
+  } catch (err) {
+    return false;
+  }
+}
+
 async function run() {
   try {
     // 1. Llamar a Tavily (con reintentos: hasta 5 intentos con backoff exponencial)
@@ -141,17 +173,20 @@ async function run() {
         !img.includes("fbcdn") &&
         !img.includes("instagram.com")
       );
-      if (validImages.length > 0) {
-        // Seleccionar una imagen al azar de las primeras 3 válidas para dar mayor variedad
-        const limit = Math.min(validImages.length, 3);
-        const randomIndex = Math.floor(Math.random() * limit);
-        imageUrl = validImages[randomIndex];
-        console.log(`Imagen seleccionada de Tavily (índice ${randomIndex}): ${imageUrl}`);
+      console.log(`Encontradas ${validImages.length} imágenes candidatas en Tavily. Comprobando accesibilidad...`);
+      for (const img of validImages) {
+        if (await isImageAccessible(img)) {
+          imageUrl = img;
+          console.log(`Imagen seleccionada de Tavily (válida y accesible): ${imageUrl}`);
+          break;
+        } else {
+          console.log(`Imagen descartada (inaccesible): ${img}`);
+        }
       }
     }
 
     if (!imageUrl && TAVILY_API_KEY) {
-      console.log("No se encontraron imágenes en la primera búsqueda. Intentando búsqueda simplificada de Tavily...");
+      console.log("No se encontraron imágenes accesibles en la primera búsqueda. Intentando búsqueda simplificada de Tavily...");
       try {
         const fallbackQuery = `${activeTheme.category} Sabadell`;
         const tavilyFallbackResponse = await fetch("https://api.tavily.com/search", {
@@ -174,11 +209,15 @@ async function run() {
               !img.includes("fbcdn") &&
               !img.includes("instagram.com")
             );
-            if (validFallbackImages.length > 0) {
-              const limit = Math.min(validFallbackImages.length, 3);
-              const randomIndex = Math.floor(Math.random() * limit);
-              imageUrl = validFallbackImages[randomIndex];
-              console.log(`Imagen seleccionada de Tavily simplificada (índice ${randomIndex}): ${imageUrl}`);
+            console.log(`Encontradas ${validFallbackImages.length} imágenes candidatas simplificadas. Comprobando accesibilidad...`);
+            for (const img of validFallbackImages) {
+              if (await isImageAccessible(img)) {
+                imageUrl = img;
+                console.log(`Imagen seleccionada de Tavily simplificada (válida y accesible): ${imageUrl}`);
+                break;
+              } else {
+                console.log(`Imagen simplificada descartada (inaccesible): ${img}`);
+              }
             }
           }
         }
@@ -245,6 +284,15 @@ async function run() {
           const recentArticles = await response.json();
           if (recentArticles.length > 0) {
             recentArticlesContext = recentArticles.map(a => `- [${a.date}] CA: "${a.title_ca}" | ES: "${a.title_es}"`).join("\n");
+            
+            // Comprobación de seguridad: evitar duplicar noticias el mismo día
+            const todayStr = new Date().toISOString().split('T')[0];
+            const hasArticleToday = recentArticles.some(a => a.date === todayStr);
+            if (hasArticleToday) {
+              console.log(`\n⚠️ [Safety Check] Ja existeix una notícia creada avui (${todayStr}).`);
+              console.log("Cancel·lant la generació per evitar duplicats.");
+              process.exit(0);
+            }
           }
           console.log("Artículos recientes recuperados con éxito.");
         }

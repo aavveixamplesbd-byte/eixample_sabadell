@@ -54,6 +54,7 @@ const dateFormatted = new Date(article.date).toLocaleDateString('es-ES', {
           src={article.image} 
           alt={article.alt.es} 
           class="w-full h-full object-cover"
+          onerror="this.onerror=null; this.src='/og-image.png';"
         />
       </div>
       {/* Article Content */}

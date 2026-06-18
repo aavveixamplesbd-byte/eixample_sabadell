@@ -147,6 +147,9 @@ export default function NewsPortal({ lang = "ca", articles: rawArticles }: NewsP
                     alt={article.alt}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     src={article.image}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/og-image.png';
+                    }}
                   />
                 </div>
                 <div className="px-2">

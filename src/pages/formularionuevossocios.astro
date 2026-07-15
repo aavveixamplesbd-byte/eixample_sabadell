@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+import RegistrationForm from '../components/RegistrationForm';
+---
+
+<Layout title="Butlletí d'inscripció - AVV Eixample Sabadell" lang="ca">
+  <Navbar client:load />
+  
+  <main class="py-12 bg-surface min-h-[80vh] flex flex-col justify-center">
+    <RegistrationForm client:load />
+  </main>
+  
+  <Footer lang="ca" />
+</Layout>

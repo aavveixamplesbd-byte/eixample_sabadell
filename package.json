@@ -14,6 +14,7 @@
     "news:create": "node scripts/news-manual.js"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.10",
     "@astrojs/react": "^3.6.2",
     "@astrojs/tailwind": "^5.1.2",
     "@astrojs/vercel": "^7.8.0",
@@ -26,6 +27,7 @@
     "react-dom": "^18.3.1",
     "resend": "^6.12.4",
     "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.3",
     "ws": "^8.21.0"
   },
   "devDependencies": {

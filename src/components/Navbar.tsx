@@ -69,6 +69,7 @@ export default function Navbar() {
       brand: "Eixample Sabadell",
       home: "Inici",
       history: "Història",      news: "Notícies",
+      festaMajor: "Festa Major",
       whoWeAre: "Qui som",
       contact: "Contacte",
       joinUs: "Fes-te Soci",
@@ -91,6 +92,7 @@ export default function Navbar() {
       home: "Inicio",
       history: "Historia",
       news: "Noticias",
+      festaMajor: "Fiesta Mayor",
       whoWeAre: "Quiénes somos",
       contact: "Contacto",
       joinUs: "Hazte Socio",
@@ -116,6 +118,7 @@ export default function Navbar() {
     { label: t.home, icon: "home", href: prefix || "/" },
     { label: t.history, icon: "factory", href: `${prefix}/historia` },
     { label: t.news, icon: "newspaper", href: `${prefix}/noticies` },
+    { label: t.festaMajor, icon: "celebration", href: `${prefix}/festa-major` },
     { label: t.whoWeAre, icon: "groups", href: `${prefix}/qui-som` },
   ];
 

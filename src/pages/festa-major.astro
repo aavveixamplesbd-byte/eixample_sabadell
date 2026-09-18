@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FestaMajorHero from '../components/FestaMajorHero.astro';
+import FestaMajorMap from '../components/FestaMajorMap';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Festa Major de l'Eixample 2026 - Sabadell" description="Programa d'activitats de la Festa Major del barri de l'Eixample de Sabadell. 25, 26 i 27 de setembre de 2026." lang="ca">
+	<Navbar client:load />
+	<main>
+		<Breadcrumbs lang="ca" items={[{ label: 'Festa Major' }]} />
+		<FestaMajorHero lang="ca" />
+		<section id="programa">
+			<FestaMajorMap lang="ca" client:load />
+		</section>
+	</main>
+	<Footer lang="ca" />
+</Layout>

@@ -1,0 +1,93 @@
+{
+  "locations": [
+    {
+      "id": "av-barbera",
+      "name": { "ca": "Av. Barberà (Carpa AVV)", "es": "Av. Barberà (Carpa AVV)" },
+      "lat": 41.5488,
+      "lng": 2.1053,
+      "description": { "ca": "Epicentre de la festa", "es": "Epicentro de la fiesta" }
+    },
+    {
+      "id": "pl-barcelona",
+      "name": { "ca": "Plaça Barcelona", "es": "Plaza Barcelona" },
+      "lat": 41.5475,
+      "lng": 2.1020,
+      "description": { "ca": "Inici de la batucada", "es": "Inicio de la batucada" }
+    },
+    {
+      "id": "pl-mestre-planes",
+      "name": { "ca": "Pl. Mestre Planes", "es": "Pl. Mestre Planes" },
+      "lat": 41.5492,
+      "lng": 2.1070,
+      "description": { "ca": "Jocs infantils", "es": "Juegos infantiles" }
+    },
+    {
+      "id": "pl-infancia",
+      "name": { "ca": "Pl. de la Infància", "es": "Pl. de la Infancia" },
+      "lat": 41.5500,
+      "lng": 2.1085,
+      "description": { "ca": "Matinal infantil del diumenge", "es": "Mañana infantil del domingo" }
+    }
+  ],
+  "mapCenter": {
+    "lat": 41.5490,
+    "lng": 2.1055
+  },
+  "days": [
+    {
+      "id": "divendres",
+      "date": "2026-09-25",
+      "label": { "ca": "Divendres 25", "es": "Viernes 25" },
+      "events": [
+        { "time": "18:00", "endTime": "22:00", "title": { "ca": "Fira d'artesania", "es": "Feria de artesanía" }, "location": "av-barbera", "icon": "🎨" },
+        { "time": "19:00", "endTime": "20:00", "title": { "ca": "Batucada – Tucantam Drums", "es": "Batucada – Tucantam Drums" }, "location": "pl-barcelona", "icon": "🥁" },
+        { "time": "20:00", "endTime": "21:00", "title": { "ca": "Pregó – Atendis", "es": "Pregón – Atendis" }, "location": "av-barbera", "icon": "📢" },
+        { "time": "21:00", "endTime": "22:00", "title": { "ca": "Focs i Ball de Diables de Sabadell", "es": "Fuegos y Ball de Diables de Sabadell" }, "location": "av-barbera", "icon": "🔥" },
+        { "time": "22:00", "endTime": "23:59", "title": { "ca": "Música – Shagadelics", "es": "Música – Shagadelics" }, "location": "av-barbera", "icon": "🎸" }
+      ]
+    },
+    {
+      "id": "dissabte",
+      "date": "2026-09-26",
+      "label": { "ca": "Dissabte 26", "es": "Sábado 26" },
+      "events": [
+        { "time": "11:00", "endTime": "12:00", "title": { "ca": "Cercavila – Gegants de Gràcia", "es": "Pasacalles – Gigantes de Gràcia" }, "location": "av-barbera", "icon": "🎭" },
+        { "time": "12:00", "endTime": "13:00", "title": { "ca": "Jocs infantils – Smatsa", "es": "Juegos infantiles – Smatsa" }, "location": "pl-mestre-planes", "icon": "🎮" },
+        { "time": "12:00", "endTime": "13:00", "title": { "ca": "Animació infantil – Pintacares", "es": "Animación infantil – Pintacaras" }, "location": "av-barbera", "icon": "🎨" },
+        { "time": "12:30", "endTime": "13:30", "title": { "ca": "Show de Màgia – Alexander Main", "es": "Show de Magia – Alexander Main" }, "location": "av-barbera", "icon": "🪄" },
+        { "time": "13:00", "endTime": "14:00", "title": { "ca": "Vermut màgic – Carpa AVV", "es": "Vermú mágico – Carpa AVV" }, "location": "av-barbera", "icon": "🍷" },
+        { "time": "18:00", "endTime": "19:00", "title": { "ca": "Balls de la India", "es": "Bailes de la India" }, "location": "av-barbera", "icon": "💃" },
+        { "time": "19:00", "endTime": "21:00", "title": { "ca": "Banda de Música de Sabadell", "es": "Banda de Música de Sabadell" }, "location": "av-barbera", "icon": "🎺" },
+        { "time": "21:00", "endTime": "22:00", "title": { "ca": "🍽️ Sopar de Festa Major", "es": "🍽️ Cena de Fiesta Mayor" }, "location": "av-barbera", "icon": "🍽️", "highlight": true },
+        { "time": "22:00", "endTime": "23:59", "title": { "ca": "Ball – Orquestra Klam", "es": "Baile – Orquestra Klam" }, "location": "av-barbera", "icon": "🎶" }
+      ]
+    },
+    {
+      "id": "diumenge",
+      "date": "2026-09-27",
+      "label": { "ca": "Diumenge 27", "es": "Domingo 27" },
+      "events": [
+        { "time": "11:00", "endTime": "13:00", "title": { "ca": "Matinal infantil: tallers, pintacares, ADF, K9, Creu Roja", "es": "Matinal infantil: talleres, pintacaras, ADF, K9, Cruz Roja" }, "location": "pl-infancia", "icon": "👧" },
+        { "time": "12:00", "endTime": "13:00", "title": { "ca": "Exhibició Swing – Swing-Copats", "es": "Exhibición Swing – Swing-Copats" }, "location": "av-barbera", "icon": "🕺" },
+        { "time": "13:00", "endTime": "14:00", "title": { "ca": "Vermut musical – Carpa AVV", "es": "Vermú musical – Carpa AVV" }, "location": "av-barbera", "icon": "🍷" },
+        { "time": "17:00", "endTime": "19:00", "title": { "ca": "Animació infantil – Jaume Ibars", "es": "Animación infantil – Jaume Ibars" }, "location": "av-barbera", "icon": "🤹" },
+        { "time": "19:30", "endTime": "20:30", "title": { "ca": "Havaneres – Dolça Petxina", "es": "Habaneras – Dolça Petxina" }, "location": "av-barbera", "icon": "🎵" },
+        { "time": "20:30", "endTime": "21:00", "title": { "ca": "Cremat de Rom (col·laboració 1€)", "es": "Cremat de Ron (colaboración 1€)" }, "location": "av-barbera", "icon": "🍹" },
+        { "time": "21:00", "endTime": "22:00", "title": { "ca": "Havaneres – Dolça Petxina", "es": "Habaneras – Dolça Petxina" }, "location": "av-barbera", "icon": "🎵" },
+        { "time": "22:00", "endTime": "22:30", "title": { "ca": "Traca final Festa Major", "es": "Traca final Fiesta Mayor" }, "location": "av-barbera", "icon": "🎆" }
+      ]
+    }
+  ],
+  "sopar": {
+    "date": "2026-09-26",
+    "time": "21:00",
+    "price": 15,
+    "menu": {
+      "ca": ["Patates o mongetes amb botifarra", "Pa amb tomàquet", "Postres", "Aigua, vi i gasosa"],
+      "es": ["Patatas o judías con butifarra", "Pan con tomate", "Postres", "Agua, vino y gaseosa"]
+    },
+    "caterer": { "ca": "Sopar realitzat per l'Amanidor de CIPO", "es": "Cena realizada por l'Amanidor de CIPO" },
+    "reservationPhone": "672520479",
+    "reservationAddress": { "ca": "Sardà, 18", "es": "Sardà, 18" }
+  }
+}

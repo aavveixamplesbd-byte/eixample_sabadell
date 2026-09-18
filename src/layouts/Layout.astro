@@ -16,6 +16,8 @@ const {
 } = Astro.props;
 
 import JoinModal from '../components/JoinModal';
+import SoparForm from '../components/SoparForm';
+import SoparPopup from '../components/SoparPopup';
 ---
 
 <!doctype html>
@@ -57,6 +59,8 @@ import JoinModal from '../components/JoinModal';
 	<body class="bg-surface text-on-surface min-h-screen">
 		<slot />
 		<JoinModal lang={lang} client:load />
+		<SoparForm lang={lang} client:load />
+		<SoparPopup lang={lang} client:load />
 	</body>
 </html>
 

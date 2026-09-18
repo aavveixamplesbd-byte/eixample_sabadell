@@ -1,0 +1,151 @@
+---
+interface Props {
+  lang?: 'ca' | 'es';
+}
+const { lang = 'ca' } = Astro.props;
+
+const t = {
+  ca: {
+    title: "Festa Major de l'Eixample 2026",
+    subtitle: "25, 26 i 27 de setembre",
+    body: "Tres dies de festa, cultura i convivència al cor del nostre barri. Activitats per a totes les edats, concerts, sopar popular i molt més. No t'ho perdis!",
+    discoverBtn: "Descobreix el programa",
+    reserveBtn: "Reserva el sopar",
+    downloadPdf: "Descarrega el llibret (PDF)",
+  },
+  es: {
+    title: "Fiesta Mayor de l'Eixample 2026",
+    subtitle: "25, 26 y 27 de septiembre",
+    body: "Tres días de fiesta, cultura y convivencia en el corazón de nuestro barrio. Actividades para todas las edades, conciertos, cena popular y mucho más. ¡No te lo pierdas!",
+    discoverBtn: "Descubre el programa",
+    reserveBtn: "Reserva la cena",
+    downloadPdf: "Descarga el librito (PDF)",
+  },
+}[lang];
+
+const supabaseUrl = import.meta.env.SUPABASE_URL || 'https://jvfmcvuucsvfcbwbpkrg.supabase.co';
+const pdfUrl = `${supabaseUrl}/storage/v1/object/public/festamajor/V4%20eixample_llibret_2026.pdf`;
+---
+
+<section class="relative min-h-[500px] flex items-center overflow-hidden py-20 md:py-28 festa-hero-bg">
+  <!-- Decorative SVG confetti dots -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <!-- Confetti circles -->
+    <svg class="absolute top-8 left-[10%] w-4 h-4 opacity-40 animate-float-slow" viewBox="0 0 16 16">
+      <circle cx="8" cy="8" r="8" fill="#FFD54F" />
+    </svg>
+    <svg class="absolute top-16 right-[15%] w-3 h-3 opacity-50 animate-float" viewBox="0 0 12 12">
+      <circle cx="6" cy="6" r="6" fill="#FF8A65" />
+    </svg>
+    <svg class="absolute top-32 left-[25%] w-2.5 h-2.5 opacity-35 animate-float-slow" viewBox="0 0 10 10">
+      <circle cx="5" cy="5" r="5" fill="#E1F5FE" />
+    </svg>
+    <svg class="absolute bottom-20 right-[20%] w-3.5 h-3.5 opacity-45 animate-float" viewBox="0 0 14 14">
+      <circle cx="7" cy="7" r="7" fill="#CE93D8" />
+    </svg>
+    <svg class="absolute bottom-32 left-[8%] w-3 h-3 opacity-30 animate-float-slow" viewBox="0 0 12 12">
+      <circle cx="6" cy="6" r="6" fill="#A5D6A7" />
+    </svg>
+    <svg class="absolute top-24 right-[40%] w-2 h-2 opacity-40 animate-float" viewBox="0 0 8 8">
+      <circle cx="4" cy="4" r="4" fill="#FFD54F" />
+    </svg>
+    <svg class="absolute bottom-40 left-[55%] w-3 h-3 opacity-35 animate-float-slow" viewBox="0 0 12 12">
+      <circle cx="6" cy="6" r="6" fill="#FF8A65" />
+    </svg>
+    <svg class="absolute top-40 left-[70%] w-2.5 h-2.5 opacity-30 animate-float" viewBox="0 0 10 10">
+      <circle cx="5" cy="5" r="5" fill="#81D4FA" />
+    </svg>
+
+    <!-- Bunting flags -->
+    <svg class="absolute top-0 left-0 w-full h-20 opacity-20" viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,10 Q30,10 60,10 L45,55 L15,55 Z" fill="#FFD54F" />
+      <path d="M60,10 Q90,10 120,10 L105,55 L75,55 Z" fill="#FF8A65" />
+      <path d="M120,10 Q150,10 180,10 L165,55 L135,55 Z" fill="#CE93D8" />
+      <path d="M180,10 Q210,10 240,10 L225,55 L195,55 Z" fill="#81D4FA" />
+      <path d="M240,10 Q270,10 300,10 L285,55 L255,55 Z" fill="#A5D6A7" />
+      <path d="M300,10 Q330,10 360,10 L345,55 L315,55 Z" fill="#FFD54F" />
+      <path d="M360,10 Q390,10 420,10 L405,55 L375,55 Z" fill="#FF8A65" />
+      <path d="M420,10 Q450,10 480,10 L465,55 L435,55 Z" fill="#CE93D8" />
+      <path d="M480,10 Q510,10 540,10 L525,55 L495,55 Z" fill="#81D4FA" />
+      <path d="M540,10 Q570,10 600,10 L585,55 L555,55 Z" fill="#A5D6A7" />
+      <path d="M600,10 Q630,10 660,10 L645,55 L615,55 Z" fill="#FFD54F" />
+      <path d="M660,10 Q690,10 720,10 L705,55 L675,55 Z" fill="#FF8A65" />
+      <path d="M720,10 Q750,10 780,10 L765,55 L735,55 Z" fill="#CE93D8" />
+      <path d="M780,10 Q810,10 840,10 L825,55 L795,55 Z" fill="#81D4FA" />
+      <path d="M840,10 Q870,10 900,10 L885,55 L855,55 Z" fill="#A5D6A7" />
+      <path d="M900,10 Q930,10 960,10 L945,55 L915,55 Z" fill="#FFD54F" />
+      <path d="M960,10 Q990,10 1020,10 L1005,55 L975,55 Z" fill="#FF8A65" />
+      <path d="M1020,10 Q1050,10 1080,10 L1065,55 L1035,55 Z" fill="#CE93D8" />
+      <path d="M1080,10 Q1110,10 1140,10 L1125,55 L1095,55 Z" fill="#81D4FA" />
+      <path d="M1140,10 Q1170,10 1200,10 L1185,55 L1155,55 Z" fill="#A5D6A7" />
+      <!-- String line -->
+      <line x1="0" y1="10" x2="1200" y2="10" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop relative z-10 w-full">
+    <div class="max-w-2xl">
+      <span class="font-label-md text-label-md text-white/80 uppercase tracking-[0.2em] bg-white/15 px-4 py-1.5 rounded-full inline-block mb-6 font-semibold backdrop-blur-sm">
+        🎉 Festa Major 2026
+      </span>
+      <h1 class="font-display-lg text-4xl sm:text-5xl md:text-6xl text-white mb-4 leading-tight tracking-tighter font-bold">
+        {t.title}
+      </h1>
+      <p class="font-label-md text-label-md text-white/90 uppercase tracking-[0.15em] mb-8 flex items-center gap-2">
+        <span class="material-symbols-outlined" style="font-size: 20px;">calendar_month</span>
+        {t.subtitle}
+      </p>
+      <p class="font-body-lg text-body-lg text-white/85 max-w-lg mb-10 leading-relaxed">
+        {t.body}
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="#programa"
+          class="bg-white text-primary px-8 py-4 rounded-xl font-label-md text-label-md font-bold transition-all hover:shadow-lg hover:-translate-y-0.5 text-center"
+        >
+          {t.discoverBtn}
+        </a>
+        <button
+          onclick="window.dispatchEvent(new CustomEvent('open-sopar-modal'))"
+          class="border border-white/60 text-white px-8 py-4 rounded-xl font-label-md text-label-md font-bold hover:bg-white/10 transition-all text-center cursor-pointer"
+        >
+          {t.reserveBtn}
+        </button>
+        <a
+          href={pdfUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-black/20 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-label-md text-label-md font-bold hover:bg-black/30 transition-all text-center flex items-center justify-center gap-2"
+        >
+          <span class="material-symbols-outlined" style="font-size: 20px;">download</span>
+          {t.downloadPdf}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .festa-hero-bg {
+    background: linear-gradient(135deg, #37645d 0%, #5a8a6a 35%, #d4915e 65%, #507d75 100%);
+  }
+
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(8deg); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(-6deg); }
+  }
+
+  .animate-float-slow {
+    animation: floatSlow 6s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+</style>
